@@ -1,0 +1,8 @@
+.link {
+  display: block;
+  padding: 10px;
+}
+
+.link:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
