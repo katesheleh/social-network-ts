@@ -2,7 +2,8 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 10px;
+  align-items: center;
+  margin-bottom: 16px;
 }
 
 .imgWrap {
@@ -15,4 +16,13 @@
 .content {
   width: calc(100% - 50px);
   padding-left: 10px;
+}
+
+.text {
+  margin: 0;
+  font-size: 16px;
+}
+
+.like {
+  font-size: 13px;
 }
