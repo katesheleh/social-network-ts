@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Dialogs.module.css';
 
 const Dialogs = () => {
-  return(
+  return (
     <div className={styles.dialogs}>
       <h1>Dialogs</h1>
     </div>
