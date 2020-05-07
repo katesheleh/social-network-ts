@@ -15,7 +15,7 @@ function App() {
     <BrowserRouter>
       <div className={styles.app}>
         <main className={styles.main}>
-          <div className={styles.sidebar}>            
+          <div className={styles.sidebar}>
             <Sidebar />
           </div>
           <div className={styles.content}>
