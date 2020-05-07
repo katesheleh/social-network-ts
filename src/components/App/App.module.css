@@ -3,33 +3,35 @@
   width: 100vw;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr auto;
-}
-
-.header {
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: rgb(238, 238, 135);
+  grid-template-rows: auto 1fr;
 }
 
 .main {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 5fr 12fr;
   overflow: hidden;  
-  background-color: lightgreen;
+  background-color:#f2f1f0;;
 }
 
 .sidebar {
-  background-color: lightskyblue;
+  width: 100%;
+    height: 100%;
+    overflow: hidden;
+  background-color: #201e2b;
 }
 
 .content {
-  overflow-y: scroll;
-  padding: 20px;
+  position: relative;
+  overflow-y: scroll;  
+}
+
+.contentMain {
+  min-height: calc(100vh - 110px);
+  padding: 30px;
 }
 
 .footer {
-  padding: 20px;
+  padding: 20px 30px;
   box-sizing: border-box;
-  background-color: darksalmon;
+  background-color: #e4e3e1;
 }

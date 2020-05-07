@@ -6,7 +6,7 @@ const Profile = () => {
   return (
     <div className={styles.profile}>
       <div className={styles.banner}>
-        <img className={styles.img} src="https://placeimg.com/1600/350/tech" alt="banner" />
+        <img className={styles.img} src="https://placeimg.com/1600/700/tech" alt="banner" />
       </div>
       <div className={styles.content}>
         <h1>Profile</h1>
