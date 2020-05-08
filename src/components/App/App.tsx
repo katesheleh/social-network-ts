@@ -20,11 +20,11 @@ function App() {
           </div>
           <div className={styles.content}>
             <div className={styles.contentMain}>
-              <Route path="/profile" component={Profile} />
-              <Route path="/dialogs" component={Dialogs} />
-              <Route path="/news" component={News} />
-              <Route path="/music" component={Music} />
-              <Route path="/friends" component={Friends} />
+              <Route path="/profile" render={() => <Profile />} />
+              <Route path="/dialogs" render={() => <Dialogs />} />
+              <Route path="/news" render={() => <News />} />
+              <Route path="/music" render={() => <Music />} />
+              <Route path="/friends" render={() => <Friends />} />
             </div>
             <div className={styles.footer}>
               <Footer />
