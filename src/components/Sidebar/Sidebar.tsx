@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Sidebar.module.css';
 import Nav from './Nav/Nav';
-import Header from '../Header/Header';
+import Header from './Header/Header';
 
 const Sidebar = () => {
   return (

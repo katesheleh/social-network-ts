@@ -1,14 +1,10 @@
 import React from 'react';
 import styles from './Post.module.css';
-
-type PostType = {
-  message: string
-  likesCounter: number
-}
+import { PostType } from '../MyPosts';
 
 const Post = (props: PostType) => {
   return (
-    <div className={styles.post}>
+    <div className={styles.post} key={props.id}>
       <div className={styles.imgWrap}>
         <img src="https://placeimg.com/50/50/tech" alt="temporal" />
       </div>
