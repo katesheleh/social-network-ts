@@ -9,8 +9,10 @@ import Dialogs from '../Dialogs/Dialogs';
 import News from '../News/News';
 import Music from '../Music/Music';
 import Friends from '../Friends/Friends';
+import { PostsType, DialogsType, MessagesType } from '../..';
 
-function App() {
+function App(props: PostsType & DialogsType & MessagesType) {
+
   return (
     <BrowserRouter>
       <div className={styles.app}>
@@ -20,8 +22,8 @@ function App() {
           </div>
           <div className={styles.content}>
             <div className={styles.contentMain}>
-              <Route path="/profile" render={() => <Profile />} />
-              <Route path="/dialogs" render={() => <Dialogs />} />
+              <Route path="/profile" render={() => <Profile posts={props.posts} />} />
+              <Route path="/dialogs" render={() => <Dialogs dialogs={props.dialogs} messages={props.messages} />} />
               <Route path="/news" render={() => <News />} />
               <Route path="/music" render={() => <Music />} />
               <Route path="/friends" render={() => <Friends />} />

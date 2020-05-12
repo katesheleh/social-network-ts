@@ -1,22 +1,12 @@
 import React from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
+import { PostsType } from '../../..';
 
-export type PostType = {
-  id: number
-  message: string
-  likesCounter: number
-}
+const MyPosts = (props: PostsType) => {
 
-let posts: Array<PostType> = [
-  { id: 1, message: 'Hi World! How are you?', likesCounter: 75 },
-  { id: 2, message: 'Today is a good day!', likesCounter: 57 },
-]
+  let postsElements = props.posts.map(post => <Post id={post.id} message={post.message} likesCounter={post.likesCounter} />);
 
-let postsElements = posts
-  .map(post => <Post id={post.id} message={post.message} likesCounter={post.likesCounter} />);
-
-const MyPosts = () => {
   return (
     <div className={styles.myPosts}>
       <h2>My Posts</h2>
