@@ -22,3 +22,15 @@ export type MessageType = {
 export type MessagesType = {
   messages: Array<MessageType>
 }
+
+export type AppStateType = {
+  appState: {
+    profilePage: {
+      posts: Array<PostType>
+    }
+    messagesPage: {
+      dialogs: Array<DialogItemType>
+      messages: Array<MessageType>
+    }
+  }
+}

@@ -9,10 +9,9 @@ import Dialogs from '../Dialogs/Dialogs';
 import News from '../News/News';
 import Music from '../Music/Music';
 import Friends from '../Friends/Friends';
-import { PostsType, DialogsType, MessagesType } from '../../types';
+import { AppStateType } from '../../types';
 
-function App(props: PostsType & DialogsType & MessagesType) {
-
+function App(props: AppStateType) {
   return (
     <BrowserRouter>
       <div className={styles.app}>
@@ -22,12 +21,17 @@ function App(props: PostsType & DialogsType & MessagesType) {
           </div>
           <div className={styles.content}>
             <div className={styles.contentMain}>
-              <Route path="/profile" render={() => <Profile posts={props.posts} />} />
-              <Route path="/dialogs" render={() => <Dialogs dialogs={props.dialogs} messages={props.messages} />} />
+              <Route path="/profile" render={() => <Profile
+                posts={props.appState.profilePage.posts} />} />
+
+              <Route path="/dialogs" render={() => <Dialogs
+                dialogs={props.appState.messagesPage.dialogs}
+                messages={props.appState.messagesPage.messages} />} />
+                
               <Route path="/news" render={() => <News />} />
               <Route path="/music" render={() => <Music />} />
               <Route path="/friends" render={() => <Friends />} />
-            </div>
+            </div>            
             <div className={styles.footer}>
               <Footer />
             </div>
