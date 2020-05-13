@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import { PostsType } from '../..';
+import { PostsType } from '../../types';
 
 const Profile = (props: PostsType) => {
 
@@ -10,7 +10,7 @@ const Profile = (props: PostsType) => {
     <div className={styles.profile}>
       <h1>Profile</h1>
       <ProfileInfo />
-      <MyPosts posts={props.posts}/>
+      <MyPosts posts={props.posts} />
     </div>
   )
 }

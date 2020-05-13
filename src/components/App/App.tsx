@@ -9,7 +9,7 @@ import Dialogs from '../Dialogs/Dialogs';
 import News from '../News/News';
 import Music from '../Music/Music';
 import Friends from '../Friends/Friends';
-import { PostsType, DialogsType, MessagesType } from '../..';
+import { PostsType, DialogsType, MessagesType } from '../../types';
 
 function App(props: PostsType & DialogsType & MessagesType) {
 

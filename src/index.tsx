@@ -4,31 +4,6 @@ import './index.css';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 
-export type PostType = {
-  id: number
-  message: string
-  likesCounter: number
-}
-export type PostsType = {
-  posts: Array<PostType>
-}
-
-export type DialogItemType = {
-  id: number
-  name: string
-}
-export type DialogsType = {
-  dialogs: Array<DialogItemType>
-}
-
-export type MessageType = {
-  id: number
-  message: string
-}
-export type MessagesType = {
-  messages: Array<MessageType>
-}
-
 let posts = [
   { id: 1, message: 'Hi World! How are you?', likesCounter: 75 },
   { id: 2, message: 'Today is a good day!', likesCounter: 57 },

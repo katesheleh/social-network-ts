@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-import { DialogsType, MessagesType } from '../..';
+import { DialogsType, MessagesType } from '../../types';
 
 const Dialogs = (props: DialogsType & MessagesType) => {
   let dialogsElements = props.dialogs
