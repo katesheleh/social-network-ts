@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 
 import styles from './App.module.css';
 import Sidebar from '../Sidebar/Sidebar';
@@ -13,7 +13,7 @@ import { AppStateType } from '../../types';
 
 function App(props: AppStateType) {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className={styles.app}>
         <main className={styles.main}>
           <div className={styles.sidebar}>
@@ -22,23 +22,23 @@ function App(props: AppStateType) {
           <div className={styles.content}>
             <div className={styles.contentMain}>
               <Route path="/profile" render={() => <Profile
-                posts={props.appState.profilePage.posts} />} />
+                posts={props.state.profilePage.posts} />} />
 
               <Route path="/dialogs" render={() => <Dialogs
-                dialogs={props.appState.messagesPage.dialogs}
-                messages={props.appState.messagesPage.messages} />} />
-                
+                dialogs={props.state.messagesPage.dialogs}
+                messages={props.state.messagesPage.messages} />} />
+
               <Route path="/news" render={() => <News />} />
               <Route path="/music" render={() => <Music />} />
               <Route path="/friends" render={() => <Friends />} />
-            </div>            
+            </div>
             <div className={styles.footer}>
               <Footer />
             </div>
           </div>
         </main>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

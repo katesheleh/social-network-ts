@@ -1,3 +1,5 @@
+import { StateType } from "../redux/state"
+
 export type PostType = {
   id: number
   message: string
@@ -24,13 +26,5 @@ export type MessagesType = {
 }
 
 export type AppStateType = {
-  appState: {
-    profilePage: {
-      posts: Array<PostType>
-    }
-    messagesPage: {
-      dialogs: Array<DialogItemType>
-      messages: Array<MessageType>
-    }
-  }
+  state: StateType
 }
