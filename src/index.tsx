@@ -4,11 +4,14 @@ import './index.css';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 import state from './redux/state';
+import { HashRouter } from 'react-router-dom';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App state={state} />
+    <HashRouter hashType={'slash'}>
+      <App state={state} />
+    </HashRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
