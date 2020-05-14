@@ -1,22 +1,28 @@
 {
   "files": {
-    "main.css": "/social-network-ts/static/css/main.f228956f.chunk.css",
-    "main.js": "/social-network-ts/static/js/main.23f55eb0.chunk.js",
-    "main.js.map": "/social-network-ts/static/js/main.23f55eb0.chunk.js.map",
+    "main.css": "/social-network-ts/static/css/main.44e69bd8.chunk.css",
+    "main.js": "/social-network-ts/static/js/main.f165f94f.chunk.js",
+    "main.js.map": "/social-network-ts/static/js/main.f165f94f.chunk.js.map",
     "runtime-main.js": "/social-network-ts/static/js/runtime-main.8af644e4.js",
     "runtime-main.js.map": "/social-network-ts/static/js/runtime-main.8af644e4.js.map",
-    "static/js/2.0c4a3ac3.chunk.js": "/social-network-ts/static/js/2.0c4a3ac3.chunk.js",
-    "static/js/2.0c4a3ac3.chunk.js.map": "/social-network-ts/static/js/2.0c4a3ac3.chunk.js.map",
+    "static/js/2.fd2ad4b3.chunk.js": "/social-network-ts/static/js/2.fd2ad4b3.chunk.js",
+    "static/js/2.fd2ad4b3.chunk.js.map": "/social-network-ts/static/js/2.fd2ad4b3.chunk.js.map",
     "index.html": "/social-network-ts/index.html",
-    "precache-manifest.d85186281d5160e4eb6b6eb69471549d.js": "/social-network-ts/precache-manifest.d85186281d5160e4eb6b6eb69471549d.js",
+    "precache-manifest.2c48829aeb1ff5ebcdc0b2caaf16839f.js": "/social-network-ts/precache-manifest.2c48829aeb1ff5ebcdc0b2caaf16839f.js",
     "service-worker.js": "/social-network-ts/service-worker.js",
-    "static/css/main.f228956f.chunk.css.map": "/social-network-ts/static/css/main.f228956f.chunk.css.map",
-    "static/js/2.0c4a3ac3.chunk.js.LICENSE.txt": "/social-network-ts/static/js/2.0c4a3ac3.chunk.js.LICENSE.txt"
+    "static/css/main.44e69bd8.chunk.css.map": "/social-network-ts/static/css/main.44e69bd8.chunk.css.map",
+    "static/js/2.fd2ad4b3.chunk.js.LICENSE.txt": "/social-network-ts/static/js/2.fd2ad4b3.chunk.js.LICENSE.txt",
+    "static/media/banner-profile.jpg": "/social-network-ts/static/media/banner-profile.7a67d37b.jpg",
+    "static/media/dialogs.jpg": "/social-network-ts/static/media/dialogs.6fe6dff8.jpg",
+    "static/media/friends.jpg": "/social-network-ts/static/media/friends.50d16565.jpg",
+    "static/media/music.jpg": "/social-network-ts/static/media/music.3e4441df.jpg",
+    "static/media/news.jpg": "/social-network-ts/static/media/news.de3167ce.jpg",
+    "static/media/profile.jpg": "/social-network-ts/static/media/profile.6be79ee3.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.8af644e4.js",
-    "static/js/2.0c4a3ac3.chunk.js",
-    "static/css/main.f228956f.chunk.css",
-    "static/js/main.23f55eb0.chunk.js"
+    "static/js/2.fd2ad4b3.chunk.js",
+    "static/css/main.44e69bd8.chunk.css",
+    "static/js/main.f165f94f.chunk.js"
   ]
 }
