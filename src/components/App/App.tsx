@@ -24,7 +24,7 @@ function App(props: AppStateType) {
               addPost={props.addPost} posts={props.state.profilePage.posts} />} />
 
             <Route path="/dialogs" render={() => <Dialogs
-            addMessage={props.addMessage}
+              addMessage={props.addMessage}
               dialogs={props.state.messagesPage.dialogs}
               messages={props.state.messagesPage.messages} />} />
 

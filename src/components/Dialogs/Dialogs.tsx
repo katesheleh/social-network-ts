@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import styles from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
@@ -11,12 +11,17 @@ const Dialogs = (props: DialogsType & MessagesType) => {
   let messagesElements = props.messages
     .map(message => <Message key={message.id} message={message.message} id={message.id} />);
 
-  let newMessageElement = React.createRef<HTMLTextAreaElement>();
+  let [message, setMessage] = useState('')
 
   let addMessage = () => {
-    let text = newMessageElement.current?.value
-    debugger
-    props.addMessage(text ? text : '')
+    // message -> from useState: [message, setMessage]
+    props.addMessage(message)
+    setMessage('')
+  }
+
+  const onChangeTextAreaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    // setMessage -> from useState: [message, setMessage]
+    setMessage(e.currentTarget.value)
   }
 
   return (
@@ -33,7 +38,9 @@ const Dialogs = (props: DialogsType & MessagesType) => {
 
           <form className={styles.form}>
             <textarea
-              ref={newMessageElement}
+              // message -> from useState: [message, setMessage]
+              value={message}
+              onChange={onChangeTextAreaHandler}
               className={styles.textarea} />
             <button
               onClick={addMessage}

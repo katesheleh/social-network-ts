@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
 import { PostsType } from '../../../types';
@@ -11,11 +11,17 @@ const MyPosts = (props: PostsType) => {
       message={post.message}
       likesCounter={post.likesCounter} />);
 
-  let newPostElement = React.createRef<HTMLTextAreaElement>();
+  let [post, setPost] = useState('');
 
   let addPost = () => {
-    let text = newPostElement.current?.value
-    props.addPost(text ? text : '')
+    // post -> from useState: [post, setPost]
+    props.addPost(post)
+    setPost('')
+  }
+
+  const onChangeTextAreaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    // setPost -> from useState: [post, setPost]
+    setPost(e.currentTarget.value)
   }
 
   return (
@@ -23,7 +29,9 @@ const MyPosts = (props: PostsType) => {
       <h2>My Posts</h2>
       <form className={styles.form}>
         <textarea
-          ref={newPostElement}
+        // post -> from useState: [post, setPost]
+          value={post}
+          onChange={onChangeTextAreaHandler}
           className={styles.textarea} />
         <button
           onClick={addPost}

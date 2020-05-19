@@ -22,22 +22,15 @@ let state = {
 }
 
 export const addPost = (postMessage: string) => {
-  let newPost = {
-    id: 5,
-    message: postMessage,
-    likesCounter: 0
-  }
-
+  let newPost = { id: 5, message: postMessage, likesCounter: 0 }
   state.profilePage.posts.push(newPost)
+  console.log(state.profilePage.posts)
 }
 
 export const addMessage = (userMessage: string) => {
-  let newMessage = {
-    id: 7,
-    message: userMessage
-  }
+  let newMessage = { id: 7, message: userMessage }
   state.messagesPage.messages.push(newMessage)
-  debugger
+  console.log(state.messagesPage.messages)
 }
 
 export type StateType = typeof state;
