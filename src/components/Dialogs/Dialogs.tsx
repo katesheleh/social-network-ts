@@ -6,16 +6,17 @@ import { DialogsType, MessagesType } from '../../types';
 
 const Dialogs = (props: DialogsType & MessagesType) => {
   let dialogsElements = props.dialogs
-    .map(dialog => <DialogItem id={dialog.id} name={dialog.name} />);
+    .map(dialog => <DialogItem key={dialog.id} id={dialog.id} name={dialog.name} />);
 
   let messagesElements = props.messages
-    .map(message => <Message message={message.message} id={message.id} />);
+    .map(message => <Message key={message.id} message={message.message} id={message.id} />);
 
   let newMessageElement = React.createRef<HTMLTextAreaElement>();
 
   let addMessage = () => {
     let text = newMessageElement.current?.value
-    console.log(text)
+    debugger
+    props.addMessage(text ? text : '')
   }
 
   return (

@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
-import state from './redux/state';
+import state, { addPost, addMessage } from './redux/state';
 import { HashRouter } from 'react-router-dom';
-
 
 ReactDOM.render(
   <React.StrictMode>
     <HashRouter hashType={'slash'}>
-      <App state={state} />
+      <App
+        state={state}
+        addPost={addPost}
+        addMessage={addMessage} />
     </HashRouter>
   </React.StrictMode>,
   document.getElementById('root')

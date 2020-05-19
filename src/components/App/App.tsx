@@ -21,9 +21,10 @@ function App(props: AppStateType) {
         <div className={styles.content}>
           <div className={styles.contentMain}>
             <Route path="/profile" render={() => <Profile
-              posts={props.state.profilePage.posts} />} />
+              addPost={props.addPost} posts={props.state.profilePage.posts} />} />
 
             <Route path="/dialogs" render={() => <Dialogs
+            addMessage={props.addMessage}
               dialogs={props.state.messagesPage.dialogs}
               messages={props.state.messagesPage.messages} />} />
 

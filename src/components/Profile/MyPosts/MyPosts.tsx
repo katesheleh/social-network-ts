@@ -6,6 +6,7 @@ import { PostsType } from '../../../types';
 const MyPosts = (props: PostsType) => {
   let postsElements = props.posts.map(post =>
     <Post
+      key={post.id}
       id={post.id}
       message={post.message}
       likesCounter={post.likesCounter} />);
@@ -14,7 +15,7 @@ const MyPosts = (props: PostsType) => {
 
   let addPost = () => {
     let text = newPostElement.current?.value
-    console.log(text)
+    props.addPost(text ? text : '')
   }
 
   return (

@@ -1,4 +1,4 @@
-import { StateType } from "../redux/state"
+import { StateType, addPost } from '../redux/state';
 
 export type PostType = {
   id: number
@@ -7,6 +7,7 @@ export type PostType = {
 }
 export type PostsType = {
   posts: Array<PostType>
+  addPost: (postMessage: string) => void
 }
 
 export type DialogItemType = {
@@ -23,8 +24,11 @@ export type MessageType = {
 }
 export type MessagesType = {
   messages: Array<MessageType>
+  addMessage: (userMessage: string) => void
 }
 
 export type AppStateType = {
   state: StateType
+  addPost: (postMessage: string) => void
+  addMessage: (userMessage: string) => void
 }
