@@ -1,7 +1,7 @@
 import { StateType, addPost } from '../redux/state';
 
 export type PostType = {
-  id: number
+  id: string
   message: string
   likesCounter: number
 }
@@ -11,7 +11,7 @@ export type PostsType = {
 }
 
 export type DialogItemType = {
-  id: number
+  id: string
   name: string
 }
 export type DialogsType = {
@@ -19,7 +19,7 @@ export type DialogsType = {
 }
 
 export type MessageType = {
-  id: number
+  id: string
   message: string
 }
 export type MessagesType = {
