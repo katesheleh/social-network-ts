@@ -14,9 +14,10 @@ const Dialogs = (props: DialogsType & MessagesType) => {
   let [message, setMessage] = useState('')
 
   let addMessage = () => {
+    
     // message -> from useState: [message, setMessage]
-    props.addMessage(message)
-    setMessage('')
+    props.addMessage('sss')
+    // setMessage('')
   }
 
   const onChangeTextAreaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {

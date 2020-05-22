@@ -1,4 +1,5 @@
 import { v1 } from "uuid"
+import { rerenderEntireTree } from "../render"
 
 
 let state = {
@@ -26,14 +27,14 @@ let state = {
 
 export const addPost = (postMessage: string) => {
   let newPost = { id: v1(), message: postMessage, likesCounter: 0 }
-  state.profilePage.posts.push(newPost)
-  console.log(state.profilePage.posts)
+  state.profilePage.posts.push(newPost)  
+  rerenderEntireTree(state)
 }
 
 export const addMessage = (userMessage: string) => {
-  let newMessage = { id: v1(), message: userMessage }
-  state.messagesPage.messages.push(newMessage)
-  console.log(state.messagesPage.messages)
+  let newMessage = {id: v1(), message: userMessage }
+  state.messagesPage.messages.push(newMessage)  
+  rerenderEntireTree(state)  
 }
 
 export type StateType = typeof state;

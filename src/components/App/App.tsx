@@ -12,6 +12,7 @@ import Music from '../Music/Music';
 import Friends from '../Friends/Friends';
 
 function App(props: AppStateType) {
+  
   return (
     <div className={styles.app}>
       <main className={styles.main}>

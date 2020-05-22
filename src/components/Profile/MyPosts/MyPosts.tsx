@@ -4,19 +4,21 @@ import Post from './Post/Post';
 import { PostsType } from '../../../types';
 
 const MyPosts = (props: PostsType) => {
+  let [post, setPost] = useState('');
+
   let postsElements = props.posts.map(post =>
     <Post
       key={post.id}
       id={post.id}
       message={post.message}
-      likesCounter={post.likesCounter} />);
-
-  let [post, setPost] = useState('');
+      likesCounter={post.likesCounter}
+    />);
 
   let addPost = () => {
     // post -> from useState: [post, setPost]
+    setPost(post)
     props.addPost(post)
-    setPost('')
+
   }
 
   const onChangeTextAreaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -29,7 +31,7 @@ const MyPosts = (props: PostsType) => {
       <h2>My Posts</h2>
       <form className={styles.form}>
         <textarea
-        // post -> from useState: [post, setPost]
+          // post -> from useState: [post, setPost]
           value={post}
           onChange={onChangeTextAreaHandler}
           className={styles.textarea} />

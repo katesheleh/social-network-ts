@@ -1,4 +1,4 @@
-import { StateType, addPost } from '../redux/state';
+import { StateType } from '../redux/state';
 
 export type PostType = {
   id: string
