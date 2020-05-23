@@ -16,8 +16,8 @@ const Dialogs = (props: DialogsType & MessagesType) => {
   let addMessage = () => {
     
     // message -> from useState: [message, setMessage]
-    props.addMessage('sss')
-    // setMessage('')
+    props.addMessage(message)
+    setMessage('')
   }
 
   const onChangeTextAreaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -37,7 +37,7 @@ const Dialogs = (props: DialogsType & MessagesType) => {
         <div className={styles.colRight}>
           {messagesElements}
 
-          <form className={styles.form}>
+          <div className={styles.form}>
             <textarea
               // message -> from useState: [message, setMessage]
               value={message}
@@ -46,7 +46,7 @@ const Dialogs = (props: DialogsType & MessagesType) => {
             <button
               onClick={addMessage}
               className={styles.button}>Add message</button>
-          </form>
+          </div>
         </div>
       </div>
     </div>

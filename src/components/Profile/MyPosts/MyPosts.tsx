@@ -29,7 +29,7 @@ const MyPosts = (props: PostsType) => {
   return (
     <div className={styles.myPosts}>
       <h2>My Posts</h2>
-      <form className={styles.form}>
+      <div className={styles.form}>
         <textarea
           // post -> from useState: [post, setPost]
           value={post}
@@ -38,7 +38,7 @@ const MyPosts = (props: PostsType) => {
         <button
           onClick={addPost}
           className={styles.button}>Add post</button>
-      </form>
+      </div>
       <div className={styles.postsList}>
         {postsElements}
       </div>
