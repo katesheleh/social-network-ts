@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, KeyboardEvent } from 'react';
 import styles from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
@@ -11,18 +11,38 @@ const Dialogs = (props: DialogsType & MessagesType) => {
   let messagesElements = props.messages
     .map(message => <Message key={message.id} message={message.message} id={message.id} />);
 
+  // add message
   let [message, setMessage] = useState('')
 
+  // trim string empty spaces
+  // message -> from useState: [message, setMessage]  
+  let trimmedMessageString = message.trim();
+
+  // validate textarea
+  let [error, setError] = useState<string | null>(null);
+
   let addMessage = () => {
-    
-    // message -> from useState: [message, setMessage]
-    props.addMessage(message)
+    if (trimmedMessageString) {
+      // message -> from useState: [message, setMessage]
+      props.addMessage(message)
+    } else {
+      // setError -> from useState: [error, setError]  
+      setError('Oops.... It seems you wrote nothing yet.');
+    }
     setMessage('')
   }
 
   const onChangeTextAreaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    // setError -> from useState: [error, setError]
+    setError(null)
     // setMessage -> from useState: [message, setMessage]
     setMessage(e.currentTarget.value)
+  }
+
+  const onKeyPressTextAreaHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.ctrlKey && e.charCode === 13) {
+      addMessage()
+    }
   }
 
   return (
@@ -42,10 +62,14 @@ const Dialogs = (props: DialogsType & MessagesType) => {
               // message -> from useState: [message, setMessage]
               value={message}
               onChange={onChangeTextAreaHandler}
-              className={styles.textarea} />
+              onKeyPress={onKeyPressTextAreaHandler}
+              // add error ClassName
+              className={error ? `${styles.textarea} ${styles.error}` : `${styles.textarea}`} />
+            {/* Error message */}
+            {error && <div className={`${styles.errorMsg}`}>{error}</div>}
             <button
               onClick={addMessage}
-              className={styles.button}>Add message</button>
+              className={trimmedMessageString ? `${styles.button} ${styles.active}` : `${styles.button}`}>Add message</button>
           </div>
         </div>
       </div>

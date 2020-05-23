@@ -6,8 +6,7 @@ let state = {
   profilePage: {
     posts: [
       { id: v1(), message: 'Hi World! How are you?', likesCounter: 75 },
-      { id: v1(), message: 'Today is a good day!', likesCounter: 57 },
-      { id: v1(), message: 'Oops, I did it again!', likesCounter: 57 },
+      { id: v1(), message: 'Today is a good day!', likesCounter: 57 }
     ]
   },
   messagesPage: {

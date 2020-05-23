@@ -13,7 +13,6 @@
   height: 150px;
   padding: 15px;
   border: 1px solid #e4e3e1;
-  margin-bottom: 10px;
   background-color: rgba(228, 227, 225, 0.2);
   font-family: 'Fira Sans', sans-serif;
   font-size: 16px;
@@ -31,10 +30,21 @@
   outline: none;
 }
 
+.textarea.error {
+  border-color: rgb(214, 14, 14);
+}
+
+.errorMsg {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(214, 14, 14);
+}
+
 .button {
   display: block;
   width: 100%;
   border: none;
+  margin-top: 10px;
   margin-left: auto;
   margin-right: 0;
   outline: none;
@@ -48,8 +58,7 @@
   cursor: pointer;
 }
 
-.button:hover,
-.button:active {
+.button.active {
   color: #fff;
   background: #201e2b;
 }
