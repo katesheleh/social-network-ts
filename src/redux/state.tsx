@@ -1,5 +1,8 @@
 import { v1 } from "uuid"
-import { rerenderEntireTree } from "../render"
+
+let rerenderEntireTree = (state: StateType) => {
+  console.log('State was changed')
+}
 
 
 let state = {
@@ -35,6 +38,10 @@ export const addPost = () => {
 export const updateNewPostText = (newText: string) => {
   state.profilePage.newPostText = newText;
   rerenderEntireTree(state)
+}
+
+export const subscribe = (observer: any) => {
+  rerenderEntireTree = observer
 }
 
 export const addMessage = (userMessage: string) => {
