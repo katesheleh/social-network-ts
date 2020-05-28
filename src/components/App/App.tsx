@@ -22,7 +22,10 @@ function App(props: AppStateType) {
         <div className={styles.content}>
           <div className={styles.contentMain}>
             <Route path="/profile" render={() => <Profile
-              addPost={props.addPost} posts={props.state.profilePage.posts} />} />
+              addPost={props.addPost} 
+              posts={props.state.profilePage.posts} 
+              newPostText={props.state.profilePage.newPostText}
+              updateNewPostText={props.updateNewPostText}/>} />
 
             <Route path="/dialogs" render={() => <Dialogs
               addMessage={props.addMessage}

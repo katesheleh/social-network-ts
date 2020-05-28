@@ -8,6 +8,8 @@ export type PostType = {
 export type PostsType = {
   posts: Array<PostType>
   addPost: (postMessage: string) => void
+  newPostText: string
+  updateNewPostText: (newText: string) => void
 }
 
 export type DialogItemType = {
@@ -31,4 +33,5 @@ export type AppStateType = {
   state: StateType
   addPost: (postMessage: string) => void
   addMessage: (userMessage: string) => void
+  updateNewPostText: (newText: string) => void
 }

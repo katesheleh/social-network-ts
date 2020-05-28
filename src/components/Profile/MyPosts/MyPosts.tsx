@@ -1,19 +1,9 @@
-import React, { useState, ChangeEvent, KeyboardEvent } from 'react';
+import React from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
 import { PostsType } from '../../../types';
 
 const MyPosts = (props: PostsType) => {
-  // add post
-  let [post, setPost] = useState('');
-
-  // trim string empty spaces
-  // post -> from useState: [post, setPost]  
-  let trimmedPostString = post.trim();
-
-  // validate textarea
-  let [error, setError] = useState<string | null>(null);
-
   let postsElements = props.posts.map(post =>
     <Post
       key={post.id}
@@ -22,29 +12,20 @@ const MyPosts = (props: PostsType) => {
       likesCounter={post.likesCounter}
     />);
 
+  let newPostElement = React.createRef<HTMLTextAreaElement>();
+
   let addPost = () => {
-    if (trimmedPostString) {
-      // post -> from useState: [post, setPost]    
-      props.addPost(trimmedPostString)
-    } else {
-      // setError -> from useState: [error, setError]  
-      setError('Oops.... It seems you wrote nothing yet.');
-    }
-    setPost('')
+    let text = newPostElement.current?.value
+    if(text) {
+      props.addPost(text)
+    }    
   }
 
-  const onChangeTextAreaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    // setError -> from useState: [error, setError]
-    setError(null)
-    // setPost -> from useState: [post, setPost]
-    setPost(e.currentTarget.value)
-  }
-
-  // add post onKeyPress: ctrl + enter
-  const onKeyPressTextAreaHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.ctrlKey && e.charCode === 13) {
-      addPost()
-    }
+  let onPostChange = () => {
+    let text = newPostElement.current?.value
+    if(text) {
+      props.updateNewPostText(text)
+    } 
   }
 
   return (
@@ -52,18 +33,15 @@ const MyPosts = (props: PostsType) => {
       <h2>My Posts</h2>
       <div className={styles.form}>
         <textarea
-          // post -> from useState: [post, setPost]
-          value={post}
-          onChange={onChangeTextAreaHandler}
-          onKeyPress={onKeyPressTextAreaHandler}
-          // add error ClassName
-          className={error ? `${styles.textarea} ${styles.error}` : `${styles.textarea}`} />
-        {/* Error message */}
-        {error && <div className={`${styles.errorMsg}`}>{error}</div>}
+          value={props.newPostText}
+          onChange={onPostChange}
+          ref={newPostElement}
+          placeholder='Write your post here'
+          className={styles.textarea}
+        />
         <button
           onClick={addPost}
-          // if string.lenght > 0 add button active class
-          className={trimmedPostString ? `${styles.button} ${styles.active}` : `${styles.button}`}>Add post</button>
+          className={styles.button}>Add post</button>
       </div>
       <div className={styles.postsList}>
         {postsElements}
