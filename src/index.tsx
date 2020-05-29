@@ -3,26 +3,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App';
-import state, { addPost, addMessage, updateNewPostText, subscribe } from './redux/state';
+import store from './redux/state';
 import { HashRouter } from 'react-router-dom';
-import { AppStateType } from './types/index';
+//import { AppStateType } from './types/index';
 
-const rerenderEntireTree = (state: any) => {
+
+const rerenderEntireTree = (state: any) => { // StateType  
   ReactDOM.render(
     <React.StrictMode>
       <HashRouter>
         <App
-          state={state}
-          addPost={addPost}          
-          addMessage={addMessage}
-          updateNewPostText={updateNewPostText} />
+          state={store.getState()}
+          addPost={store.addPost.bind(store)}          
+          addMessage={store.addMessage.bind(store)}
+          updateNewPostText={store.updateNewPostText.bind(store)} />
       </HashRouter>
     </React.StrictMode>,
     document.getElementById('root')
   );
 }
 
-rerenderEntireTree(state)
-subscribe(rerenderEntireTree)
+rerenderEntireTree(store)
+store.subscribe(rerenderEntireTree)
 
 serviceWorker.unregister();

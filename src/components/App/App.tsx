@@ -12,7 +12,8 @@ import Music from '../Music/Music';
 import Friends from '../Friends/Friends';
 
 function App(props: AppStateType) {
-  
+  console.log(props.state)
+  debugger;
   return (
     <div className={styles.app}>
       <main className={styles.main}>
@@ -21,6 +22,7 @@ function App(props: AppStateType) {
         </div>
         <div className={styles.content}>
           <div className={styles.contentMain}>
+            
             <Route path="/profile" render={() => <Profile
               addPost={props.addPost} 
               posts={props.state.profilePage.posts} 

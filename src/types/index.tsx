@@ -1,37 +1,36 @@
-import { StateType } from '../redux/state';
-
 export type PostType = {
-  id: string
-  message: string
-  likesCounter: number
-}
+  id: string;
+  message: string;
+  likesCounter: number;
+};
 export type PostsType = {
-  posts: Array<PostType>
-  addPost: (postMessage: string) => void
-  newPostText: string
-  updateNewPostText: (newText: string) => void
-}
+  posts: Array<PostType>;
+  addPost: (postMessage: string) => void;
+  newPostText: string;
+  updateNewPostText: (newText: string) => void;
+};
 
 export type DialogItemType = {
-  id: string
-  name: string
-}
+  id: string;
+  name: string;
+};
+
 export type DialogsType = {
-  dialogs: Array<DialogItemType>
-}
+  dialogs: Array<DialogItemType>;
+};
 
 export type MessageType = {
-  id: string
-  message: string
-}
+  id: string;
+  message: string;
+};
 export type MessagesType = {
-  messages: Array<MessageType>
-  addMessage: (userMessage: string) => void
-}
+  messages: Array<MessageType>;
+  addMessage: (userMessage: string) => void;
+};
 
 export type AppStateType = {
-  state: StateType
-  addPost: (postMessage: string) => void
-  addMessage: (userMessage: string) => void
-  updateNewPostText: (newText: string) => void
-}
+  state: any; //StateType
+  addPost: (postMessage: string) => void;
+  addMessage: (userMessage: string) => void;
+  updateNewPostText: (newText: string) => void;
+};
