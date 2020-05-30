@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './Post.module.css';
-import { PostType } from '../../../../types';
+import {PostType} from '../../../../types/types';
 
-const Post = (props: PostType) => {
+const Post=(props: PostType) => {
   return (
     <div className={styles.post} key={props.id}>
       <div className={styles.imgWrap}>

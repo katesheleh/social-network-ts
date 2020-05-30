@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
-import { PostsType } from '../../../types';
+import {PostsType} from '../../../types/types';
 
-const MyPosts = (props: PostsType) => {
-  let postsElements = props.posts.map(post =>
+const MyPosts=(props: PostsType) => {
+  let postsElements=props.posts.map(post =>
     <Post
       key={post.id}
       id={post.id}
@@ -12,20 +12,20 @@ const MyPosts = (props: PostsType) => {
       likesCounter={post.likesCounter}
     />);
 
-  let newPostElement = React.createRef<HTMLTextAreaElement>();
+  let newPostElement=React.createRef<HTMLTextAreaElement>();
 
-  let addPost = () => {
-    let text = newPostElement.current?.value
+  let addPost=() => {
+    let text=newPostElement.current?.value
     if(text) {
       props.addPost(text)
-    }    
+    }
   }
 
-  let onPostChange = () => {
-    let text = newPostElement.current?.value
+  let onPostChange=() => {
+    let text=newPostElement.current?.value
     if(text) {
       props.updateNewPostText(text)
-    } 
+    }
   }
 
   return (

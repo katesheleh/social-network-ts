@@ -1,4 +1,5 @@
 import { v1 } from "uuid";
+import { StoreStateType } from "../types/types";
 
 let store = {
   _state: {
@@ -27,9 +28,9 @@ let store = {
     return this._state;
   },
   // StateType
-  _callSubscriber(state: any) {
+  _callSubscriber( state: StoreStateType ) {
     // ???????????????????
-    console.log("State was changed");
+    console.log( "State was changed" );
   },
   addPost() {
     let newPost = {
@@ -37,21 +38,21 @@ let store = {
       message: this._state.profilePage.newPostText,
       likesCounter: 0,
     };
-    this._state.profilePage.posts.push(newPost);
+    this._state.profilePage.posts.push( newPost );
     this._state.profilePage.newPostText = "";
-    this._callSubscriber(this._state);
+    this._callSubscriber( this._state );
   },
-  updateNewPostText(newText: string) {
+  updateNewPostText( newText: string ) {
     this._state.profilePage.newPostText = newText;
-    this._callSubscriber(this._state);
+    this._callSubscriber( this._state );
   },
-  subscribe(observer: any) {
+  subscribe( observer: any ) {
     this._callSubscriber = observer;
   },
-  addMessage(userMessage: string) {
+  addMessage( userMessage: string ) {
     let newMessage = { id: v1(), message: userMessage };
-    this._state.messagesPage.messages.push(newMessage);
-    this._callSubscriber(this._state);
+    this._state.messagesPage.messages.push( newMessage );
+    this._callSubscriber( this._state );
   },
 };
 

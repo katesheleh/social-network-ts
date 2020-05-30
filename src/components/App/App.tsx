@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './App.module.css';
 import { Route } from 'react-router-dom';
-import { AppStateType } from '../../types';
+import { AppStateType } from '../../types/types';
 
 import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
@@ -11,34 +11,32 @@ import News from '../News/News';
 import Music from '../Music/Music';
 import Friends from '../Friends/Friends';
 
-function App(props: AppStateType) {
-  console.log(props.state)
-  debugger;
+function App( props: AppStateType ) {
   return (
-    <div className={styles.app}>
-      <main className={styles.main}>
-        <div className={styles.sidebar}>
+    <div className={ styles.app }>
+      <main className={ styles.main }>
+        <div className={ styles.sidebar }>
           <Sidebar />
         </div>
-        <div className={styles.content}>
-          <div className={styles.contentMain}>
-            
-            <Route path="/profile" render={() => <Profile
-              addPost={props.addPost} 
-              posts={props.state.profilePage.posts} 
-              newPostText={props.state.profilePage.newPostText}
-              updateNewPostText={props.updateNewPostText}/>} />
+        <div className={ styles.content }>
+          <div className={ styles.contentMain }>
 
-            <Route path="/dialogs" render={() => <Dialogs
-              addMessage={props.addMessage}
-              dialogs={props.state.messagesPage.dialogs}
-              messages={props.state.messagesPage.messages} />} />
+            <Route path='/profile' render={ () => <Profile
+              addPost={ props.addPost }
+              posts={ props.state.profilePage.posts }
+              newPostText={ props.state.profilePage.newPostText }
+              updateNewPostText={ props.updateNewPostText } /> } />
 
-            <Route path="/news" render={() => <News />} />
-            <Route path="/music" render={() => <Music />} />
-            <Route path="/friends" render={() => <Friends />} />
+            <Route path='/dialogs' render={ () => <Dialogs
+              addMessage={ props.addMessage }
+              dialogs={ props.state.messagesPage.dialogs }
+              messages={ props.state.messagesPage.messages } /> } />
+
+            <Route path='/news' render={ () => <News /> } />
+            <Route path='/music' render={ () => <Music /> } />
+            <Route path='/friends' render={ () => <Friends /> } />
           </div>
-          <div className={styles.footer}>
+          <div className={ styles.footer }>
             <Footer />
           </div>
         </div>
