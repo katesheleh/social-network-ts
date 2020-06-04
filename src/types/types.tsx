@@ -5,9 +5,9 @@ export type PostType = {
 };
 
 export type PostsType = {
-  dispatch: ( action: any ) => void;
   posts: Array<PostType>;
   newPostText: string;
+  dispatch: ( action: any ) => void;
 };
 
 export type DialogItemType = {

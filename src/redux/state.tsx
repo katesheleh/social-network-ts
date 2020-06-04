@@ -1,6 +1,27 @@
 import { v1 } from "uuid";
 import { StoreStateType, DispatchType } from "../types/types";
 
+
+const ADD_POST = 'ADD_POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
+const ADD_MESSAGE = 'ADD_MESSAGE';
+
+export const addPostActionCreator = () => {
+  return ( { type: ADD_POST } );
+};
+
+export const updateNewPostTextActionCreator = ( text: string ) => {
+  return (
+    { type: UPDATE_NEW_POST_TEXT, newText: text }
+  );
+};
+
+export const addMessageActionCreator = ( message: string ) => {
+  return (
+    { type: ADD_MESSAGE, userMessage: message }
+  );
+};
+
 let store = {
   _state: {
     profilePage: {
@@ -31,10 +52,10 @@ let store = {
     return this._state;
   },
   subscribe( observer: any ) { //ObserverType 
-    observer = this._callSubscriber;
+    this._callSubscriber = observer;
   },
   dispatch( action: DispatchType ) {
-    if ( action.type === 'ADD-POST' ) {
+    if ( action.type === ADD_POST ) {
       let newPost = {
         id: v1(),
         message: this._state.profilePage.newPostText,
@@ -45,11 +66,11 @@ let store = {
       this._state.profilePage.newPostText = "";
       this._callSubscriber( this._state );
 
-    } else if ( action.type === 'UPDATE-NEW-POST-TEXT' ) {
+    } else if ( action.type === UPDATE_NEW_POST_TEXT ) {
       this._state.profilePage.newPostText = action.newText;
       this._callSubscriber( this._state );
 
-    } else if ( action.type === 'ADD-MESSAGE' ) {
+    } else if ( action.type === ADD_MESSAGE ) {
       let newMessage = { id: v1(), message: action.userMessage };
       this._state.messagesPage.messages.push( newMessage );
       this._callSubscriber( this._state );

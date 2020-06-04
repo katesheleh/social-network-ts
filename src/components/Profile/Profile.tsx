@@ -5,7 +5,7 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 import { PostsType } from '../../types/types';
 
 const Profile = ( props: PostsType ) => {
-
+  debugger;
   return (
     <div className={ styles.profile }>
       <h1>Profile </h1>

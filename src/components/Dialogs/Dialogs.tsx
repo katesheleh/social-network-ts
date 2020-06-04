@@ -3,6 +3,7 @@ import styles from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import { DialogsType, MessagesType } from '../../types/types';
+import { addMessageActionCreator } from '../../redux/state';
 
 const Dialogs = ( props: DialogsType & MessagesType ) => {
   let dialogsElements = props.dialogs
@@ -24,7 +25,7 @@ const Dialogs = ( props: DialogsType & MessagesType ) => {
   let addMessage = () => {
     if ( trimmedMessageString ) {
       // message -> from useState: [message, setMessage]
-      props.dispatch( { type: 'ADD-MESSAGE', userMessage: message } );
+      props.dispatch( addMessageActionCreator( message ) );
     } else {
       // setError -> from useState: [error, setError]  
       setError( 'Oops.... It seems you wrote nothing yet.' );
