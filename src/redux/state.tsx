@@ -5,22 +5,7 @@ import { StoreStateType, DispatchType } from "../types/types";
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const ADD_MESSAGE = 'ADD_MESSAGE';
-
-export const addPostActionCreator = () => {
-  return ( { type: ADD_POST } );
-};
-
-export const updateNewPostTextActionCreator = ( text: string ) => {
-  return (
-    { type: UPDATE_NEW_POST_TEXT, newText: text }
-  );
-};
-
-export const addMessageActionCreator = ( message: string ) => {
-  return (
-    { type: ADD_MESSAGE, userMessage: message }
-  );
-};
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
 
 let store = {
   _state: {
@@ -43,6 +28,7 @@ let store = {
         { id: v1(), message: "Me too. Have a nice day!" },
         { id: v1(), message: ":)" },
       ],
+      newMessageText: "",
     },
   },
   _callSubscriber( state: StoreStateType ) {
@@ -56,12 +42,7 @@ let store = {
   },
   dispatch( action: DispatchType ) {
     if ( action.type === ADD_POST ) {
-      let newPost = {
-        id: v1(),
-        message: this._state.profilePage.newPostText,
-        likesCounter: 0,
-      };
-
+      let newPost = { id: v1(), message: this._state.profilePage.newPostText, likesCounter: 0 };
       this._state.profilePage.posts.push( newPost );
       this._state.profilePage.newPostText = "";
       this._callSubscriber( this._state );
@@ -71,11 +52,39 @@ let store = {
       this._callSubscriber( this._state );
 
     } else if ( action.type === ADD_MESSAGE ) {
-      let newMessage = { id: v1(), message: action.userMessage };
+      let newMessage = { id: v1(), message: this._state.messagesPage.newMessageText };
       this._state.messagesPage.messages.push( newMessage );
+      this._state.messagesPage.newMessageText = "";
+      this._callSubscriber( this._state );
+
+
+    } else if ( action.type === UPDATE_NEW_MESSAGE_TEXT ) {
+      this._state.messagesPage.newMessageText = action.newText;
       this._callSubscriber( this._state );
     }
   }
+};
+
+export const addPostActionCreator = () => {
+  return ( { type: ADD_POST } );
+};
+
+export const updateNewPostTextActionCreator = ( text: string ) => {
+  return (
+    { type: UPDATE_NEW_POST_TEXT, newText: text }
+  );
+};
+
+export const addMessageActionCreator = () => {
+  return (
+    { type: ADD_MESSAGE }
+  );
+};
+
+export const updateNewMessageActionCreator = ( text: string ) => {
+  return (
+    { type: UPDATE_NEW_MESSAGE_TEXT, newText: text }
+  );
 };
 
 //export type StateType = typeof store;

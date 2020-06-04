@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
 import { PostsType } from '../../../types/types';
@@ -13,18 +13,13 @@ const MyPosts = ( props: PostsType ) => {
       likesCounter={ post.likesCounter }
     /> );
 
-  let newPostElement = React.createRef<HTMLTextAreaElement>();
-
   let addPost = () => {
-    debugger;
     props.dispatch( addPostActionCreator() );
   };
 
-  let onPostChange = () => {
-    let text = newPostElement.current?.value;
-    if ( text ) {
-      props.dispatch( updateNewPostTextActionCreator( text ) );
-    }
+  let onPostChange = ( e: ChangeEvent<HTMLTextAreaElement> ) => {
+    let text = e.target.value;
+    props.dispatch( updateNewPostTextActionCreator( text ) );
   };
 
   return (
@@ -34,7 +29,6 @@ const MyPosts = ( props: PostsType ) => {
         <textarea
           value={ props.newPostText }
           onChange={ onPostChange }
-          ref={ newPostElement }
           placeholder='Write your post here'
           className={ styles.textarea }
         />

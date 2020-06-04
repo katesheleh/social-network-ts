@@ -1,9 +1,9 @@
-import React, { useState, ChangeEvent, KeyboardEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import styles from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import { DialogsType, MessagesType } from '../../types/types';
-import { addMessageActionCreator } from '../../redux/state';
+import { addMessageActionCreator, updateNewMessageActionCreator } from '../../redux/state';
 
 const Dialogs = ( props: DialogsType & MessagesType ) => {
   let dialogsElements = props.dialogs
@@ -12,38 +12,13 @@ const Dialogs = ( props: DialogsType & MessagesType ) => {
   let messagesElements = props.messages
     .map( message => <Message key={ message.id } message={ message.message } id={ message.id } /> );
 
-  // add message
-  let [ message, setMessage ] = useState( '' );
-
-  // trim string empty spaces
-  // message -> from useState: [message, setMessage]  
-  let trimmedMessageString = message.trim();
-
-  // validate textarea
-  let [ error, setError ] = useState<string | null>( null );
-
   let addMessage = () => {
-    if ( trimmedMessageString ) {
-      // message -> from useState: [message, setMessage]
-      props.dispatch( addMessageActionCreator( message ) );
-    } else {
-      // setError -> from useState: [error, setError]  
-      setError( 'Oops.... It seems you wrote nothing yet.' );
-    }
-    setMessage( '' );
+    props.dispatch( addMessageActionCreator() );
   };
 
-  const onChangeTextAreaHandler = ( e: ChangeEvent<HTMLTextAreaElement> ) => {
-    // setError -> from useState: [error, setError]
-    setError( null );
-    // setMessage -> from useState: [message, setMessage]
-    setMessage( e.currentTarget.value );
-  };
-
-  const onKeyPressTextAreaHandler = ( e: KeyboardEvent<HTMLTextAreaElement> ) => {
-    if ( e.ctrlKey && e.charCode === 13 ) {
-      addMessage();
-    }
+  const onMessageChange = ( e: ChangeEvent<HTMLTextAreaElement> ) => {
+    let text = e.target.value;
+    props.dispatch( updateNewMessageActionCreator( text ) );
   };
 
   return (
@@ -60,17 +35,13 @@ const Dialogs = ( props: DialogsType & MessagesType ) => {
 
           <div className={ styles.form }>
             <textarea
-              // message -> from useState: [message, setMessage]
-              value={ message }
-              onChange={ onChangeTextAreaHandler }
-              onKeyPress={ onKeyPressTextAreaHandler }
-              // add error ClassName
-              className={ error ? `${ styles.textarea } ${ styles.error }` : `${ styles.textarea }` } />
-            {/* Error message */ }
-            { error && <div className={ `${ styles.errorMsg }` }>{ error }</div> }
+              value={ props.newMessageText }
+              placeholder='Write your message here'
+              onChange={ onMessageChange }
+              className={ styles.textarea } />
             <button
               onClick={ addMessage }
-              className={ trimmedMessageString ? `${ styles.button } ${ styles.active }` : `${ styles.button }` }>Add message</button>
+              className={ styles.button }>Add message</button>
           </div>
         </div>
       </div>

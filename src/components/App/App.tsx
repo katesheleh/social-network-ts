@@ -29,6 +29,7 @@ function App( props: AppStateType ) {
 
             <Route path='/dialogs' render={ () => <Dialogs
               dispatch={ props.dispatch }
+              newMessageText={ props.state.messagesPage.newMessageText }
               dialogs={ props.state.messagesPage.dialogs }
               messages={ props.state.messagesPage.messages } /> } />
 

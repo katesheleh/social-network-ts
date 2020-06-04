@@ -26,6 +26,7 @@ export type MessageType = {
 
 export type MessagesType = {
   messages: Array<MessageType>;
+  newMessageText: string;
   dispatch: ( action: any ) => void;
 };
 
@@ -37,6 +38,7 @@ export type ProfilePageType = {
 export type MessagesPageType = {
   dialogs: Array<DialogItemType>;
   messages: Array<MessageType>;
+  newMessageText: string;
 };
 
 export type StoreStateType = {
