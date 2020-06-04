@@ -5,9 +5,10 @@ import './index.css';
 import App from './components/App/App';
 import store from './redux/state';
 import { HashRouter } from 'react-router-dom';
+import { StoreStateType } from './types/types';
 
 
-const rerenderEntireTree = ( state: any ) => { // rerenderEntireTreeType 
+const rerenderEntireTree = ( state: StoreStateType ) => {
   ReactDOM.render(
     <React.StrictMode>
       <HashRouter>
@@ -21,7 +22,7 @@ const rerenderEntireTree = ( state: any ) => { // rerenderEntireTreeType
   );
 };
 
-rerenderEntireTree( store.getState );
+rerenderEntireTree( store.getState() );
 store.subscribe( rerenderEntireTree );
 
 serviceWorker.unregister();

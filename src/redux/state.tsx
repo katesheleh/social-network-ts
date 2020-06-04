@@ -1,5 +1,5 @@
 import { v1 } from "uuid";
-import { StoreStateType } from "../types/types";
+import { StoreStateType, DispatchType } from "../types/types";
 
 let store = {
   _state: {
@@ -24,7 +24,6 @@ let store = {
       ],
     },
   },
-  // StateType
   _callSubscriber( state: StoreStateType ) {
     console.log( "State was changed" );
   },
@@ -32,15 +31,9 @@ let store = {
     return this._state;
   },
   subscribe( observer: any ) { //ObserverType 
-    this._callSubscriber = observer;
+    observer = this._callSubscriber;
   },
-  addMessage( userMessage: string ) {
-    let newMessage = { id: v1(), message: userMessage };
-    this._state.messagesPage.messages.push( newMessage );
-    this._callSubscriber( this._state );
-  },
-
-  dispatch( action: any ) { // DispatchType
+  dispatch( action: DispatchType ) {
     if ( action.type === 'ADD-POST' ) {
       let newPost = {
         id: v1(),
@@ -51,6 +44,7 @@ let store = {
       this._state.profilePage.posts.push( newPost );
       this._state.profilePage.newPostText = "";
       this._callSubscriber( this._state );
+
     } else if ( action.type === 'UPDATE-NEW-POST-TEXT' ) {
       this._state.profilePage.newPostText = action.newText;
       this._callSubscriber( this._state );

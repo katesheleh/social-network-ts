@@ -50,23 +50,12 @@ export type AppStateType = {
 };
 
 export type DispatchType = {
-  type: string;
-  newText?: string;
-  userMessage?: string | undefined;
+  type: Object;
+  newText: string;
+  userMessage: string;
 };
 
 export type ObserverType = {
-  observer: () => void;
-};
-
-export type rerenderEntireTreeType = {
-  getState: () => StoreStateType;
-};
-export type StateType = {
-  _state: StoreStateType;
-  _callSubscriber: ( state: StoreStateType ) => void;
-  getState: () => void;
-  subscribe: ( observer: any ) => void;
-  dispatch: ( action: any ) => void;
+  observer: StoreStateType;
 };
 
