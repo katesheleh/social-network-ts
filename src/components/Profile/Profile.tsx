@@ -11,10 +11,10 @@ const Profile = ( props: PostsType ) => {
       <h1>Profile </h1>
       <ProfileInfo />
       <MyPosts
-        addPost={ props.addPost }
         posts={ props.posts }
+        dispatch={ props.dispatch }
         newPostText={ props.newPostText }
-        updateNewPostText={ props.updateNewPostText } />
+      />
     </div>
   );
 };

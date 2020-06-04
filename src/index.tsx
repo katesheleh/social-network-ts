@@ -6,15 +6,15 @@ import App from './components/App/App';
 import store from './redux/state';
 import { HashRouter } from 'react-router-dom';
 
-const rerenderEntireTree = ( state: any ) => { // StateType  
+
+const rerenderEntireTree = ( state: any ) => { // rerenderEntireTreeType 
   ReactDOM.render(
     <React.StrictMode>
       <HashRouter>
         <App
           state={ store.getState() }
-          addPost={ store.addPost.bind( store ) }
-          addMessage={ store.addMessage.bind( store ) }
-          updateNewPostText={ store.updateNewPostText.bind( store ) } />
+          dispatch={ store.dispatch.bind( store ) }
+        />
       </HashRouter>
     </React.StrictMode>,
     document.getElementById( 'root' )

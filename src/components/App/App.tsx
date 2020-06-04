@@ -22,13 +22,13 @@ function App( props: AppStateType ) {
           <div className={ styles.contentMain }>
 
             <Route path='/profile' render={ () => <Profile
-              addPost={ props.addPost }
               posts={ props.state.profilePage.posts }
+              dispatch={ props.dispatch }
               newPostText={ props.state.profilePage.newPostText }
-              updateNewPostText={ props.updateNewPostText } /> } />
+            /> } />
 
             <Route path='/dialogs' render={ () => <Dialogs
-              addMessage={ props.addMessage }
+              dispatch={ props.dispatch }
               dialogs={ props.state.messagesPage.dialogs }
               messages={ props.state.messagesPage.messages } /> } />
 

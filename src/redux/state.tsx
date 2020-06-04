@@ -24,29 +24,14 @@ let store = {
       ],
     },
   },
+  // StateType
+  _callSubscriber( state: StoreStateType ) {
+    console.log( "State was changed" );
+  },
   getState() {
     return this._state;
   },
-  // StateType
-  _callSubscriber( state: StoreStateType ) {
-    // ???????????????????
-    console.log( "State was changed" );
-  },
-  addPost() {
-    let newPost = {
-      id: v1(),
-      message: this._state.profilePage.newPostText,
-      likesCounter: 0,
-    };
-    this._state.profilePage.posts.push( newPost );
-    this._state.profilePage.newPostText = "";
-    this._callSubscriber( this._state );
-  },
-  updateNewPostText( newText: string ) {
-    this._state.profilePage.newPostText = newText;
-    this._callSubscriber( this._state );
-  },
-  subscribe( observer: any ) {
+  subscribe( observer: any ) { //ObserverType 
     this._callSubscriber = observer;
   },
   addMessage( userMessage: string ) {
@@ -54,7 +39,29 @@ let store = {
     this._state.messagesPage.messages.push( newMessage );
     this._callSubscriber( this._state );
   },
+
+  dispatch( action: any ) { // DispatchType
+    if ( action.type === 'ADD-POST' ) {
+      let newPost = {
+        id: v1(),
+        message: this._state.profilePage.newPostText,
+        likesCounter: 0,
+      };
+
+      this._state.profilePage.posts.push( newPost );
+      this._state.profilePage.newPostText = "";
+      this._callSubscriber( this._state );
+    } else if ( action.type === 'UPDATE-NEW-POST-TEXT' ) {
+      this._state.profilePage.newPostText = action.newText;
+      this._callSubscriber( this._state );
+
+    } else if ( action.type === 'ADD-MESSAGE' ) {
+      let newMessage = { id: v1(), message: action.userMessage };
+      this._state.messagesPage.messages.push( newMessage );
+      this._callSubscriber( this._state );
+    }
+  }
 };
 
-export type StateType = typeof store;
+//export type StateType = typeof store;
 export default store;

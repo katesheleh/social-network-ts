@@ -5,10 +5,9 @@ export type PostType = {
 };
 
 export type PostsType = {
+  dispatch: ( action: any ) => void;
   posts: Array<PostType>;
-  addPost: ( postMessage: string ) => void;
   newPostText: string;
-  updateNewPostText: ( newText: string ) => void;
 };
 
 export type DialogItemType = {
@@ -27,7 +26,7 @@ export type MessageType = {
 
 export type MessagesType = {
   messages: Array<MessageType>;
-  addMessage: ( userMessage: string ) => void;
+  dispatch: ( action: any ) => void;
 };
 
 export type ProfilePageType = {
@@ -47,8 +46,27 @@ export type StoreStateType = {
 
 export type AppStateType = {
   state: StoreStateType; //StateType
-  addPost: ( postMessage: string ) => void;
-  addMessage: ( userMessage: string ) => void;
-  updateNewPostText: ( newText: string ) => void;
+  dispatch: ( action: any ) => void;
+};
+
+export type DispatchType = {
+  type: string;
+  newText?: string;
+  userMessage?: string | undefined;
+};
+
+export type ObserverType = {
+  observer: () => void;
+};
+
+export type rerenderEntireTreeType = {
+  getState: () => StoreStateType;
+};
+export type StateType = {
+  _state: StoreStateType;
+  _callSubscriber: ( state: StoreStateType ) => void;
+  getState: () => void;
+  subscribe: ( observer: any ) => void;
+  dispatch: ( action: any ) => void;
 };
 
