@@ -1,5 +1,7 @@
 import { v1 } from "uuid";
 import { StoreStateType, DispatchType } from "../types/types";
+import profileReducer from './profileReducer';
+import dialogsReducer from "./dialogsReducer";
 
 
 const ADD_POST = 'ADD_POST';
@@ -37,31 +39,13 @@ let store = {
   getState() {
     return this._state;
   },
-  subscribe( observer: any ) { //ObserverType 
+  subscribe( observer: any ) {
     this._callSubscriber = observer;
   },
   dispatch( action: DispatchType ) {
-    if ( action.type === ADD_POST ) {
-      let newPost = { id: v1(), message: this._state.profilePage.newPostText, likesCounter: 0 };
-      this._state.profilePage.posts.push( newPost );
-      this._state.profilePage.newPostText = "";
-      this._callSubscriber( this._state );
-
-    } else if ( action.type === UPDATE_NEW_POST_TEXT ) {
-      this._state.profilePage.newPostText = action.newText;
-      this._callSubscriber( this._state );
-
-    } else if ( action.type === ADD_MESSAGE ) {
-      let newMessage = { id: v1(), message: this._state.messagesPage.newMessageText };
-      this._state.messagesPage.messages.push( newMessage );
-      this._state.messagesPage.newMessageText = "";
-      this._callSubscriber( this._state );
-
-
-    } else if ( action.type === UPDATE_NEW_MESSAGE_TEXT ) {
-      this._state.messagesPage.newMessageText = action.newText;
-      this._callSubscriber( this._state );
-    }
+    this._state.profilePage = profileReducer( this._state.profilePage, action );
+    this._state.messagesPage = dialogsReducer( this._state.messagesPage, action );
+    this._callSubscriber( this._state );
   }
 };
 
@@ -87,5 +71,4 @@ export const updateNewMessageActionCreator = ( text: string ) => {
   );
 };
 
-//export type StateType = typeof store;
 export default store;

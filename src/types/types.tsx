@@ -52,12 +52,17 @@ export type AppStateType = {
 };
 
 export type DispatchType = {
-  type: Object;
+  type: string;
   newText: string;
-  userMessage: string;
 };
 
-export type ObserverType = {
-  observer: StoreStateType;
+export type ProfileReducerType = {
+  type: string;
+  newText: string;
+};
+
+export type DialogsReducerType = {
+  type: string;
+  newText: string;
 };
 
