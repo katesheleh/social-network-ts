@@ -4,7 +4,16 @@ import { ProfilePageType, ProfileReducerType } from "../types/types";
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 
-const profileReducer = ( state: ProfilePageType, action: ProfileReducerType ) => {
+const initialState = {
+  posts: [
+    { id: v1(), message: "Hi World! How are you?", likesCounter: 75 },
+    { id: v1(), message: "Today is a good day!", likesCounter: 57 },
+  ],
+  newPostText: "",
+};
+
+const profileReducer = ( state: ProfilePageType = initialState, action: ProfileReducerType ) => {
+
   switch ( action.type ) {
 
     case ADD_POST:

@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App';
-import store from './redux/state';
+import store from './redux/redux-store';
 import { HashRouter } from 'react-router-dom';
 import { StoreStateType } from './types/types';
 
@@ -23,6 +23,10 @@ const rerenderEntireTree = ( state: StoreStateType ) => {
 };
 
 rerenderEntireTree( store.getState() );
-store.subscribe( rerenderEntireTree );
+
+store.subscribe( () => {
+  let state = store.getState();
+  rerenderEntireTree( state );
+} );
 
 serviceWorker.unregister();
