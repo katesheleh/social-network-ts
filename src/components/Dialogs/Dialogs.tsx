@@ -3,7 +3,6 @@ import styles from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import { DialogsType, MessagesType } from '../../types/types';
-import { addMessageActionCreator, updateNewMessageActionCreator } from '../../redux/state';
 
 const Dialogs = ( props: DialogsType & MessagesType ) => {
   let dialogsElements = props.dialogs
@@ -13,12 +12,12 @@ const Dialogs = ( props: DialogsType & MessagesType ) => {
     .map( message => <Message key={ message.id } message={ message.message } id={ message.id } /> );
 
   let addMessage = () => {
-    props.dispatch( addMessageActionCreator() );
+    props.sendMessage();
   };
 
   const onMessageChange = ( e: ChangeEvent<HTMLTextAreaElement> ) => {
     let text = e.target.value;
-    props.dispatch( updateNewMessageActionCreator( text ) );
+    props.updateNewMessage( text );
   };
 
   return (

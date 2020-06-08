@@ -7,15 +7,11 @@ import store from './redux/redux-store';
 import { HashRouter } from 'react-router-dom';
 import { StoreStateType } from './types/types';
 
-
 const rerenderEntireTree = ( state: StoreStateType ) => {
   ReactDOM.render(
     <React.StrictMode>
       <HashRouter>
-        <App
-          state={ state }
-          dispatch={ store.dispatch.bind( store ) }
-        />
+        <App state={ store } />
       </HashRouter>
     </React.StrictMode>,
     document.getElementById( 'root' )

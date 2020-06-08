@@ -1,3 +1,5 @@
+import { StateType } from "../redux/redux-store";
+
 export type PostType = {
   id: string;
   message: string;
@@ -7,7 +9,16 @@ export type PostType = {
 export type PostsType = {
   posts: Array<PostType>;
   newPostText: string;
-  dispatch: ( action: any ) => void;
+  updatePostNewText: ( text: string ) => void;
+  addPost: () => void;
+};
+
+export type PostsContainerType = {
+  store: StateType;
+};
+
+export type DialogsContainerType = {
+  store: StateType;
 };
 
 export type DialogItemType = {
@@ -17,6 +28,8 @@ export type DialogItemType = {
 
 export type DialogsType = {
   dialogs: Array<DialogItemType>;
+  updateNewMessage: ( text: string ) => void;
+  sendMessage: () => void;
 };
 
 export type MessageType = {
@@ -27,7 +40,6 @@ export type MessageType = {
 export type MessagesType = {
   messages: Array<MessageType>;
   newMessageText: string;
-  dispatch: ( action: any ) => void;
 };
 
 export type ProfilePageType = {
@@ -47,8 +59,7 @@ export type StoreStateType = {
 };
 
 export type AppStateType = {
-  state: StoreStateType; //StateType
-  dispatch: ( action: any ) => void;
+  state: StateType;
 };
 
 export type DispatchType = {

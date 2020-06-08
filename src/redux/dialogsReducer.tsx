@@ -1,5 +1,5 @@
 import { v1 } from "uuid";
-import { MessagesPageType, DialogsReducerType } from "../types/types";
+import { MessagesPageType } from "../types/types";
 
 const ADD_MESSAGE = 'ADD_MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
@@ -18,8 +18,8 @@ const initialState = {
   ],
   newMessageText: ""
 };
-
-const dialogsReducer = ( state: MessagesPageType = initialState, action: DialogsReducerType ) => {
+// TODO: fix action ts type
+const dialogsReducer = ( state: MessagesPageType = initialState, action: any ) => { //DialogsReducerType
   switch ( action.type ) {
 
     case ADD_MESSAGE:

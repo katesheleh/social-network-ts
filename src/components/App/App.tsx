@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from './App.module.css';
 import { Route } from 'react-router-dom';
-import { AppStateType } from '../../types/types';
 
 import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
 import Profile from '../Profile/Profile';
-import Dialogs from '../Dialogs/Dialogs';
 import News from '../News/News';
 import Music from '../Music/Music';
 import Friends from '../Friends/Friends';
+import DialogsContainer from '../Dialogs/DialogsContainer';
+import { AppStateType } from '../../types/types';
 
 function App( props: AppStateType ) {
   return (
@@ -18,21 +18,11 @@ function App( props: AppStateType ) {
         <div className={ styles.sidebar }>
           <Sidebar />
         </div>
+
         <div className={ styles.content }>
           <div className={ styles.contentMain }>
-
-            <Route path='/profile' render={ () => <Profile
-              posts={ props.state.profilePage.posts }
-              dispatch={ props.dispatch }
-              newPostText={ props.state.profilePage.newPostText }
-            /> } />
-
-            <Route path='/dialogs' render={ () => <Dialogs
-              dispatch={ props.dispatch }
-              newMessageText={ props.state.messagesPage.newMessageText }
-              dialogs={ props.state.messagesPage.dialogs }
-              messages={ props.state.messagesPage.messages } /> } />
-
+            <Route path='/profile' render={ () => <Profile store={ props.state } /> } />
+            <Route path='/dialogs' render={ () => <DialogsContainer store={ props.state } /> } />
             <Route path='/news' render={ () => <News /> } />
             <Route path='/music' render={ () => <Music /> } />
             <Route path='/friends' render={ () => <Friends /> } />
@@ -41,6 +31,7 @@ function App( props: AppStateType ) {
             <Footer />
           </div>
         </div>
+
       </main>
     </div>
   );

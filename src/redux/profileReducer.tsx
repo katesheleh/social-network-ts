@@ -1,5 +1,5 @@
 import { v1 } from "uuid";
-import { ProfilePageType, ProfileReducerType } from "../types/types";
+import { ProfilePageType } from "../types/types";
 
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
@@ -11,8 +11,8 @@ const initialState = {
   ],
   newPostText: "",
 };
-
-const profileReducer = ( state: ProfilePageType = initialState, action: ProfileReducerType ) => {
+// TODO: fix action ts type
+const profileReducer = ( state: ProfilePageType = initialState, action: any ) => { //ProfileReducerType
 
   switch ( action.type ) {
 
