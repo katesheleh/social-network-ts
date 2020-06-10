@@ -3,7 +3,7 @@ import styles from './MyPosts.module.css';
 import Post from './Post/Post';
 import { PostsType } from '../../../types/types';
 
-const MyPosts = ( props: PostsType ) => {
+const MyPosts = ( props: PostsType ) => { // PostsType
   let postsElements = props.posts.map( post =>
     <Post
       key={ post.id }

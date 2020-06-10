@@ -6,12 +6,15 @@ import App from './components/App/App';
 import store from './redux/redux-store';
 import { HashRouter } from 'react-router-dom';
 import { StoreStateType } from './types/types';
+import { Provider } from './StoreContext';
 
 const rerenderEntireTree = ( state: StoreStateType ) => {
   ReactDOM.render(
     <React.StrictMode>
       <HashRouter>
-        <App state={ store } />
+        <Provider store={ store }>
+          <App />
+        </Provider>
       </HashRouter>
     </React.StrictMode>,
     document.getElementById( 'root' )

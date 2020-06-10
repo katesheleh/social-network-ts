@@ -13,14 +13,6 @@ export type PostsType = {
   addPost: () => void;
 };
 
-export type PostsContainerType = {
-  store: StateType;
-};
-
-export type DialogsContainerType = {
-  store: StateType;
-};
-
 export type DialogItemType = {
   id: string;
   name: string;
@@ -58,10 +50,6 @@ export type StoreStateType = {
   messagesPage: MessagesPageType;
 };
 
-export type AppStateType = {
-  state: StateType;
-};
-
 export type DispatchType = {
   type: string;
   newText: string;
@@ -77,3 +65,8 @@ export type DialogsReducerType = {
   newText: string;
 };
 
+
+export type ProviderType = {
+  store: StateType;
+  children: React.ReactNode;
+};

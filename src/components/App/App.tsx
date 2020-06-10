@@ -9,9 +9,8 @@ import News from '../News/News';
 import Music from '../Music/Music';
 import Friends from '../Friends/Friends';
 import DialogsContainer from '../Dialogs/DialogsContainer';
-import { AppStateType } from '../../types/types';
 
-function App( props: AppStateType ) {
+function App() {
   return (
     <div className={ styles.app }>
       <main className={ styles.main }>
@@ -21,8 +20,8 @@ function App( props: AppStateType ) {
 
         <div className={ styles.content }>
           <div className={ styles.contentMain }>
-            <Route path='/profile' render={ () => <Profile store={ props.state } /> } />
-            <Route path='/dialogs' render={ () => <DialogsContainer store={ props.state } /> } />
+            <Route path='/profile' render={ () => <Profile /> } />
+            <Route path='/dialogs' render={ () => <DialogsContainer /> } />
             <Route path='/news' render={ () => <News /> } />
             <Route path='/music' render={ () => <Music /> } />
             <Route path='/friends' render={ () => <Friends /> } />
@@ -31,7 +30,6 @@ function App( props: AppStateType ) {
             <Footer />
           </div>
         </div>
-
       </main>
     </div>
   );
