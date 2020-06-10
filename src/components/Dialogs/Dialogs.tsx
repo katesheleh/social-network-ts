@@ -4,7 +4,7 @@ import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import { DialogsType, MessagesType } from '../../types/types';
 
-const Dialogs = ( props: DialogsType & MessagesType ) => {
+const Dialogs = ( props: DialogsType & MessagesType ) => { //DialogsType & MessagesType
   let dialogsElements = props.dialogs
     .map( dialog => <DialogItem key={ dialog.id } id={ dialog.id } name={ dialog.name } /> );
 

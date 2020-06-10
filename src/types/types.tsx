@@ -1,5 +1,3 @@
-import { StateType } from "../redux/redux-store";
-
 export type PostType = {
   id: string;
   message: string;
@@ -57,16 +55,11 @@ export type DispatchType = {
 
 export type ProfileReducerType = {
   type: string;
-  newText: string;
+  newText?: string;
 };
 
 export type DialogsReducerType = {
   type: string;
-  newText: string;
+  newText?: string;
 };
 
-
-export type ProviderType = {
-  store: StateType;
-  children: React.ReactNode;
-};
