@@ -13,21 +13,21 @@ const initialState = {
 };
 // TODO: fix action ts type
 const profileReducer = ( state: ProfilePageType = initialState, action: any ) => { //ProfileReducerType
-  let stateCopy = { ...state };
-  switch ( action.type ) {
 
+  switch ( action.type ) {
     case ADD_POST:
       let newPost = { id: v1(), message: state.newPostText, likesCounter: 0 };
-
-      // newPost
-      stateCopy.posts = [ ...state.posts ];
-      stateCopy.posts.push( newPost );
-      stateCopy.newPostText = "";
-      return stateCopy;
+      return {
+        ...state,
+        posts: [ newPost, ...state.posts ],
+        newPostText: ''
+      };
 
     case UPDATE_NEW_POST_TEXT:
-      stateCopy.newPostText = action.newText;
-      return stateCopy;
+      return {
+        ...state,
+        newPostText: action.newText
+      };
 
     default:
       return state;

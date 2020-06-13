@@ -20,19 +20,20 @@ const initialState = {
 };
 // TODO: fix action ts type
 const dialogsReducer = ( state: MessagesPageType = initialState, action: any ) => { //DialogsReducerType
-  let stateCopy = { ...state };
   switch ( action.type ) {
 
     case ADD_MESSAGE:
-      let newMessage = { id: v1(), message: state.newMessageText };
-      stateCopy.messages = [ ...state.messages ];
-      stateCopy.messages.push( newMessage );
-      stateCopy.newMessageText = "";
-      return stateCopy;
+      return {
+        ...state,
+        messages: [ ...state.messages, { id: v1(), message: state.newMessageText } ],
+        newMessageText: ''
+      };
 
     case UPDATE_NEW_MESSAGE_TEXT:
-      stateCopy.newMessageText = action.newText;
-      return stateCopy;
+      return {
+        ...state,
+        newMessageText: action.newText
+      };
 
     default:
       return state;
