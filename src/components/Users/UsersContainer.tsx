@@ -1,10 +1,10 @@
 import React from 'react';
-import {connect} from "react-redux";
-import Users from "./Users";
-import {followAC, setUsersAC, unFollowAC} from "../../redux/usersReducer";
-import {MapDispatchToPropsUsersType, UsersStructureType} from "../../types/types";
+import {connect} from 'react-redux';
+import Users from './Users';
+import {followAC, setUsersAC, unFollowAC} from '../../redux/usersReducer';
+import {MapDispatchToPropsUsersType, StateInitialType, UsersStructureType} from '../../types/types';
 
-let mapStateToProps = (state: any) => {
+let mapStateToProps = (state: StateInitialType) => {
 	return {
 		users: state.usersPage.users
 	}

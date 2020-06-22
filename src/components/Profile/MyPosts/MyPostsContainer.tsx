@@ -1,9 +1,9 @@
 import {updateNewPostTextActionCreator, addPostActionCreator} from '../../../redux/profileReducer';
 import MyPosts from './MyPosts';
 import {connect} from 'react-redux';
-import {MapDispatchToPropsPostsType} from "../../../types/types";
+import {MapDispatchToPropsPostsType, StateInitialType} from '../../../types/types';
 
-let mapStateToProps = (state: any) => { // StateType
+let mapStateToProps = (state: StateInitialType) => {
 	return {
 		posts: state.profilePage.posts,
 		newPostText: state.profilePage.newPostText

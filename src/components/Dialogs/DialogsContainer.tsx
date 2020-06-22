@@ -1,9 +1,9 @@
 import { updateNewMessageActionCreator, addMessageActionCreator } from '../../redux/dialogsReducer';
 import Dialogs from './Dialogs';
 import { connect } from 'react-redux';
-import {MapDispatchToPropsDialogsType} from "../../types/types";
+import {MapDispatchToPropsDialogsType, StateInitialType} from '../../types/types';
 
-let mapStateToProps = ( state: any ) => { // StateType
+let mapStateToProps = ( state: StateInitialType ) => {
   return {
     dialogs: state.messagesPage.dialogs,
     newMessageText: state.messagesPage.newMessageText,
