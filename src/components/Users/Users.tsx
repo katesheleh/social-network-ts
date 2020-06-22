@@ -1,29 +1,17 @@
 import React from 'react';
 import styles from './Users.module.css';
-import {UsersPagePropsType} from "../../types/types";
-import {v1} from "uuid";
+import {UsersPagePropsType} from '../../types/types';
+import axios from 'axios';
+import userPhoto from '../../assets/images/no_profile_image_placeholder.jpg';
 
 const Users = (props: UsersPagePropsType) => {
 
 	if (props.users.length === 0) {
-		props.setUsers(
-				[
-					{
-						id: v1(),
-						followed: false,
-						fullName: 'Katia Sheleh',
-						status: 'Hey',
-						location: {city: 'Minsk', country: 'Belarus'}
-					},
-					{
-						id: v1(),
-						followed: true,
-						fullName: 'John Smith',
-						status: 'Hey',
-						location: {city: 'Minsk', country: 'Belarus'}
-					}
-				]
-		)
+		axios
+				.get('https://social-network.samuraijs.com/api/1.0/users')
+				.then(response => {
+					props.setUsers(response.data.items)
+				})
 	}
 
 	return (
@@ -32,7 +20,11 @@ const Users = (props: UsersPagePropsType) => {
 				{
 					props.users.map(u => <div className={styles.item} key={u.id}>
 						<div className={styles.colLeft}>
-							<div><img src='https://dummyimage.com/100x100/dbc629.jpg' alt={u.fullName}/></div>
+							<div className={styles.img}>
+								<img
+										src={u.photos.small != null ? u.photos.small : userPhoto}
+										alt={u.name}/>
+							</div>
 							{u.followed
 									? <button onClick={() => props.unFollow(u.id)}>Unfollow</button>
 									: <button onClick={() => props.follow(u.id)}>Follow</button>
@@ -40,12 +32,8 @@ const Users = (props: UsersPagePropsType) => {
 						</div>
 						<div className={styles.colRight}>
 							<div className={styles.userInfo}>
-								<h4>{u.fullName}</h4>
+								<h4>{u.name}</h4>
 								<p>{u.status}</p>
-							</div>
-							<div className={styles.userLocation}>
-								<p>{u.location.city}</p>
-								<p>{u.location.country}</p>
 							</div>
 						</div>
 					</div>)

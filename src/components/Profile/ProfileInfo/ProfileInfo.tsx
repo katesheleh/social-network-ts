@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './ProfileInfo.module.css';
-import banner from '../../../images/banner-profile.jpg';
+import banner from '../../../assets/images/banner-profile.jpg';
 
 const ProfileInfo = () => {
   return (

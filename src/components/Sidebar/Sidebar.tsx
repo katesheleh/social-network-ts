@@ -2,11 +2,11 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import styles from './Sidebar.module.css';
 
-import profileImg from '../../images/profile.jpg';
-import dialogsImg from '../../images/dialogs.jpg';
-import newsImg from '../../images/news.jpg';
-import musicImg from '../../images/music.jpg';
-import friendsImg from '../../images/friends.jpg';
+import profileImg from '../../assets/images/profile.jpg';
+import dialogsImg from '../../assets/images/dialogs.jpg';
+import newsImg from '../../assets/images/news.jpg';
+import musicImg from '../../assets/images/music.jpg';
+import friendsImg from '../../assets/images/friends.jpg';
 
 import Banner from './Banner/Banner';
 import Header from './Header/Header';

@@ -80,17 +80,17 @@ export type UsersPagePropsType = {
 	setUsers: (users: Array<UsersStructureType>) => void
 }
 
-export type UserLocationType = {
-	city: string
-	country: string
+type UserPhotosType = {
+	small?: string
+	large?: string
 }
 
 export type UsersStructureType = {
+	name: string
 	id: string
+	photos: UserPhotosType
 	followed: boolean
-	fullName: string
 	status: string
-	location: UserLocationType
 }
 
 export type UsersFollowActionType = {
