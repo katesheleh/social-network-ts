@@ -6,17 +6,20 @@ import userPhoto from '../../assets/images/no_profile_image_placeholder.jpg';
 
 const Users = (props: UsersPagePropsType) => {
 
-	if (props.users.length === 0) {
-		axios
-				.get('https://social-network.samuraijs.com/api/1.0/users')
-				.then(response => {
-					props.setUsers(response.data.items)
-				})
+	const getUsers = () => {
+		if (props.users.length === 0) {
+			axios
+					.get('https://social-network.samuraijs.com/api/1.0/users')
+					.then(response => {
+						props.setUsers(response.data.items)
+					})
+		}
 	}
 
 	return (
 			<div className={styles.users}>
 				<h1>Users</h1>
+				<button onClick={getUsers}>Get users</button>
 				{
 					props.users.map(u => <div className={styles.item} key={u.id}>
 						<div className={styles.colLeft}>

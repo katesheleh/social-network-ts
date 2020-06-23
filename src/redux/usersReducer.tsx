@@ -1,4 +1,3 @@
-import {v1} from 'uuid';
 import {UsersPageType, UsersReducersActionType, UsersStructureType} from '../types/types';
 
 export const FOLLOW = 'FOLLOW';
