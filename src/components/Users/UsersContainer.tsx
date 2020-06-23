@@ -3,6 +3,8 @@ import Users from './Users';
 import {followAC, setUsersAC, unFollowAC} from '../../redux/usersReducer';
 import {MapDispatchToPropsUsersType, StateInitialType, UsersStructureType} from '../../types/types';
 
+
+
 let mapStateToProps = (state: StateInitialType) => {
 	return {
 		users: state.usersPage.users
