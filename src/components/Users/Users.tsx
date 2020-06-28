@@ -1,14 +1,12 @@
-import React from 'react';
-import styles from './Users.module.css';
-import {UsersPagePropsType} from '../../types/types';
-import axios from 'axios';
-import userPhoto from '../../assets/images/no_profile_image_placeholder.jpg';
+import React from 'react'
+import styles from './Users.module.css'
+import {UsersPagePropsType} from '../../types/types'
+import axios from 'axios'
+import userPhoto from '../../assets/images/no_profile_image_placeholder.jpg'
 
 class Users extends React.Component<UsersPagePropsType> {
 
-	constructor(props: any) {
-		super(props)
-
+	componentDidMount() {
 		axios
 				.get('https://social-network.samuraijs.com/api/1.0/users')
 				.then(response => {
@@ -46,4 +44,4 @@ class Users extends React.Component<UsersPagePropsType> {
 	}
 }
 
-export default Users;
+export default Users
