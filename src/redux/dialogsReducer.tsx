@@ -1,22 +1,22 @@
-import {v1} from "uuid";
-import {DialogsReducersActionType, MessagesPageType} from "../types/types";
+import {v1} from 'uuid';
+import {AddMessageACType, DialogsReducersActionType, MessagesPageType, UpdateNewMessageACType} from '../types/types';
 
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
 
 const initialState = {
 	dialogs: [
-		{id: v1(), name: "Jain"},
-		{id: v1(), name: "Nick"},
-		{id: v1(), name: "Alex"},
+		{id: v1(), name: 'Jain'},
+		{id: v1(), name: 'Nick'},
+		{id: v1(), name: 'Alex'},
 	],
 	messages: [
-		{id: v1(), message: "Hi! How are you?"},
-		{id: v1(), message: "I am fine! And you?"},
-		{id: v1(), message: "Me too. Have a nice day!"},
-		{id: v1(), message: ":)"},
+		{id: v1(), message: 'Hi! How are you?'},
+		{id: v1(), message: 'I am fine! And you?'},
+		{id: v1(), message: 'Me too. Have a nice day!'},
+		{id: v1(), message: ':)'},
 	],
-	newMessageText: ""
+	newMessageText: ''
 };
 
 const dialogsReducer = (state: MessagesPageType = initialState, action: DialogsReducersActionType) => {
@@ -40,13 +40,13 @@ const dialogsReducer = (state: MessagesPageType = initialState, action: DialogsR
 	}
 };
 
-export const addMessageActionCreator = () => {
+export const addMessageAC = (): AddMessageACType => {
 	return (
 			{type: ADD_MESSAGE}
 	);
 };
 
-export const updateNewMessageActionCreator = (text: string) => {
+export const updateNewMessageAC = (text: string): UpdateNewMessageACType => {
 	return (
 			{type: UPDATE_NEW_MESSAGE_TEXT, newText: text}
 	);

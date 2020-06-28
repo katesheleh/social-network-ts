@@ -1,4 +1,4 @@
-import { updateNewMessageActionCreator, addMessageActionCreator } from '../../redux/dialogsReducer';
+import { updateNewMessageAC, addMessageAC } from '../../redux/dialogsReducer';
 import Dialogs from './Dialogs';
 import { connect } from 'react-redux';
 import {MapDispatchToPropsDialogsType, StateInitialType} from '../../types/types';
@@ -15,10 +15,10 @@ let mapStateToProps = ( state: StateInitialType ) => {
 let mapDispatchToProps = ( dispatch: MapDispatchToPropsDialogsType ) => {
   return {
     updateNewMessage: ( text: string ) => {
-      dispatch( updateNewMessageActionCreator( text ) );
+      dispatch( updateNewMessageAC( text ) );
     },
     sendMessage: () => {
-      dispatch( addMessageActionCreator() );
+      dispatch( addMessageAC() );
     }
   };
 };
