@@ -1,0 +1,12 @@
+.pagination {
+	padding: 15px;
+	margin-bottom: 15px;
+	background-color: rgba(0, 0, 0, 0.1);
+}
+.page {
+	color: black;
+}
+
+.currentPage {
+	color: darkred;
+}

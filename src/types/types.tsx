@@ -1,6 +1,6 @@
-import profileReducer, {ADD_POST, UPDATE_NEW_POST_TEXT} from '../redux/profileReducer';
-import dialogsReducer, {ADD_MESSAGE, UPDATE_NEW_MESSAGE_TEXT} from "../redux/dialogsReducer";
-import usersReducer, {FOLLOW, UNFOLLOW, SET_USERS} from '../redux/usersReducer';
+import {ADD_POST, UPDATE_NEW_POST_TEXT} from '../redux/profileReducer';
+import {ADD_MESSAGE, UPDATE_NEW_MESSAGE_TEXT} from '../redux/dialogsReducer';
+import {FOLLOW, UNFOLLOW, SET_USERS, SET_CURRENT_PAGE, SET_TOTAL_COUNT} from '../redux/usersReducer';
 
 export type PostType = {
 	id: string
@@ -71,13 +71,21 @@ export type DialogsReducersActionType = AddMessageACType | UpdateNewMessageACTyp
 
 export type UsersPageType = {
 	users: Array<UsersStructureType>
+	pageSize: number
+	totalUsersCount: number
+	currentPage: number
 }
 
 export type UsersPagePropsType = {
 	users: Array<UsersStructureType>
+	pageSize: number
+	totalUsersCount: number
+	currentPage: number
 	follow: (id: string) => void
 	unFollow: (id: string) => void
 	setUsers: (users: Array<UsersStructureType>) => void
+	setTotalUsersCount: (totalCount: number) => void
+	setCurrentPage: (currentPage: number) => void
 }
 
 type UserPhotosType = {
@@ -108,12 +116,39 @@ export type UsersSetUsersActionType = {
 	users: Array<UsersStructureType>
 }
 
-export type UsersReducersActionType = UsersFollowActionType | UsersUnFollowActionType | UsersSetUsersActionType
+export type UsersCurrentPageActionType = {
+	type: typeof SET_CURRENT_PAGE
+	currentPage: number
+}
+
+export type UsersTotalCountActionType = {
+	type: typeof SET_TOTAL_COUNT
+	totalCount: number
+}
+
+export type UsersReducersActionType = UsersFollowActionType | UsersUnFollowActionType |
+		UsersSetUsersActionType | UsersCurrentPageActionType | UsersTotalCountActionType
 
 
-export type MapDispatchToPropsPostsType = (arg0: { type: string; newText?: string; }) => void
-export type MapDispatchToPropsDialogsType = (arg0: { type: string; newText?: string; }) => void
-export type MapDispatchToPropsUsersType = (arg0: { type: string; userId?: string; users?: Array<UsersStructureType> }) => void
+export type MapDispatchToPropsPostsType = (
+		args: {
+			type: string;
+			newText?: string;
+		}) => void
+
+export type MapDispatchToPropsDialogsType = (
+		args: {
+			type: string;
+			newText?: string;
+		}) => void
+
+export type MapDispatchToPropsUsersType = (
+		args: {
+			type: string;
+			userId?: string;
+			users?: Array<UsersStructureType>;
+			currentPage?: number
+		}) => void
 
 
 export type StateInitialType = {

@@ -24,7 +24,10 @@ test('User should be followed', () => {
 				status: 'Hey, hey',
 				followed: false
 			}
-		]
+		],
+		pageSize: 1,
+		totalUsersCount: 2,
+		currentPage: 1
 	};
 
 	const action = followAC('1')
@@ -58,7 +61,10 @@ test('User should be unfollowed', () => {
 				status: 'Hey, hey',
 				followed: false
 			}
-		]
+		],
+		pageSize: 1,
+		totalUsersCount: 2,
+		currentPage: 1
 	};
 
 	const action = unFollowAC('1')
@@ -93,7 +99,10 @@ test('Users should be set', () => {
 		}
 	]
 	const startState = {
-		users: []
+		users: [],
+		pageSize: 1,
+		totalUsersCount: 2,
+		currentPage: 1
 	};
 
 	const action = setUsersAC(users)
