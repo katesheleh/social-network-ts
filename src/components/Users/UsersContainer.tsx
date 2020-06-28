@@ -1,8 +1,7 @@
-import {connect} from 'react-redux';
-import Users from './Users';
-import {followAC, setUsersAC, unFollowAC} from '../../redux/usersReducer';
-import {MapDispatchToPropsUsersType, StateInitialType, UsersStructureType} from '../../types/types';
-
+import {connect} from 'react-redux'
+import Users from './Users'
+import {followAC, setUsersAC, unFollowAC} from '../../redux/usersReducer'
+import {MapDispatchToPropsUsersType, StateInitialType, UsersStructureType} from '../../types/types'
 
 
 let mapStateToProps = (state: StateInitialType) => {
@@ -25,4 +24,4 @@ let mapDispatchToProps = (dispatch: MapDispatchToPropsUsersType) => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default connect(mapStateToProps, mapDispatchToProps)(Users)

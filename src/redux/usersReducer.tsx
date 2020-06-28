@@ -1,14 +1,20 @@
-import {UsersPageType, UsersReducersActionType, UsersStructureType} from '../types/types';
+import {
+	UsersFollowActionType,
+	UsersPageType,
+	UsersReducersActionType, UsersSetUsersActionType,
+	UsersStructureType,
+	UsersUnFollowActionType
+} from '../types/types'
 
-export const FOLLOW = 'FOLLOW';
-export const UNFOLLOW = 'UNFOLLOW';
-export const SET_USERS = 'SET_USERS';
+export const FOLLOW = 'FOLLOW'
+export const UNFOLLOW = 'UNFOLLOW'
+export const SET_USERS = 'SET_USERS'
 
 const initialState = {
 	users: []
-};
+}
 
-const usersReducer = (state: UsersPageType = initialState, action: UsersReducersActionType) => { // ReducersActionsType
+const usersReducer = (state: UsersPageType = initialState, action: UsersReducersActionType) => {
 
 	switch (action.type) {
 		case FOLLOW:
@@ -18,9 +24,10 @@ const usersReducer = (state: UsersPageType = initialState, action: UsersReducers
 					if (u.id === action.userId) {
 						return {...u, followed: true}
 					}
-					return u;
+					return u
 				})
 			}
+
 		case UNFOLLOW:
 			return {
 				...state,
@@ -28,24 +35,29 @@ const usersReducer = (state: UsersPageType = initialState, action: UsersReducers
 					if (u.id === action.userId) {
 						return {...u, followed: false}
 					}
-					return u;
+					return u
 				})
 			}
+
 		case SET_USERS:
 			return {...state, users: [...state.users, ...action.users]}
+
 		default:
-			return state;
+			return state
 	}
-};
+}
 
-export const followAC = (userId: string) => {
-	return ({type: FOLLOW, userId});
-};
-export const unFollowAC = (userId: string) => {
-	return ({type: UNFOLLOW, userId});
-};
-export const setUsersAC = (users: Array<UsersStructureType>) => {
-	return ({type: SET_USERS, users});
-};
+export const followAC = (userId: string): UsersFollowActionType => {
+	return ({type: FOLLOW, userId})
+}
 
-export default usersReducer;
+export const unFollowAC = (userId: string): UsersUnFollowActionType => {
+	return ({type: UNFOLLOW, userId})
+}
+
+export const setUsersAC = (users: Array<UsersStructureType>): UsersSetUsersActionType => {
+	return ({type: SET_USERS, users})
+}
+
+
+export default usersReducer
