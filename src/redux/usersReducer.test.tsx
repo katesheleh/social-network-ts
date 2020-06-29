@@ -1,4 +1,4 @@
-import usersReducer, {followAC, setUsersAC, unFollowAC} from './usersReducer';
+import usersReducer, {followAC, setCurrentPageAC, setTotalCountAC, setUsersAC, unFollowAC} from './usersReducer';
 import {UsersStructureType} from '../types/types';
 
 test('User should be followed', () => {
@@ -28,7 +28,7 @@ test('User should be followed', () => {
 		pageSize: 1,
 		totalUsersCount: 2,
 		currentPage: 1
-	};
+	}
 
 	const action = followAC('1')
 	const endState = usersReducer(startState, action)
@@ -65,7 +65,7 @@ test('User should be unfollowed', () => {
 		pageSize: 1,
 		totalUsersCount: 2,
 		currentPage: 1
-	};
+	}
 
 	const action = unFollowAC('1')
 	const endState = usersReducer(startState, action)
@@ -103,7 +103,7 @@ test('Users should be set', () => {
 		pageSize: 1,
 		totalUsersCount: 2,
 		currentPage: 1
-	};
+	}
 
 	const action = setUsersAC(users)
 	const endState = usersReducer(startState, action)
@@ -111,4 +111,76 @@ test('Users should be set', () => {
 	expect(endState.users.length).toBe(2)
 	expect(endState.users[0].name).toEqual('Katia')
 	expect(endState.users[1].photos.small).toEqual('small.jpg')
+})
+
+
+test('Current page should be set', () => {
+	const startState = {
+		users: [
+			{
+				name: 'Katia',
+				id: '1',
+				photos: {
+					small: 'small-pic.jpg',
+					large: 'large-pic.jpg'
+				},
+				status: 'Hey, amigos!',
+				followed: false
+			},
+			{
+				name: 'John',
+				id: '2',
+				photos: {
+					'small': 'small.jpg',
+					'large': 'large.jpg'
+				},
+				status: 'Hey, hey',
+				followed: false
+			}
+		],
+		pageSize: 1,
+		totalUsersCount: 2,
+		currentPage: 1
+	}
+
+	const action = setCurrentPageAC(3)
+	const endState = usersReducer(startState, action)
+
+	expect(endState.currentPage).toBe(3)
+
+})
+
+
+test('Total users count should be set', () => {
+	const startState = {
+		users: [
+			{
+				name: 'Katia',
+				id: '1',
+				photos: {
+					small: 'small-pic.jpg',
+					large: 'large-pic.jpg'
+				},
+				status: 'Hey, amigos!',
+				followed: false
+			},
+			{
+				name: 'John',
+				id: '2',
+				photos: {
+					'small': 'small.jpg',
+					'large': 'large.jpg'
+				},
+				status: 'Hey, hey',
+				followed: false
+			}
+		],
+		pageSize: 1,
+		totalUsersCount: 2,
+		currentPage: 1
+	}
+
+	const endState = usersReducer(startState, setTotalCountAC(200))
+
+	expect(endState.totalUsersCount).toEqual(200)
 })
