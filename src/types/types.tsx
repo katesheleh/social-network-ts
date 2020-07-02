@@ -1,6 +1,13 @@
 import {ADD_POST, UPDATE_NEW_POST_TEXT} from '../redux/profileReducer';
 import {ADD_MESSAGE, UPDATE_NEW_MESSAGE_TEXT} from '../redux/dialogsReducer';
-import {FOLLOW, UNFOLLOW, SET_USERS, SET_CURRENT_PAGE, SET_TOTAL_COUNT} from '../redux/usersReducer';
+import {
+	FOLLOW,
+	UNFOLLOW,
+	SET_USERS,
+	SET_CURRENT_PAGE,
+	SET_TOTAL_COUNT,
+	TOGGLE_IS_FETCHING
+} from '../redux/usersReducer';
 
 export type PostType = {
 	id: string
@@ -74,6 +81,7 @@ export type UsersPageType = {
 	pageSize: number
 	totalUsersCount: number
 	currentPage: number
+	isFetching: boolean
 }
 
 export type UsersPagePropsType = {
@@ -86,6 +94,8 @@ export type UsersPagePropsType = {
 	setUsers: (users: Array<UsersStructureType>) => void
 	setTotalUsersCount: (totalCount: number) => void
 	setCurrentPage: (currentPage: number) => void
+	isFetching: boolean
+	toggleIsFetching: (isFetching: boolean) => void
 }
 
 export type UsersPageUIType = {
@@ -136,8 +146,14 @@ export type UsersTotalCountActionType = {
 	totalCount: number
 }
 
+export type ToggleIsFecthingActionType = {
+	type: typeof TOGGLE_IS_FETCHING
+	isFetching: boolean
+}
+
 export type UsersReducersActionType = UsersFollowActionType | UsersUnFollowActionType |
-		UsersSetUsersActionType | UsersCurrentPageActionType | UsersTotalCountActionType
+		UsersSetUsersActionType | UsersCurrentPageActionType | UsersTotalCountActionType |
+		ToggleIsFecthingActionType
 
 
 export type MapDispatchToPropsPostsType = (

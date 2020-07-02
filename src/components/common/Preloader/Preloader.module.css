@@ -1,0 +1,17 @@
+.wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: calc(100vh - 110px);
+  z-index: 40;
+}
+
+.img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -49px;
+  margin-top: -49px;
+  z-index: 40;
+}

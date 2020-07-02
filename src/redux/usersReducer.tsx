@@ -5,7 +5,7 @@ import {
 	UsersReducersActionType, UsersSetUsersActionType,
 	UsersStructureType,
 	UsersUnFollowActionType,
-	UsersTotalCountActionType
+	UsersTotalCountActionType, ToggleIsFecthingActionType
 } from '../types/types'
 
 export const FOLLOW = 'FOLLOW'
@@ -13,12 +13,14 @@ export const UNFOLLOW = 'UNFOLLOW'
 export const SET_USERS = 'SET_USERS'
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 export const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
+export const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 const initialState = {
 	users: [],
 	pageSize: 10,
 	totalUsersCount: 0,
-	currentPage: 1
+	currentPage: 1,
+	isFetching: false
 }
 
 const usersReducer = (state: UsersPageType = initialState, action: UsersReducersActionType) => {
@@ -55,30 +57,31 @@ const usersReducer = (state: UsersPageType = initialState, action: UsersReducers
 		case SET_TOTAL_COUNT:
 			return {...state, totalUsersCount: action.totalCount}
 
+		case TOGGLE_IS_FETCHING:
+			return {...state, isFetching: action.isFetching}
+
 		default:
 			return state
 	}
 }
 
-export const followAC = (userId: string): UsersFollowActionType => {
-	return ({type: FOLLOW, userId})
-}
+export const followAC = (userId: string): UsersFollowActionType => ({type: FOLLOW, userId})
 
-export const unFollowAC = (userId: string): UsersUnFollowActionType => {
-	return ({type: UNFOLLOW, userId})
-}
+export const unFollowAC = (userId: string): UsersUnFollowActionType => ({type: UNFOLLOW, userId})
 
-export const setUsersAC = (users: Array<UsersStructureType>): UsersSetUsersActionType => {
-	return ({type: SET_USERS, users})
-}
+export const setUsersAC = (users: Array<UsersStructureType>): UsersSetUsersActionType => ({type: SET_USERS, users})
 
-export const setCurrentPageAC = (currentPage: number): UsersCurrentPageActionType => {
-	return({type: SET_CURRENT_PAGE, currentPage})
-}
+export const setCurrentPageAC = (currentPage: number): UsersCurrentPageActionType => ({
+	type: SET_CURRENT_PAGE,
+	currentPage
+})
 
-export const setTotalCountAC = (totalCount: number): UsersTotalCountActionType => {
-	return({type: SET_TOTAL_COUNT, totalCount})
-}
+export const setTotalCountAC = (totalCount: number): UsersTotalCountActionType => ({type: SET_TOTAL_COUNT, totalCount})
+
+export const toggleIsFetchingAC = (isFetching: boolean): ToggleIsFecthingActionType => ({
+	type: TOGGLE_IS_FETCHING,
+	isFetching
+})
 
 
 export default usersReducer

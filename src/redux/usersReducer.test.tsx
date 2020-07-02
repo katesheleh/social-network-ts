@@ -27,7 +27,8 @@ test('User should be followed', () => {
 		],
 		pageSize: 1,
 		totalUsersCount: 2,
-		currentPage: 1
+		currentPage: 1,
+		isFetching: false
 	}
 
 	const action = followAC('1')
@@ -64,7 +65,8 @@ test('User should be unfollowed', () => {
 		],
 		pageSize: 1,
 		totalUsersCount: 2,
-		currentPage: 1
+		currentPage: 1,
+		isFetching: false
 	}
 
 	const action = unFollowAC('1')
@@ -102,7 +104,8 @@ test('Users should be set', () => {
 		users: [],
 		pageSize: 1,
 		totalUsersCount: 2,
-		currentPage: 1
+		currentPage: 1,
+		isFetching: false
 	}
 
 	const action = setUsersAC(users)
@@ -140,7 +143,8 @@ test('Current page should be set', () => {
 		],
 		pageSize: 1,
 		totalUsersCount: 2,
-		currentPage: 1
+		currentPage: 1,
+		isFetching: false
 	}
 
 	const action = setCurrentPageAC(3)
@@ -177,7 +181,8 @@ test('Total users count should be set', () => {
 		],
 		pageSize: 1,
 		totalUsersCount: 2,
-		currentPage: 1
+		currentPage: 1,
+		isFetching: false
 	}
 
 	const endState = usersReducer(startState, setTotalCountAC(200))

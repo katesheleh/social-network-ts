@@ -17,6 +17,7 @@ const Users = (props: UsersPageUIType) => {
 					{
 						pages.map(p => {
 							return <span
+									key={p}
 									className={props.currentPage === p ? `${styles.page} ${styles.currentPage}` : `${styles.page}`}
 									onClick={(e: MouseEvent<HTMLSpanElement>) => {
 										props.onPageChanged(p)
