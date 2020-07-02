@@ -40,11 +40,11 @@
 }
 
 .colLeft {
-	width: 100px;
+	width: 80px;
 }
 
 .colRight {
-	width: calc(100% - 100px);
+	width: calc(100% - 80px);
 	padding-left: 15px;
 }
 
@@ -66,9 +66,10 @@ button {
 	border: none;
 	outline: none;
 	font-family: 'Fira Sans', sans-serif;
-	font-size: 13px;
-	padding: 6px 12px;
-	margin-top: -22px;
+	font-size: 11px;
+	padding: 5px 12px;
+	letter-spacing: 0.03rem;
+	margin-top: -17px;
 	background: #201e2b;
 	color: #ffffff;
 	font-weight: 400;

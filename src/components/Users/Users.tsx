@@ -29,15 +29,13 @@ const Users = (props: UsersPageUIType) => {
 					{
 						props.users.map(u => <div className={styles.item} key={u.id}>
 							<div className={styles.colLeft}>
-								<div className={styles.img}>
-									<img
-											src={u.photos.small != null ? u.photos.small : userPhoto}
-											alt={u.name}
-											width='100'
-											height='100'/>
-								</div>
+								<img
+										src={u.photos.small != null ? u.photos.small : userPhoto}
+										alt={u.name}
+										width='100'
+										height='100'/>
 								{u.followed
-										? <button onClick={() => props.unFollow(u.id)} className={styles.btnUnFollow}>Unfollow</button>
+										? <button onClick={() => props.unFollow(u.id)}>Unfollow</button>
 										: <button onClick={() => props.follow(u.id)} className={styles.btnFollow}>Follow</button>
 								}
 							</div>
