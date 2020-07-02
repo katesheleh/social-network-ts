@@ -88,6 +88,16 @@ export type UsersPagePropsType = {
 	setCurrentPage: (currentPage: number) => void
 }
 
+export type UsersPageUIType = {
+	users: Array<UsersStructureType>
+	pageSize: number
+	totalUsersCount: number
+	currentPage: number
+	follow: (id: string) => void
+	unFollow: (id: string) => void
+	onPageChanged: (page: number) => void
+}
+
 type UserPhotosType = {
 	small?: string
 	large?: string
