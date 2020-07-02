@@ -25,29 +25,33 @@ const Users = (props: UsersPageUIType) => {
 						})
 					}
 				</div>
-				{
-					props.users.map(u => <div className={styles.item} key={u.id}>
-						<div className={styles.colLeft}>
-							<div className={styles.img}>
-								<img
-										src={u.photos.small != null ? u.photos.small : userPhoto}
-										alt={u.name}
-										width='100'
-										height='100'/>
+				<div className={styles.usersWrapper}>
+					{
+						props.users.map(u => <div className={styles.item} key={u.id}>
+							<div className={styles.colLeft}>
+								<div className={styles.img}>
+									<img
+											src={u.photos.small != null ? u.photos.small : userPhoto}
+											alt={u.name}
+											width='100'
+											height='100'/>
+								</div>
+								{u.followed
+										? <button onClick={() => props.unFollow(u.id)} className={styles.btnUnFollow}>Unfollow</button>
+										: <button onClick={() => props.follow(u.id)} className={styles.btnFollow}>Follow</button>
+								}
 							</div>
-							{u.followed
-									? <button onClick={() => props.unFollow(u.id)}>Unfollow</button>
-									: <button onClick={() => props.follow(u.id)}>Follow</button>
-							}
-						</div>
-						<div className={styles.colRight}>
-							<div className={styles.userInfo}>
-								<h4>{u.name}</h4>
-								<p>{u.status}</p>
+
+							<div className={styles.colRight}>
+								<div className={styles.userInfo}>
+									<h5 className={styles.title}>{u.name}</h5>
+									<p className={styles.text}><i>{u.status}</i></p>
+								</div>
 							</div>
-						</div>
-					</div>)
-				}
+
+						</div>)
+					}
+				</div>
 			</div>
 	)
 }
