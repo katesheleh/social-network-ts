@@ -11,7 +11,6 @@ import {
 import {UsersPagePropsType} from '../../types/types';
 import axios from 'axios';
 import Users from './Users';
-import Preloader from '../common/Preloader/Preloader';
 import {AppRootStateType} from '../../redux/redux-store';
 
 
@@ -46,20 +45,15 @@ class UsersContainer extends React.Component<UsersPagePropsType> {
 
 	render() {
 		return (
-				<>
-					{/*show / hide preloader*/}
-					{this.props.isFetching
-							? <Preloader/>
-							: <Users
-									currentPage={this.props.currentPage}
-									users={this.props.users}
-									pageSize={this.props.pageSize}
-									totalUsersCount={this.props.totalUsersCount}
-									follow={this.props.follow}
-									unFollow={this.props.unFollow}
-									onPageChanged={this.onPageChanged}/>}
-
-				</>
+				<Users
+						currentPage={this.props.currentPage}
+						users={this.props.users}
+						pageSize={this.props.pageSize}
+						totalUsersCount={this.props.totalUsersCount}
+						follow={this.props.follow}
+						unFollow={this.props.unFollow}
+						onPageChanged={this.onPageChanged}
+						isFetching={this.props.isFetching}/>
 		)
 	}
 }
@@ -85,4 +79,4 @@ export default connect(
 			setTotalUsersCount: setTotalCountAC,
 			toggleIsFetching: toggleIsFetchingAC
 		}
-		)(UsersContainer)
+)(UsersContainer)

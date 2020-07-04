@@ -106,6 +106,7 @@ export type UsersPageUIType = {
 	follow: (id: string) => void
 	unFollow: (id: string) => void
 	onPageChanged: (page: number) => void
+	isFetching: boolean
 }
 
 type UserPhotosType = {
