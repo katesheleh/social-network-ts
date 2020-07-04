@@ -1,4 +1,11 @@
-import usersReducer, {followAC, setCurrentPageAC, setTotalCountAC, setUsersAC, unFollowAC} from './usersReducer';
+import usersReducer, {
+	followAC,
+	setCurrentPageAC,
+	setTotalCountAC,
+	setUsersAC,
+	toggleIsFetchingAC,
+	unFollowAC
+} from './usersReducer';
 import {UsersPageType, UsersStructureType} from '../types/types';
 
 let users: Array<UsersStructureType> = []
@@ -85,4 +92,11 @@ test('Total users count should be set', () => {
 	const endState = usersReducer(startState, setTotalCountAC(200))
 
 	expect(endState.totalUsersCount).toEqual(200)
+})
+
+
+test('isFetching works correctly', () => {
+	const endState = usersReducer(startState, toggleIsFetchingAC(true))
+
+	expect(endState.isFetching).toEqual(true)
 })
