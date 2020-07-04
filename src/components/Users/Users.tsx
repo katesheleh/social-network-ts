@@ -1,30 +1,21 @@
-import React, {MouseEvent} from 'react';
+import React from 'react';
 import styles from './Users.module.css';
 import userPhoto from '../../assets/images/no_profile_image_placeholder.jpg';
 import {UsersPageUIType} from '../../types/types';
+import Pagination from '../common/Pagination/Pagination';
 
 const Users = (props: UsersPageUIType) => {
-	// calculate pagination pages
-	let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-	let pages = []
-	for (let i = 1; i <= pagesCount; i++) {
-		pages.push(i)
-	}
 	return (
 			<div className={styles.users}>
 				<h1>Users</h1>
-				<div className={styles.pagination}>
-					{
-						pages.map(p => {
-							return <span
-									key={p}
-									className={props.currentPage === p ? `${styles.page} ${styles.currentPage}` : `${styles.page}`}
-									onClick={(e: MouseEvent<HTMLSpanElement>) => {
-										props.onPageChanged(p)
-									}}> {p} </span>
-						})
-					}
-				</div>
+
+				<Pagination
+						totalUsersCount={props.totalUsersCount}
+						pageSize={props.pageSize}
+						currentPage={props.currentPage}
+						onPageChanged={props.onPageChanged}
+				/>
+
 				<div className={styles.usersWrapper}>
 					{
 						props.users.map(u => <div className={styles.item} key={u.id}>
@@ -50,6 +41,13 @@ const Users = (props: UsersPageUIType) => {
 						</div>)
 					}
 				</div>
+
+				<Pagination
+						totalUsersCount={props.totalUsersCount}
+						pageSize={props.pageSize}
+						currentPage={props.currentPage}
+						onPageChanged={props.onPageChanged}
+				/>
 			</div>
 	)
 }

@@ -167,3 +167,10 @@ export type MapDispatchToPropsDialogsType = (
 			type: string;
 			newText?: string;
 		}) => void
+
+export type PaginationType = {
+	totalUsersCount: number
+	pageSize: number
+	currentPage: number
+	onPageChanged: (page: number) => void
+}
