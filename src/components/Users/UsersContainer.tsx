@@ -8,10 +8,11 @@ import {
 	toggleIsFetchingAC,
 	unFollowAC
 } from '../../redux/usersReducer';
-import {StateInitialType, UsersPagePropsType} from '../../types/types';
+import {UsersPagePropsType} from '../../types/types';
 import axios from 'axios';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
+import {AppRootStateType} from '../../redux/redux-store';
 
 
 class UsersContainer extends React.Component<UsersPagePropsType> {
@@ -64,7 +65,7 @@ class UsersContainer extends React.Component<UsersPagePropsType> {
 }
 
 
-let mapStateToProps = (state: StateInitialType) => {
+let mapStateToProps = (state: AppRootStateType) => {
 	return {
 		users: state.usersPage.users,
 		pageSize: state.usersPage.pageSize,

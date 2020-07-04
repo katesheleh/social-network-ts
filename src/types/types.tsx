@@ -167,20 +167,3 @@ export type MapDispatchToPropsDialogsType = (
 			type: string;
 			newText?: string;
 		}) => void
-
-export type MapDispatchToPropsUsersType = (
-		args: {
-			type: string;
-			userId?: string;
-			users?: Array<UsersStructureType>;
-			currentPage?: number
-		}) => void
-
-
-export type StateInitialType = {
-	profilePage: ProfilePageType
-	messagesPage: MessagesPageType
-	usersPage: UsersPageType
-}
-
-

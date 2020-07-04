@@ -8,8 +8,13 @@ const reducers = combineReducers({
 	messagesPage: dialogsReducer,
 	usersPage: usersReducer
 });
+
 const store = createStore(reducers);
 
 
-export type StateType = typeof store;
+export type AppRootStateType = ReturnType<typeof reducers>;
 export default store;
+
+// dev debugger store
+// @ts-ignore
+window.store = store;
