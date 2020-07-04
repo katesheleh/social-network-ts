@@ -8,7 +8,7 @@ import {
 	toggleIsFetchingAC,
 	unFollowAC
 } from '../../redux/usersReducer';
-import {MapDispatchToPropsUsersType, StateInitialType, UsersPagePropsType, UsersStructureType} from '../../types/types';
+import {StateInitialType, UsersPagePropsType} from '../../types/types';
 import axios from 'axios';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
