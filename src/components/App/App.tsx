@@ -4,12 +4,12 @@ import {Route} from 'react-router-dom';
 
 import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
-import Profile from '../Profile/Profile';
 import News from '../News/News';
 import Music from '../Music/Music';
 import Friends from '../Friends/Friends';
 import DialogsContainer from '../Dialogs/DialogsContainer';
-import UsersContainer from "../Users/UsersContainer";
+import UsersContainer from '../Users/UsersContainer';
+import ProfileContainer from '../Profile/ProfileContainer';
 
 function App() {
 	return (
@@ -21,7 +21,7 @@ function App() {
 
 					<div className={styles.content}>
 						<div className={styles.contentMain}>
-							<Route path='/profile' render={() => <Profile/>}/>
+							<Route path='/profile' render={() => <ProfileContainer/>}/>
 							<Route path='/dialogs' render={() => <DialogsContainer/>}/>
 							<Route path='/users' render={() => <UsersContainer/>}/>
 							<Route path='/news' render={() => <News/>}/>

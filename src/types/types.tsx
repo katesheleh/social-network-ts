@@ -1,4 +1,4 @@
-import {ADD_POST, UPDATE_NEW_POST_TEXT} from '../redux/profileReducer';
+import {ADD_POST, SET_USER_PROFILE, UPDATE_NEW_POST_TEXT} from '../redux/profileReducer';
 import {ADD_MESSAGE, UPDATE_NEW_MESSAGE_TEXT} from '../redux/dialogsReducer';
 import {
 	FOLLOW,
@@ -46,6 +46,33 @@ export type MessagesType = {
 export type ProfilePageType = {
 	posts: Array<PostType>
 	newPostText: string
+	profile: ProfileType
+}
+
+export type ProfileType = {
+	userId: number
+	aboutMe: string
+	lookingForAJob: boolean
+	lookingForAJobDescription: null | string
+	fullName: string
+	contacts: ProfileContactsType
+	photos: ProfilePhotosType
+}
+
+export type ProfileContactsType = {
+	github: null | string
+	vk: null | string
+	facebook: null | string
+	instagram: null | string
+	twitter: null | string
+	website: null | string
+	youtube: null | string
+	mainLink: null | string
+}
+
+export type ProfilePhotosType = {
+	small: null | string
+	large: null | string
 }
 
 export type MessagesPageType = {
@@ -63,7 +90,12 @@ export type UpdateNewPostTextACType = {
 	newText: string
 }
 
-export type ProfileReducersActionType = AddPostACType | UpdateNewPostTextACType
+export type SetUserProfileType = {
+	type: typeof SET_USER_PROFILE
+	profile: any
+}
+
+export type ProfileReducersActionType = AddPostACType | UpdateNewPostTextACType | SetUserProfileType
 
 export type AddMessageACType = {
 	type: typeof ADD_MESSAGE
@@ -174,4 +206,17 @@ export type PaginationType = {
 	pageSize: number
 	currentPage: number
 	onPageChanged: (page: number) => void
+}
+
+export type ProfileContainerType = {
+	profile: ProfileType
+	setUserProfile: any
+}
+
+export type ProfileComponentType = {
+	profile: ProfileType
+}
+
+export type ProfileInfoComponentType = {
+	profile: ProfileType
 }

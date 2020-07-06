@@ -4,6 +4,7 @@ import userPhoto from '../../assets/images/no_profile_image_placeholder.jpg';
 import {UsersPageUIType} from '../../types/types';
 import Pagination from '../common/Pagination/Pagination';
 import Preloader from '../common/Preloader/Preloader';
+import {NavLink} from 'react-router-dom';
 
 const Users = (props: UsersPageUIType) => {
 	return (
@@ -23,11 +24,12 @@ const Users = (props: UsersPageUIType) => {
 									{
 										props.users.map(u => <div className={styles.item} key={u.id}>
 											<div className={styles.colLeft}>
-												<img
-														src={u.photos.small != null ? u.photos.small : userPhoto}
-														alt={u.name}
-														width='100'
-														height='100'/>
+												<NavLink to={`/profile/${u.id}`} target='_blank'>
+													<img
+															src={u.photos.small != null ? u.photos.small : userPhoto}
+															alt={u.name}/>
+												</NavLink>
+
 												{u.followed
 														? <button onClick={() => props.unFollow(u.id)}>Unfollow</button>
 														: <button onClick={() => props.follow(u.id)} className={styles.btnFollow}>Follow</button>
