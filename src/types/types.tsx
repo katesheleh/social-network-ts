@@ -210,7 +210,7 @@ export type PaginationType = {
 
 export type ProfileContainerType = {
 	profile: ProfileType
-	setUserProfile: any
+	setUserProfile: (profile: ProfileType) => void
 }
 
 export type ProfileComponentType = {
