@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './ProfileInfo.module.css';
 import noUserImage from '../../../assets/images/no_profile_image_placeholder.jpg';
-import {ProfileInfoComponentType} from '../../../types/types';
+import {ProfileComponentType} from '../../../types/types';
 import Preloader from '../../common/Preloader/Preloader';
 
-const ProfileInfo = (props: ProfileInfoComponentType) => {
+const ProfileInfo = (props: ProfileComponentType) => {
 	if (!props.profile) {
 		return <Preloader/>
 	} else {

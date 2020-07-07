@@ -24,7 +24,7 @@ const Users = (props: UsersPageUIType) => {
 									{
 										props.users.map(u => <div className={styles.item} key={u.id}>
 											<div className={styles.colLeft}>
-												<NavLink to={`/profile/${u.id}`} target='_blank'>
+												<NavLink to={`/profile/${u.id}`}>
 													<img
 															src={u.photos.small != null ? u.photos.small : userPhoto}
 															alt={u.name}/>

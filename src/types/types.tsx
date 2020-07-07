@@ -9,6 +9,8 @@ import {
 	TOGGLE_IS_FETCHING
 } from '../redux/usersReducer';
 
+import {RouteComponentProps} from 'react-router-dom';
+
 export type PostType = {
 	id: string
 	message: string
@@ -208,15 +210,18 @@ export type PaginationType = {
 	onPageChanged: (page: number) => void
 }
 
-export type ProfileContainerType = {
-	profile: ProfileType
+export type ProfileContainerOwnPropsType = {
 	setUserProfile: (profile: ProfileType) => void
+	profile: ProfileType
 }
 
 export type ProfileComponentType = {
 	profile: ProfileType
 }
 
-export type ProfileInfoComponentType = {
-	profile: ProfileType
+export type ProfilePathParamType = {
+	userId: string
 }
+
+export type ProfileContainerCommonPropsType =
+		RouteComponentProps<ProfilePathParamType> & ProfileContainerOwnPropsType
