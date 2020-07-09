@@ -21,7 +21,7 @@ function App() {
 
 					<div className={styles.content}>
 						<div className={styles.contentMain}>
-							<Route path='/profile:userId?' render={() => <ProfileContainer/>}/>
+							<Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
 							<Route path='/dialogs' render={() => <DialogsContainer/>}/>
 							<Route path='/users' render={() => <UsersContainer/>}/>
 							<Route path='/news' render={() => <News/>}/>
