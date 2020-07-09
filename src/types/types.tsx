@@ -10,6 +10,7 @@ import {
 } from '../redux/usersReducer';
 
 import {RouteComponentProps} from 'react-router-dom';
+import {SET_USER_DATA} from '../redux/authReducer';
 
 export type PostType = {
 	id: string
@@ -225,3 +226,29 @@ export type ProfilePathParamType = {
 
 export type ProfileContainerCommonPropsType =
 		RouteComponentProps<ProfilePathParamType> & ProfileContainerOwnPropsType
+
+export type AuthUserType = {
+	userId: null | string
+	email: null | string
+	login: null | string
+	isAuth: boolean
+}
+
+export type SetUserDataType = {
+	type: typeof SET_USER_DATA
+	data: AuthUserType
+}
+
+export type AuthReducersActionType = SetUserDataType
+
+
+export type UserAuthOwnPropsType = {
+	setAuthUserData: (data: AuthUserType) => void
+	isAuth: boolean
+	login: any
+}
+
+export type HeaderPropsType = {
+	isAuth: boolean
+	login: any
+}

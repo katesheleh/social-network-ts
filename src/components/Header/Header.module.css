@@ -2,7 +2,7 @@
   position: relative;
   padding: 25px 0 20px 30px;
   z-index: 2;
-  margin-bottom: 140px;
+  margin-bottom: 100px;
 }
 .title {
   margin-bottom: 0;
@@ -14,4 +14,13 @@
   display: block;
   font-size: 20px;
   color: #f9d74d;
+}
+
+.loginBlock {
+  margin-top: 40px;
+  color: #fff;
+}
+
+.loginLink {
+  color: #fff;
 }

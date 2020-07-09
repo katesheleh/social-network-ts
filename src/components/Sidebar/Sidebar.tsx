@@ -9,8 +9,8 @@ import musicImg from '../../assets/images/music.jpg';
 import friendsImg from '../../assets/images/friends.jpg';
 
 import Banner from './Banner/Banner';
-import Header from './Header/Header';
 import Nav from './Nav/Nav';
+import HeaderContainer from '../Header/HeaderContainer';
 
 const Sidebar = () => {
   return (
@@ -21,7 +21,7 @@ const Sidebar = () => {
       <Route path="/music" render={() => <Banner image={musicImg} title={'Music'} />} />
       <Route path="/friends" render={() => <Banner image={friendsImg} title={'Friends'} />} />
       
-      <Header />
+      <HeaderContainer />
       <Nav />
     </div>
   )
