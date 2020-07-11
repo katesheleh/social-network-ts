@@ -5,6 +5,7 @@ import {UsersPageUIType} from '../../types/types';
 import Pagination from '../common/Pagination/Pagination';
 import Preloader from '../common/Preloader/Preloader';
 import {NavLink} from 'react-router-dom';
+import axios from 'axios';
 
 const Users = (props: UsersPageUIType) => {
 	return (
@@ -31,8 +32,39 @@ const Users = (props: UsersPageUIType) => {
 												</NavLink>
 
 												{u.followed
-														? <button onClick={() => props.unFollow(u.id)}>Unfollow</button>
-														: <button onClick={() => props.follow(u.id)} className={styles.btnFollow}>Follow</button>
+														? <button onClick={() => {
+															axios
+																	.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+																		withCredentials: true,
+																		headers: {
+																			'API-KEY': '37106453-1aca-4e6f-89bb-a08749b89b18'
+																		}
+																	})
+																	.then(response => {
+																		if (response.data.resultCode === 0) {
+																			props.unFollow(u.id)
+																		}
+																	})
+														}}
+														>Unfollow</button>
+
+
+														: <button
+																onClick={() => {
+																	axios
+																			.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+																				withCredentials: true,
+																				headers: {
+																					'API-KEY': '37106453-1aca-4e6f-89bb-a08749b89b18'
+																				}
+																			})
+																			.then(response => {
+																				if (response.data.resultCode === 0) {
+																					props.follow(u.id)
+																				}
+																			})
+																}}
+																className={styles.btnFollow}>Follow</button>
 												}
 											</div>
 
@@ -60,4 +92,4 @@ const Users = (props: UsersPageUIType) => {
 	)
 }
 
-export default Users
+export default Users;

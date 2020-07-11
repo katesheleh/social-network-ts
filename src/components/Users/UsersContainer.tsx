@@ -20,7 +20,9 @@ class UsersContainer extends React.Component<UsersPagePropsType> {
 		// show preloader
 		this.props.toggleIsFetching(true)
 		axios
-				.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}&sortOrder=asc`)
+				.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}&sortOrder=asc`, {
+					withCredentials: true
+				})
 				.then(response => {
 					// hide preloader
 					this.props.toggleIsFetching(false)
@@ -35,7 +37,9 @@ class UsersContainer extends React.Component<UsersPagePropsType> {
 		// show preloader
 		this.props.toggleIsFetching(true)
 		axios
-				.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}&sortOrder=asc`)
+				.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}&sortOrder=asc`, {
+					withCredentials: true
+				})
 				.then(response => {
 					// hide preloader
 					this.props.toggleIsFetching(false)
@@ -79,4 +83,4 @@ export default connect(
 			setTotalUsersCount: setTotalCountAC,
 			toggleIsFetching: toggleIsFetchingAC
 		}
-)(UsersContainer)
+)(UsersContainer);
