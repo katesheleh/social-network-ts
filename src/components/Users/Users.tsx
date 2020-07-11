@@ -33,7 +33,7 @@ const Users = (props: UsersPageUIType) => {
 
 												{u.followed
 														? <button
-																disabled={props.followingInProgress.some(id => id == +u.id)}
+																disabled={props.followingInProgress.some(id => id === +u.id)}
 																onClick={() => {
 																	// disable btn during server response
 																	props.toggleFollowingInProgress(true, +u.id)
@@ -49,7 +49,7 @@ const Users = (props: UsersPageUIType) => {
 
 														: <button
 																className={styles.btnFollow}
-																disabled={props.followingInProgress.some(id => id == +u.id)}
+																disabled={props.followingInProgress.some(id => id === +u.id)}
 																onClick={() => {
 																	// disable btn during server response
 																	props.toggleFollowingInProgress(true, +u.id)
