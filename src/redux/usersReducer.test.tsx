@@ -2,7 +2,7 @@ import usersReducer, {
 	followAC,
 	setCurrentPageAC,
 	setTotalCountAC,
-	setUsersAC,
+	setUsersAC, toggleFollowingInProgressAC,
 	toggleIsFetchingAC,
 	unFollowAC
 } from './usersReducer';
@@ -40,7 +40,8 @@ beforeEach(() => {
 		pageSize: 1,
 		totalUsersCount: 2,
 		currentPage: 1,
-		isFetching: false
+		isFetching: false,
+		followingInProgress: [1, 2, 3, 4]
 	}
 })
 
@@ -68,7 +69,8 @@ test('Users should be set', () => {
 		pageSize: 1,
 		totalUsersCount: 2,
 		currentPage: 1,
-		isFetching: false
+		isFetching: false,
+		followingInProgress: []
 	}
 
 	const action = setUsersAC(users)
@@ -99,4 +101,11 @@ test('isFetching works correctly', () => {
 	const endState = usersReducer(startState, toggleIsFetchingAC(true))
 
 	expect(endState.isFetching).toEqual(true)
+})
+
+
+test('follow/unfollow button is disabled while waiting server response', () => {
+	const endState = usersReducer(startState, toggleFollowingInProgressAC(true, 5))
+
+	expect(endState.followingInProgress).toEqual([1, 2, 3, 4, 5])
 })

@@ -69,3 +69,7 @@ button {
 	color: #f9d74d;
 	transition: all 0.2s ease-in;
 }
+
+button:disabled {
+	background-color: #cccccc;
+}

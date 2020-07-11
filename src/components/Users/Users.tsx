@@ -32,25 +32,35 @@ const Users = (props: UsersPageUIType) => {
 												</NavLink>
 
 												{u.followed
-														? <button onClick={() => {
-															followAPI.unfollowUser(u.id).then(response => {
-																if (response.data.resultCode === 0) {
-																	props.unFollow(u.id)
-																}
-															})
-														}}
-														>Unfollow</button>
+														? <button
+																disabled={props.followingInProgress.some(id => id == +u.id)}
+																onClick={() => {
+																	// disable btn during server response
+																	props.toggleFollowingInProgress(true, +u.id)
+																	followAPI.unfollowUser(u.id).then(response => {
+																		if (response.data.resultCode === 0) {
+																			props.unFollow(u.id)
+																		}
+																		// activate btn after server response
+																		props.toggleFollowingInProgress(false, +u.id)
+																	})
+																}}>Unfollow</button>
 
 
 														: <button
+																className={styles.btnFollow}
+																disabled={props.followingInProgress.some(id => id == +u.id)}
 																onClick={() => {
+																	// disable btn during server response
+																	props.toggleFollowingInProgress(true, +u.id)
 																	followAPI.followUser(u.id).then(response => {
 																		if (response.data.resultCode === 0) {
 																			props.follow(u.id)
 																		}
+																		// activate btn after server response
+																		props.toggleFollowingInProgress(false, +u.id)
 																	})
-																}}
-																className={styles.btnFollow}>Follow</button>
+																}}>Follow</button>
 												}
 											</div>
 

@@ -6,7 +6,7 @@ import {
 	SET_USERS,
 	SET_CURRENT_PAGE,
 	SET_TOTAL_COUNT,
-	TOGGLE_IS_FETCHING
+	TOGGLE_IS_FETCHING, TOGGLE_FOLLOWING_PROGRESS
 } from '../redux/usersReducer';
 
 import {RouteComponentProps} from 'react-router-dom';
@@ -117,6 +117,7 @@ export type UsersPageType = {
 	totalUsersCount: number
 	currentPage: number
 	isFetching: boolean
+	followingInProgress: Array<number>
 }
 
 export type UsersPagePropsType = {
@@ -131,6 +132,8 @@ export type UsersPagePropsType = {
 	setCurrentPage: (currentPage: number) => void
 	isFetching: boolean
 	toggleIsFetching: (isFetching: boolean) => void
+	followingInProgress: Array<number>
+	toggleFollowingInProgress: (isFetching: boolean, userId: number) => void
 }
 
 export type UsersPageUIType = {
@@ -142,6 +145,8 @@ export type UsersPageUIType = {
 	unFollow: (id: string) => void
 	onPageChanged: (page: number) => void
 	isFetching: boolean
+	followingInProgress: Array<number>
+	toggleFollowingInProgress: (isFetching: boolean, userId: number) => void
 }
 
 type UserPhotosType = {
@@ -187,9 +192,15 @@ export type ToggleIsFecthingActionType = {
 	isFetching: boolean
 }
 
+export type ToggleFollowingInProgressActionType = {
+	type: typeof TOGGLE_FOLLOWING_PROGRESS
+	isFetching: boolean
+	userId: number
+}
+
 export type UsersReducersActionType = UsersFollowActionType | UsersUnFollowActionType |
 		UsersSetUsersActionType | UsersCurrentPageActionType | UsersTotalCountActionType |
-		ToggleIsFecthingActionType
+		ToggleIsFecthingActionType | ToggleFollowingInProgressActionType
 
 
 export type MapDispatchToPropsPostsType = (
