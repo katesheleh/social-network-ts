@@ -1,12 +1,16 @@
 import {
+	ToggleFollowingInProgressActionType,
+	ToggleIsFecthingActionType,
 	UsersCurrentPageActionType,
 	UsersFollowActionType,
 	UsersPageType,
-	UsersReducersActionType, UsersSetUsersActionType,
+	UsersReducersActionType,
+	UsersSetUsersActionType,
 	UsersStructureType,
-	UsersUnFollowActionType,
-	UsersTotalCountActionType, ToggleIsFecthingActionType, ToggleFollowingInProgressActionType
+	UsersTotalCountActionType,
+	UsersUnFollowActionType
 } from '../types/types';
+import {followAPI, usersAPI} from '../api/api';
 
 export const FOLLOW = 'FOLLOW'
 export const UNFOLLOW = 'UNFOLLOW'
@@ -75,25 +79,82 @@ const usersReducer = (state: UsersPageType = initialState, action: UsersReducers
 	}
 }
 
-export const followAC = (userId: string): UsersFollowActionType => ({type: FOLLOW, userId})
+export const followSuccessAC = (userId: string): UsersFollowActionType => ({type: FOLLOW, userId})
 
-export const unFollowAC = (userId: string): UsersUnFollowActionType => ({type: UNFOLLOW, userId})
+
+export const unFollowSuccessAC = (userId: string): UsersUnFollowActionType => ({type: UNFOLLOW, userId})
+
 
 export const setUsersAC = (users: Array<UsersStructureType>): UsersSetUsersActionType => ({type: SET_USERS, users})
+
 
 export const setCurrentPageAC = (currentPage: number): UsersCurrentPageActionType => ({
 	type: SET_CURRENT_PAGE, currentPage
 })
 
+
 export const setTotalCountAC = (totalCount: number): UsersTotalCountActionType => ({type: SET_TOTAL_COUNT, totalCount})
+
 
 export const toggleIsFetchingAC = (isFetching: boolean): ToggleIsFecthingActionType => ({
 	type: TOGGLE_IS_FETCHING, isFetching
 })
 
+
 export const toggleFollowingInProgressAC = (isFetching: boolean, userId: number): ToggleFollowingInProgressActionType => ({
 	type: TOGGLE_FOLLOWING_PROGRESS, isFetching, userId
 })
+
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+	return (
+			(dispatch: any) => {
+				// show preloader
+				dispatch(toggleIsFetchingAC(true))
+
+				usersAPI.getUsers(currentPage, pageSize).then(data => {
+					// hide preloader
+					dispatch(toggleIsFetchingAC(false))
+					dispatch(setUsersAC(data.items))
+					dispatch(setTotalCountAC(data.totalCount))
+				})
+			}
+	)
+}
+
+
+export const followUsersThunkCreator = (userId: string) => {
+	return (
+			(dispatch: any) => {
+				// disable btn during server response
+				dispatch(toggleFollowingInProgressAC(true, +userId))
+				followAPI.followUser(userId).then(response => {
+					if (response.data.resultCode === 0) {
+						dispatch(followSuccessAC(userId))
+					}
+					// activate btn after server response
+					dispatch(toggleFollowingInProgressAC(false, +userId))
+				})
+			}
+	)
+}
+
+
+export const unfollowUsersThunkCreator = (userId: string) => {
+	return (
+			(dispatch: any) => {
+				// disable btn during server response
+				dispatch(toggleFollowingInProgressAC(true, +userId))
+				followAPI.unfollowUser(userId).then(response => {
+					if (response.data.resultCode === 0) {
+						dispatch(unFollowSuccessAC(userId))
+					}
+					// activate btn after server response
+					dispatch(toggleFollowingInProgressAC(false, +userId))
+				})
+			}
+	)
+}
 
 
 export default usersReducer;

@@ -1,10 +1,10 @@
 import usersReducer, {
-	followAC,
+	followSuccessAC,
 	setCurrentPageAC,
 	setTotalCountAC,
 	setUsersAC, toggleFollowingInProgressAC,
 	toggleIsFetchingAC,
-	unFollowAC
+	unFollowSuccessAC
 } from './usersReducer';
 import {UsersPageType, UsersStructureType} from '../types/types';
 
@@ -46,7 +46,7 @@ beforeEach(() => {
 })
 
 test('User should be followed', () => {
-	const action = followAC('1')
+	const action = followSuccessAC('1')
 	const endState = usersReducer(startState, action)
 
 	expect(endState.users[0].followed).toBe(true)
@@ -55,7 +55,7 @@ test('User should be followed', () => {
 
 
 test('User should be unfollowed', () => {
-	const action = unFollowAC('1')
+	const action = unFollowSuccessAC('1')
 	const endState = usersReducer(startState, action)
 
 	expect(endState.users[0].followed).toBe(false)

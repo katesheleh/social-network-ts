@@ -125,15 +125,12 @@ export type UsersPagePropsType = {
 	pageSize: number
 	totalUsersCount: number
 	currentPage: number
-	follow: (id: string) => void
-	unFollow: (id: string) => void
-	setUsers: (users: Array<UsersStructureType>) => void
-	setTotalUsersCount: (totalCount: number) => void
 	setCurrentPage: (currentPage: number) => void
 	isFetching: boolean
-	toggleIsFetching: (isFetching: boolean) => void
 	followingInProgress: Array<number>
-	toggleFollowingInProgress: (isFetching: boolean, userId: number) => void
+	getUsers: (currentPage: number, pageSize: number) => void
+	followUsers: (userId: string) => void
+	unfollowUsers: (userId: string) => void
 }
 
 export type UsersPageUIType = {
@@ -141,12 +138,11 @@ export type UsersPageUIType = {
 	pageSize: number
 	totalUsersCount: number
 	currentPage: number
-	follow: (id: string) => void
-	unFollow: (id: string) => void
 	onPageChanged: (page: number) => void
 	isFetching: boolean
 	followingInProgress: Array<number>
-	toggleFollowingInProgress: (isFetching: boolean, userId: number) => void
+	followUsers: (userId: string) => void
+	unfollowUsers: (userId: string) => void
 }
 
 type UserPhotosType = {
