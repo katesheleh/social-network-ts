@@ -11,6 +11,7 @@ import {
 	UsersUnFollowActionType
 } from '../types/types';
 import {followAPI, usersAPI} from '../api/api';
+import {Dispatch} from 'react';
 
 export const FOLLOW = 'FOLLOW'
 export const UNFOLLOW = 'UNFOLLOW'
@@ -108,7 +109,7 @@ export const toggleFollowingInProgressAC = (isFetching: boolean, userId: number)
 
 export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 	return (
-			(dispatch: any) => {
+			(dispatch: Dispatch<ToggleIsFecthingActionType | UsersSetUsersActionType | UsersTotalCountActionType>) => {
 				// show preloader
 				dispatch(toggleIsFetchingAC(true))
 
@@ -125,7 +126,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 
 export const followUsersThunkCreator = (userId: string) => {
 	return (
-			(dispatch: any) => {
+			(dispatch: Dispatch<ToggleFollowingInProgressActionType | UsersFollowActionType>) => {
 				// disable btn during server response
 				dispatch(toggleFollowingInProgressAC(true, +userId))
 				followAPI.followUser(userId).then(response => {
@@ -142,7 +143,7 @@ export const followUsersThunkCreator = (userId: string) => {
 
 export const unfollowUsersThunkCreator = (userId: string) => {
 	return (
-			(dispatch: any) => {
+			(dispatch: Dispatch<ToggleFollowingInProgressActionType | UsersUnFollowActionType>) => {
 				// disable btn during server response
 				dispatch(toggleFollowingInProgressAC(true, +userId))
 				followAPI.unfollowUser(userId).then(response => {
