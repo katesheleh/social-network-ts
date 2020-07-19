@@ -2,10 +2,13 @@ import {v1} from 'uuid'
 import {
 	AddPostACType,
 	ProfilePageType,
-	ProfileReducersActionType, ProfileType,
+	ProfileReducersActionType,
+	ProfileType,
 	SetUserProfileType,
 	UpdateNewPostTextACType
 } from '../types/types'
+import {Dispatch} from 'react';
+import {profileAPI} from '../api/api';
 
 export const ADD_POST = 'ADD_POST'
 export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
@@ -79,6 +82,16 @@ export const updateNewPostTextAC = (text: string): UpdateNewPostTextACType => {
 
 export const setUserProfile = (profile: ProfileType): SetUserProfileType => {
 	return ({type: SET_USER_PROFILE, profile: profile})
+}
+
+export const setUserProfileThunkCreator = (userId: string) => {
+	return (
+			(dispatch: Dispatch<SetUserProfileType>) => {
+				profileAPI.getUser(userId).then(response => {
+					dispatch(setUserProfile(response.data))
+				})
+			}
+	)
 }
 
 

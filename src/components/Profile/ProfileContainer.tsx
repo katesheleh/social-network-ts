@@ -2,10 +2,9 @@ import React from 'react';
 import Profile from './Profile';
 import {connect} from 'react-redux';
 import {AppRootStateType} from '../../redux/redux-store';
-import {setUserProfile} from '../../redux/profileReducer';
+import {setUserProfileThunkCreator} from '../../redux/profileReducer';
 import {ProfileContainerCommonPropsType} from '../../types/types';
 import {withRouter} from 'react-router-dom';
-import {profileAPI} from '../../api/api';
 
 
 class ProfileContainer extends React.Component<ProfileContainerCommonPropsType> {
@@ -16,9 +15,8 @@ class ProfileContainer extends React.Component<ProfileContainerCommonPropsType> 
 			userId = '2'
 		}
 
-		profileAPI.getUser(userId).then(response => {
-			this.props.setUserProfile(response.data)
-		})
+		this.props.setUserProfileThunk(userId)
+
 	}
 
 
@@ -35,4 +33,6 @@ const MapStateToProps = (state: AppRootStateType) => ({
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
-export default connect(MapStateToProps, {setUserProfile})(WithUrlDataContainerComponent);
+export default connect(MapStateToProps, {
+	setUserProfileThunk: setUserProfileThunkCreator
+})(WithUrlDataContainerComponent);

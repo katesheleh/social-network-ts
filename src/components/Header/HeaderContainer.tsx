@@ -2,17 +2,12 @@ import React from 'react';
 import Header from './Header';
 import {connect} from 'react-redux';
 import {AppRootStateType} from '../../redux/redux-store';
-import {setAuthUserDataAC} from '../../redux/authReducer';
+import {setAuthUserDataThunkCreator} from '../../redux/authReducer';
 import {UserAuthOwnPropsType} from '../../types/types';
-import {authAPI} from '../../api/api';
 
 class HeaderContainer extends React.Component<UserAuthOwnPropsType> {
 	componentDidMount() {
-		authAPI.authUser().then(data => {
-			if (data.resultCode === 0) {
-				this.props.setAuthUserData(data.data)
-			}
-		})
+		this.props.setAuthUserDataThunk()
 	}
 
 	render() {
@@ -29,6 +24,6 @@ const MapStateToProps = (state: AppRootStateType) => ({
 })
 
 export default connect(MapStateToProps, {
-			setAuthUserData: setAuthUserDataAC
+			setAuthUserDataThunk: setAuthUserDataThunkCreator
 		}
 )(HeaderContainer);

@@ -1,11 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {
-	followSuccessAC, unfollowUsersThunkCreator,
+	followUsersThunkCreator,
 	getUsersThunkCreator,
 	setCurrentPageAC,
-	toggleFollowingInProgressAC,
-	unFollowSuccessAC, followUsersThunkCreator
+	unfollowUsersThunkCreator
 } from '../../redux/usersReducer';
 import {UsersPagePropsType} from '../../types/types';
 import Users from './Users';
@@ -30,12 +29,9 @@ class UsersContainer extends React.Component<UsersPagePropsType> {
 						users={this.props.users}
 						pageSize={this.props.pageSize}
 						totalUsersCount={this.props.totalUsersCount}
-						//follow={this.props.follow}
-						//unFollow={this.props.unFollow}
 						onPageChanged={this.onPageChanged}
 						isFetching={this.props.isFetching}
 						followingInProgress={this.props.followingInProgress}
-						//toggleFollowingInProgress={this.props.toggleFollowingInProgress}
 						followUsers={this.props.followUsers}
 						unfollowUsers={this.props.unfollowUsers}
 				/>
@@ -58,10 +54,7 @@ let mapStateToProps = (state: AppRootStateType) => {
 export default connect(
 		mapStateToProps,
 		{
-			//follow: followSuccessAC,
-			//unFollow: unFollowSuccessAC,
 			setCurrentPage: setCurrentPageAC,
-			//toggleFollowingInProgress: toggleFollowingInProgressAC,
 			getUsers: getUsersThunkCreator,
 			followUsers: followUsersThunkCreator,
 			unfollowUsers: unfollowUsersThunkCreator

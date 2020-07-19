@@ -2,11 +2,12 @@ import {ADD_POST, SET_USER_PROFILE, UPDATE_NEW_POST_TEXT} from '../redux/profile
 import {ADD_MESSAGE, UPDATE_NEW_MESSAGE_TEXT} from '../redux/dialogsReducer';
 import {
 	FOLLOW,
-	UNFOLLOW,
-	SET_USERS,
 	SET_CURRENT_PAGE,
 	SET_TOTAL_COUNT,
-	TOGGLE_IS_FETCHING, TOGGLE_FOLLOWING_PROGRESS
+	SET_USERS,
+	TOGGLE_FOLLOWING_PROGRESS,
+	TOGGLE_IS_FETCHING,
+	UNFOLLOW
 } from '../redux/usersReducer';
 
 import {RouteComponentProps} from 'react-router-dom';
@@ -219,8 +220,8 @@ export type PaginationType = {
 }
 
 export type ProfileContainerOwnPropsType = {
-	setUserProfile: (profile: ProfileType) => void
 	profile: ProfileType
+	setUserProfileThunk: (userId: string) => void
 }
 
 export type ProfileComponentType = {
@@ -250,7 +251,7 @@ export type AuthReducersActionType = SetUserDataType
 
 
 export type UserAuthOwnPropsType = {
-	setAuthUserData: (data: AuthUserType) => void
+	setAuthUserDataThunk: () => void
 	isAuth: boolean
 	login: any
 }

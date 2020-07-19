@@ -1,4 +1,6 @@
-import {AuthReducersActionType, AuthUserType, SetUserDataType} from '../types/types';
+import {AuthReducersActionType, AuthUserType, SetUserDataType, SetUserProfileType} from '../types/types';
+import {Dispatch} from 'react';
+import {authAPI} from '../api/api';
 
 export const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -22,5 +24,18 @@ const authReducer = (state: AuthUserType = initialState, action: AuthReducersAct
 }
 
 export const setAuthUserDataAC = (data: AuthUserType): SetUserDataType => ({type: SET_USER_DATA, data})
+
+
+export const setAuthUserDataThunkCreator = () => {
+	return (
+			(dispatch: Dispatch<SetUserDataType>) => {
+				authAPI.authUser().then(data => {
+					if (data.resultCode === 0) {
+						dispatch(setAuthUserDataAC(data.data))
+					}
+				})
+			}
+	)
+}
 
 export default authReducer
