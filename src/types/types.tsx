@@ -42,6 +42,10 @@ export type MessageType = {
 	message: string
 }
 
+export type IsAuthType = {
+	isAuth: boolean
+}
+
 export type MessagesType = {
 	messages: Array<MessageType>
 	newMessageText: string
@@ -260,3 +264,4 @@ export type HeaderPropsType = {
 	isAuth: boolean
 	login: any
 }
+

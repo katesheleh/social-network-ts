@@ -10,6 +10,7 @@ import Friends from '../Friends/Friends';
 import DialogsContainer from '../Dialogs/DialogsContainer';
 import UsersContainer from '../Users/UsersContainer';
 import ProfileContainer from '../Profile/ProfileContainer';
+import Login from '../Login/Login';
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 
 					<div className={styles.content}>
 						<div className={styles.contentMain}>
+							<Route path='/login' render={() => <Login/>}/>
 							<Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
 							<Route path='/dialogs' render={() => <DialogsContainer/>}/>
 							<Route path='/users' render={() => <UsersContainer/>}/>
