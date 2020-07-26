@@ -2,10 +2,9 @@ import React, {ChangeEvent} from 'react';
 import styles from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
-import {DialogsType, IsAuthType, MessagesType} from '../../types/types';
-import {Redirect} from 'react-router-dom';
+import {DialogsType, MessagesType} from '../../types/types';
 
-const Dialogs = (props: DialogsType & MessagesType & IsAuthType) => {
+const Dialogs = (props: DialogsType & MessagesType) => {
 	let dialogsElements = props.dialogs
 			.map(dialog => <DialogItem key={dialog.id} id={dialog.id} name={dialog.name}/>)
 
@@ -19,12 +18,6 @@ const Dialogs = (props: DialogsType & MessagesType & IsAuthType) => {
 	const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		let text = e.target.value
 		props.updateNewMessage(text)
-	}
-
-
-	// Redirect if user is not logged
-	if (!props.isAuth) {
-		return <Redirect to={'/login'}/>
 	}
 
 	return (

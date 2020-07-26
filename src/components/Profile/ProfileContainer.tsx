@@ -3,43 +3,50 @@ import Profile from './Profile';
 import {connect} from 'react-redux';
 import {AppRootStateType} from '../../redux/redux-store';
 import {setUserProfileThunkCreator} from '../../redux/profileReducer';
-import {IsAuthType, ProfileContainerCommonPropsType} from '../../types/types';
-import {Redirect, withRouter} from 'react-router-dom';
+import {ProfileType} from '../../types/types';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
+type OwnProps = {}
 
-class ProfileContainer extends React.Component<ProfileContainerCommonPropsType & IsAuthType> {
+type MapStateType = {
+	profile: ProfileType
+}
+
+type MapDispatchType = {
+	setUserProfileThunk: (userId: string) => void
+}
+
+type PropsTypes = OwnProps & MapDispatchType & MapStateType & RouteComponentProps<{ userId: string }>
+
+class ProfileContainer extends React.Component<PropsTypes> {
+
 	componentDidMount() {
-
 		let userId = this.props.match.params.userId;
 		if (!userId) {
-			userId = '2'
+			userId = '8888'
 		}
 
 		this.props.setUserProfileThunk(userId)
-
 	}
 
 
 	render() {
-
-		// Redirect if user is not logged
-		if (!this.props.isAuth) {
-			return <Redirect to={'/login'}/>
-		}
-
-		return (
-				<Profile profile={this.props.profile}/>
-		)
+		return <Profile profile={this.props.profile}/>
 	}
 }
 
-const MapStateToProps = (state: AppRootStateType) => ({
-	profile: state.profilePage.profile,
-	isAuth: state.auth.isAuth
+
+const MapStateToProps = (state: AppRootStateType): MapStateType => ({
+	profile: state.profilePage.profile
 })
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer);
+// withAuthRedirect -> custom hoc
+let AuthRedirectComponent = withRouter(ProfileContainer)
+let WithUrlDataContainerComponent = withAuthRedirect(AuthRedirectComponent)
 
-export default connect(MapStateToProps, {
-	setUserProfileThunk: setUserProfileThunkCreator
-})(WithUrlDataContainerComponent);
+export default connect<MapStateType, MapDispatchType, OwnProps, AppRootStateType>(MapStateToProps,
+		{
+			setUserProfileThunk: setUserProfileThunkCreator
+		})(WithUrlDataContainerComponent);
+

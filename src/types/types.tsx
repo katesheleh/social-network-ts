@@ -9,8 +9,6 @@ import {
 	TOGGLE_IS_FETCHING,
 	UNFOLLOW
 } from '../redux/usersReducer';
-
-import {RouteComponentProps} from 'react-router-dom';
 import {SET_USER_DATA} from '../redux/authReducer';
 
 export type PostType = {
@@ -40,10 +38,6 @@ export type DialogsType = {
 export type MessageType = {
 	id: string
 	message: string
-}
-
-export type IsAuthType = {
-	isAuth: boolean
 }
 
 export type MessagesType = {
@@ -210,11 +204,6 @@ export type MapDispatchToPropsPostsType = (
 			newText?: string;
 		}) => void
 
-export type MapDispatchToPropsDialogsType = (
-		args: {
-			type: string;
-			newText?: string;
-		}) => void
 
 export type PaginationType = {
 	totalUsersCount: number
@@ -223,21 +212,9 @@ export type PaginationType = {
 	onPageChanged: (page: number) => void
 }
 
-export type ProfileContainerOwnPropsType = {
-	profile: ProfileType
-	setUserProfileThunk: (userId: string) => void
-}
-
 export type ProfileComponentType = {
 	profile: ProfileType
 }
-
-export type ProfilePathParamType = {
-	userId: string
-}
-
-export type ProfileContainerCommonPropsType =
-		RouteComponentProps<ProfilePathParamType> & ProfileContainerOwnPropsType
 
 export type AuthUserType = {
 	userId: null | string
@@ -264,4 +241,3 @@ export type HeaderPropsType = {
 	isAuth: boolean
 	login: any
 }
-
