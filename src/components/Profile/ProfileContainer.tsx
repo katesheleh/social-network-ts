@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ComponentClass, FunctionComponent} from 'react';
 import Profile from './Profile';
 import {connect} from 'react-redux';
 import {AppRootStateType} from '../../redux/redux-store';
@@ -6,6 +6,7 @@ import {setUserProfileThunkCreator} from '../../redux/profileReducer';
 import {ProfileType} from '../../types/types';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+import {compose} from 'redux';
 
 type OwnProps = {}
 
@@ -17,16 +18,15 @@ type MapDispatchType = {
 	setUserProfileThunk: (userId: string) => void
 }
 
-type PropsTypes = OwnProps & MapDispatchType & MapStateType & RouteComponentProps<{ userId: string }>
+export type ProfileContainerTypes = OwnProps & MapDispatchType & MapStateType & RouteComponentProps<{ userId: string }>
 
-class ProfileContainer extends React.Component<PropsTypes> {
+class ProfileContainer extends React.Component<ProfileContainerTypes> {
 
 	componentDidMount() {
 		let userId = this.props.match.params.userId;
 		if (!userId) {
 			userId = '8888'
 		}
-
 		this.props.setUserProfileThunk(userId)
 	}
 
@@ -41,12 +41,15 @@ const MapStateToProps = (state: AppRootStateType): MapStateType => ({
 	profile: state.profilePage.profile
 })
 
-// withAuthRedirect -> custom hoc
-let AuthRedirectComponent = withRouter(ProfileContainer)
-let WithUrlDataContainerComponent = withAuthRedirect(AuthRedirectComponent)
 
-export default connect<MapStateType, MapDispatchType, OwnProps, AppRootStateType>(MapStateToProps,
-		{
-			setUserProfileThunk: setUserProfileThunkCreator
-		})(WithUrlDataContainerComponent);
+
+export default compose<any, any, any, any>(
+		connect<MapStateType, MapDispatchType, OwnProps, AppRootStateType>(
+				MapStateToProps,
+				{
+					setUserProfileThunk: setUserProfileThunkCreator
+				}),
+		withRouter,
+		withAuthRedirect
+)(ProfileContainer)
 

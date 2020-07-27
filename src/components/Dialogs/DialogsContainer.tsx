@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {DialogItemType, DialogsType, MessagesType, MessageType} from '../../types/types';
 import {AppRootStateType} from '../../redux/redux-store';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+import {compose} from 'redux';
 
 type MapStateType = {
 	dialogs: Array<DialogItemType>
@@ -26,14 +27,12 @@ let mapStateToProps = (state: AppRootStateType) => {
 	}
 }
 
-// withAuthRedirect -> custom hoc
-let AuthRedirectComponent = withAuthRedirect<DialogsType & MessagesType>(Dialogs)
-
-
-const DialogsContainer = connect<MapStateType, MapDispatchToPropsType, OwnProps, AppRootStateType>(mapStateToProps,
-		{
-			updateNewMessage: updateNewMessageAC,
-			sendMessage: addMessageAC
-		})(AuthRedirectComponent)
-
-export default DialogsContainer;
+export default compose<any, any, any>(
+		connect<MapStateType, MapDispatchToPropsType, null, AppRootStateType>(
+				mapStateToProps,
+				{
+					updateNewMessage: updateNewMessageAC,
+					sendMessage: addMessageAC
+				}),
+		withAuthRedirect
+)(Dialogs)
