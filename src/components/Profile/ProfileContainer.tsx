@@ -1,4 +1,4 @@
-import React, {ComponentClass, FunctionComponent} from 'react';
+import React from 'react';
 import Profile from './Profile';
 import {connect} from 'react-redux';
 import {AppRootStateType} from '../../redux/redux-store';
@@ -40,7 +40,6 @@ class ProfileContainer extends React.Component<ProfileContainerTypes> {
 const MapStateToProps = (state: AppRootStateType): MapStateType => ({
 	profile: state.profilePage.profile
 })
-
 
 
 export default compose<any, any, any, any>(

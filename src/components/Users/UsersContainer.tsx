@@ -9,6 +9,9 @@ import {
 import {UsersPagePropsType} from '../../types/types';
 import Users from './Users';
 import {AppRootStateType} from '../../redux/redux-store';
+import {compose} from 'redux';
+import {withRouter} from 'react-router-dom';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 
 class UsersContainer extends React.Component<UsersPagePropsType> {
@@ -51,12 +54,16 @@ let mapStateToProps = (state: AppRootStateType) => {
 	}
 }
 
-export default connect(
-		mapStateToProps,
-		{
-			setCurrentPage: setCurrentPageAC,
-			getUsers: getUsersThunkCreator,
-			followUsers: followUsersThunkCreator,
-			unfollowUsers: unfollowUsersThunkCreator
-		}
-)(UsersContainer);
+export default compose<any, any, any, any>(
+		connect(
+				mapStateToProps,
+				{
+					setCurrentPage: setCurrentPageAC,
+					getUsers: getUsersThunkCreator,
+					followUsers: followUsersThunkCreator,
+					unfollowUsers: unfollowUsersThunkCreator
+				}
+		),
+		withRouter,
+		withAuthRedirect
+)(UsersContainer)

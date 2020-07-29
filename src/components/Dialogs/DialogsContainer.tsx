@@ -1,7 +1,7 @@
 import {addMessageAC, updateNewMessageAC} from '../../redux/dialogsReducer';
 import Dialogs from './Dialogs';
 import {connect} from 'react-redux';
-import {DialogItemType, DialogsType, MessagesType, MessageType} from '../../types/types';
+import {DialogItemType, MessageType} from '../../types/types';
 import {AppRootStateType} from '../../redux/redux-store';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
