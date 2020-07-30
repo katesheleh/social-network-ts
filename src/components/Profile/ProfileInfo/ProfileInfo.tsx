@@ -3,6 +3,7 @@ import styles from './ProfileInfo.module.css';
 import noUserImage from '../../../assets/images/no_profile_image_placeholder.jpg';
 import {ProfileComponentType} from '../../../types/types';
 import Preloader from '../../common/Preloader/Preloader';
+import ProfileStatus from './ProfileStatus/ProfileStatus';
 
 const ProfileInfo = (props: ProfileComponentType) => {
 	if (!props.profile) {
@@ -23,7 +24,7 @@ const ProfileInfo = (props: ProfileComponentType) => {
 					</div>
 					<div className={styles.content}>
 						<h3 className={styles.subtitle}>{props.profile.fullName}</h3>
-
+						<ProfileStatus status={'Status: Double click to activate editMode'}/>
 						<p className={`${styles.data} ${styles.contacts}`}><strong>Contacts: </strong>
 							{!props.profile.contacts.facebook && !props.profile.contacts.website && !props.profile.contacts.vk
 							&& !props.profile.contacts.twitter && !props.profile.contacts.instagram && !props.profile.contacts.youtube
