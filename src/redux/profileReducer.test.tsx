@@ -1,6 +1,5 @@
 import {v1} from 'uuid';
-import profileReducer, {addPostAC, setUserProfile, updateNewPostTextAC} from './profileReducer';
-import {ProfilePageType} from '../types/types';
+import profileReducer, {addPostAC, ProfilePageType, setUserProfile, updateNewPostTextAC} from './profileReducer';
 
 
 let startState: ProfilePageType;
@@ -12,6 +11,7 @@ beforeEach(() => {
 			{id: v1(), message: 'Today is a good day!', likesCounter: 57},
 		],
 		newPostText: '',
+		status: 'status',
 		profile: {
 			userId: 1,
 			lookingForAJob: true,

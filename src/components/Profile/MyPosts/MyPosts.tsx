@@ -1,7 +1,19 @@
 import React, {ChangeEvent} from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
-import {PostsType} from '../../../types/types';
+
+export type PostsType = {
+	posts: Array<PostType>
+	newPostText: string
+	updatePostNewText: (text: string) => void
+	addPost: () => void
+}
+
+export type PostType = {
+	id: string
+	message: string
+	likesCounter: number
+}
 
 const MyPosts = (props: PostsType) => { // PostsType
 	let postsElements = props.posts.map(post =>

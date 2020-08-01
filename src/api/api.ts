@@ -35,6 +35,14 @@ export const profileAPI = {
 
 	getUser(userId: string) {
 		return instance.get(`/profile/${userId}`)
+	},
+
+	getStatus(userId: string) {
+		return instance.get(`/profile/status/${userId}`)
+	},
+
+	updateStatus(status: string) {
+		return instance.put(`/profile/status`, {status})
 	}
 
 }
@@ -47,7 +55,7 @@ export const followAPI = {
 	},
 
 	followUser(userId: string) {
-		return instance.post(`/follow/${userId}`, {})
+		return instance.post(`/follow/${userId}`)
 	}
 
 }

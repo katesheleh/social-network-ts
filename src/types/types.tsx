@@ -1,4 +1,3 @@
-import {ADD_POST, SET_USER_PROFILE, UPDATE_NEW_POST_TEXT} from '../redux/profileReducer';
 import {ADD_MESSAGE, UPDATE_NEW_MESSAGE_TEXT} from '../redux/dialogsReducer';
 import {
 	FOLLOW,
@@ -10,19 +9,6 @@ import {
 	UNFOLLOW
 } from '../redux/usersReducer';
 import {SET_USER_DATA} from '../redux/authReducer';
-
-export type PostType = {
-	id: string
-	message: string
-	likesCounter: number
-}
-
-export type PostsType = {
-	posts: Array<PostType>
-	newPostText: string
-	updatePostNewText: (text: string) => void
-	addPost: () => void
-}
 
 export type DialogItemType = {
 	id: string
@@ -45,59 +31,11 @@ export type MessagesType = {
 	newMessageText: string
 }
 
-export type ProfilePageType = {
-	posts: Array<PostType>
-	newPostText: string
-	profile: ProfileType
-}
-
-export type ProfileType = {
-	userId: number
-	aboutMe: string
-	lookingForAJob: boolean
-	lookingForAJobDescription: null | string
-	fullName: string
-	contacts: ProfileContactsType
-	photos: ProfilePhotosType
-}
-
-export type ProfileContactsType = {
-	github: null | string
-	vk: null | string
-	facebook: null | string
-	instagram: null | string
-	twitter: null | string
-	website: null | string
-	youtube: null | string
-	mainLink: null | string
-}
-
-export type ProfilePhotosType = {
-	small: null | string
-	large: null | string
-}
-
 export type MessagesPageType = {
 	dialogs: Array<DialogItemType>
 	messages: Array<MessageType>
 	newMessageText: string
 }
-
-export type AddPostACType = {
-	type: typeof ADD_POST
-}
-
-export type UpdateNewPostTextACType = {
-	type: typeof UPDATE_NEW_POST_TEXT
-	newText: string
-}
-
-export type SetUserProfileType = {
-	type: typeof SET_USER_PROFILE
-	profile: any
-}
-
-export type ProfileReducersActionType = AddPostACType | UpdateNewPostTextACType | SetUserProfileType
 
 export type AddMessageACType = {
 	type: typeof ADD_MESSAGE
@@ -144,15 +82,13 @@ export type UsersPageUIType = {
 	unfollowUsers: (userId: string) => void
 }
 
-type UserPhotosType = {
-	small?: string
-	large?: string
-}
-
 export type UsersStructureType = {
 	name: string
 	id: string
-	photos: UserPhotosType
+	photos: {
+		small?: string
+		large?: string
+	}
 	followed: boolean
 	status: string
 }
@@ -212,10 +148,6 @@ export type PaginationType = {
 	onPageChanged: (page: number) => void
 }
 
-export type ProfileComponentType = {
-	profile: ProfileType
-}
-
 export type AuthUserType = {
 	userId: null | string
 	email: null | string
@@ -240,4 +172,9 @@ export type UserAuthOwnPropsType = {
 export type HeaderPropsType = {
 	isAuth: boolean
 	login: any
+}
+
+export enum ResultCodeStatus {
+	'success' = 0,
+	'error' = 1
 }

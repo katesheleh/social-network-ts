@@ -1,17 +1,21 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import styles from './ProfileStatus.module.css';
 
 
 type ProfileStatusType = {
 	status: string
+	updateStatus: (status: string) => void
 }
 type localStateType = {
 	editMode: boolean
+	status: string
 }
 
 class ProfileStatus extends React.Component<ProfileStatusType> {
+
 	state: localStateType = {
-		editMode: false
+		editMode: false,
+		status: this.props.status
 	}
 
 	activateEditMode = () => {
@@ -26,13 +30,18 @@ class ProfileStatus extends React.Component<ProfileStatusType> {
 		this.setState({
 			editMode: false
 		})
+		this.props.updateStatus(this.state.status)
 	}
 
-	changeStatusValue = () => {
-
+	onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+		this.setState({
+			status: e.currentTarget.value
+		})
 	}
 
 	render() {
+
+		console.log(this.props.status)
 		return (
 				<div className={styles.wrap}>
 					{!this.state.editMode
@@ -41,9 +50,10 @@ class ProfileStatus extends React.Component<ProfileStatusType> {
 									onDoubleClick={this.activateEditMode}>
 								{this.props.status}</p>
 							: <input
+									onChange={this.onStatusChange}
 									className={styles.input}
 									onBlur={this.deactivateEditMode}
-									value={this.props.status}
+									value={this.state.status}
 									autoFocus={true}/>}
 				</div>
 		)

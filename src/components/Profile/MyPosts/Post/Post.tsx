@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Post.module.css';
-import {PostType} from '../../../../types/types';
+import {PostType} from '../MyPosts';
 
 const Post=(props: PostType) => {
   return (
