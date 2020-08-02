@@ -1,6 +1,10 @@
 import React from 'react';
 import styles from './Message.module.css';
-import {MessageType} from '../../../types/types';
+
+export type MessageType = {
+  id: string
+  message: string
+}
 
 const Message=(props: MessageType) => {
   return (

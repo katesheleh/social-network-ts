@@ -1,23 +1,30 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import styles from './Dialogs.module.css';
-import DialogItem from './DialogItem/DialogItem';
-import Message from './Message/Message';
-import {DialogsType, MessagesType} from '../../types/types';
+import DialogItem, {DialogItemType} from './DialogItem/DialogItem';
+import Message, {MessageType} from './Message/Message';
+import DialogsForm, {DialogsFormDataType} from './DialogsForm/DialogsForm';
+
+export type DialogsType = {
+	dialogs: Array<DialogItemType>
+	updateNewMessage: (text: string) => void
+	sendMessage: (newMessageBody: string) => void
+}
+
+export type MessagesType = {
+	messages: Array<MessageType>
+	newMessageText: string
+}
 
 const Dialogs = (props: DialogsType & MessagesType) => {
+
 	let dialogsElements = props.dialogs
 			.map(dialog => <DialogItem key={dialog.id} id={dialog.id} name={dialog.name}/>)
 
 	let messagesElements = props.messages
 			.map(message => <Message key={message.id} message={message.message} id={message.id}/>)
 
-	let addMessage = () => {
-		props.sendMessage()
-	}
-
-	const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		let text = e.target.value
-		props.updateNewMessage(text)
+	const onSubmit = (formData: DialogsFormDataType) => {
+		props.sendMessage(formData.newMessageBody)
 	}
 
 	return (
@@ -32,17 +39,7 @@ const Dialogs = (props: DialogsType & MessagesType) => {
 					<div className={styles.colRight}>
 						{messagesElements}
 
-						<div className={styles.form}>
-            <textarea
-								value={props.newMessageText}
-								placeholder='Write your message here'
-								onChange={onMessageChange}
-								className={styles.textarea}/>
-							<button
-									onClick={addMessage}
-									className={styles.button}>Add message
-							</button>
-						</div>
+						<DialogsForm onSubmit={onSubmit}/>
 					</div>
 				</div>
 			</div>

@@ -1,4 +1,3 @@
-import {ADD_MESSAGE, UPDATE_NEW_MESSAGE_TEXT} from '../redux/dialogsReducer';
 import {
 	FOLLOW,
 	SET_CURRENT_PAGE,
@@ -10,43 +9,6 @@ import {
 } from '../redux/usersReducer';
 import {SET_USER_DATA} from '../redux/authReducer';
 
-export type DialogItemType = {
-	id: string
-	name: string
-}
-
-export type DialogsType = {
-	dialogs: Array<DialogItemType>
-	updateNewMessage: (text: string) => void
-	sendMessage: () => void
-}
-
-export type MessageType = {
-	id: string
-	message: string
-}
-
-export type MessagesType = {
-	messages: Array<MessageType>
-	newMessageText: string
-}
-
-export type MessagesPageType = {
-	dialogs: Array<DialogItemType>
-	messages: Array<MessageType>
-	newMessageText: string
-}
-
-export type AddMessageACType = {
-	type: typeof ADD_MESSAGE
-}
-
-export type UpdateNewMessageACType = {
-	type: typeof UPDATE_NEW_MESSAGE_TEXT
-	newText: string
-}
-
-export type DialogsReducersActionType = AddMessageACType | UpdateNewMessageACType;
 
 export type UsersPageType = {
 	users: Array<UsersStructureType>

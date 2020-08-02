@@ -11,11 +11,7 @@ export const SET_STATUS = 'SET_STATUS'
 
 export type AddPostACType = {
 	type: typeof ADD_POST
-}
-
-export type UpdateNewPostTextACType = {
-	type: typeof UPDATE_NEW_POST_TEXT
-	newText: string
+	newPostBody: string
 }
 
 export type SetUserProfileType = {
@@ -28,7 +24,7 @@ export type SetStatusType = {
 	status: string
 }
 
-export type ProfileReducersActionType = AddPostACType | UpdateNewPostTextACType | SetUserProfileType | SetStatusType
+export type ProfileReducersActionType = AddPostACType | SetUserProfileType | SetStatusType
 
 export type ProfileType = {
 	userId: number
@@ -56,7 +52,6 @@ export type ProfileContactsType = {
 
 export type ProfilePageType = {
 	posts: Array<PostType>
-	newPostText: string
 	profile: ProfileType
 	status: string
 }
@@ -81,14 +76,13 @@ let userProfile: ProfileType = {
 		small: '',
 		large: ''
 	}
-};
+}
 
 const initialState = {
 	posts: [
 		{id: v1(), message: 'Hi World! How are you?', likesCounter: 75},
 		{id: v1(), message: 'Today is a good day!', likesCounter: 57},
 	],
-	newPostText: '',
 	profile: userProfile,
 	status: ''
 }
@@ -97,17 +91,10 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
 
 	switch (action.type) {
 		case ADD_POST:
-			let newPost = {id: v1(), message: state.newPostText, likesCounter: 0};
+			let newPost = {id: v1(), message: action.newPostBody, likesCounter: 0};
 			return {
 				...state,
-				posts: [newPost, ...state.posts],
-				newPostText: ''
-			}
-
-		case UPDATE_NEW_POST_TEXT:
-			return {
-				...state,
-				newPostText: action.newText
+				posts: [newPost, ...state.posts]
 			}
 
 		case SET_USER_PROFILE:
@@ -127,11 +114,8 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
 	}
 }
 
-export const addPostAC = (): AddPostACType => {
-	return ({type: ADD_POST})
-}
-export const updateNewPostTextAC = (text: string): UpdateNewPostTextACType => {
-	return ({type: UPDATE_NEW_POST_TEXT, newText: text})
+export const addPostAC = (newPostBody: string): AddPostACType => {
+	return ({type: ADD_POST, newPostBody})
 }
 
 export const setUserProfile = (profile: ProfileType): SetUserProfileType => {

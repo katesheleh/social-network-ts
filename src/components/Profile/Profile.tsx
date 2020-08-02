@@ -20,7 +20,7 @@ const Profile = (props: ProfileComponentType) => {
 						updateUserStatus={props.updateUserStatus}/>
 				<MyPostsContainer/>
 			</div>
-	);
-};
+	)
+}
 
 export default Profile;

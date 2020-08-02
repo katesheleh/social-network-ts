@@ -1,6 +1,5 @@
 import {v1} from 'uuid';
-import {MessagesPageType} from '../types/types';
-import dialogsReducer, {addMessageAC, updateNewMessageAC} from './dialogsReducer';
+import dialogsReducer, {addMessageAC, MessagesPageType} from './dialogsReducer';
 
 let startState: MessagesPageType;
 
@@ -14,26 +13,14 @@ beforeEach(() => {
 		messages: [
 			{id: v1(), message: 'Hi! How are you?'},
 			{id: v1(), message: 'I am fine! And you?'}
-		],
-		newMessageText: ''
+		]
 	};
 })
 
 test('Message should be added', () => {
-	const action = addMessageAC();
+	const action = addMessageAC('test');
 	const endState = dialogsReducer(startState, action)
 
 	expect(endState['dialogs'].length).toBe(3)
 	expect(endState['messages'].length).toBe(3)
-})
-
-test('Message should be updated', () => {
-	const updatedNewMessageText = ':)';
-
-	const action = updateNewMessageAC(updatedNewMessageText)
-	const endState = dialogsReducer(startState, action)
-
-	expect(endState['dialogs'].length).toBe(3)
-	expect(endState.newMessageText).toBe(updatedNewMessageText)
-	expect(endState['messages'][0].message).toBe('Hi! How are you?')
 })

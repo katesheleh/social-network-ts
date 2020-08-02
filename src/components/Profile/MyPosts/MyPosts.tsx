@@ -1,12 +1,11 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import styles from './MyPosts.module.css';
 import Post from './Post/Post';
+import PostForm, {PostFormDataType} from './PostForm/PostForm';
 
 export type PostsType = {
 	posts: Array<PostType>
-	newPostText: string
-	updatePostNewText: (text: string) => void
-	addPost: () => void
+	addPost: (newPostBody: string) => void
 }
 
 export type PostType = {
@@ -15,44 +14,31 @@ export type PostType = {
 	likesCounter: number
 }
 
-const MyPosts = (props: PostsType) => { // PostsType
+const MyPosts = (props: PostsType) => {
 	let postsElements = props.posts.map(post =>
 			<Post
 					key={post.id}
 					id={post.id}
 					message={post.message}
 					likesCounter={post.likesCounter}
-			/>);
+			/>)
 
-	let onAddPost = () => {
-		props.addPost();
-	};
-
-	let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		let text = e.target.value;
-		props.updatePostNewText(text);
-	};
+	const onSubmit = (formData: PostFormDataType) => {
+		props.addPost(formData.newPostBody)
+	}
 
 	return (
 			<div className={styles.myPosts}>
 				<h2>My Posts</h2>
-				<div className={styles.form}>
-        <textarea
-						value={props.newPostText}
-						onChange={onPostChange}
-						placeholder='Write your post here'
-						className={styles.textarea}
-				/>
-					<button
-							onClick={onAddPost}
-							className={styles.button}>Add post
-					</button>
-				</div>
+
+				<PostForm onSubmit={onSubmit}/>
+
 				<div className={styles.postsList}>
 					{postsElements}
 				</div>
 			</div>
-	);
-};
+	)
+}
 
 export default MyPosts;
+

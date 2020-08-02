@@ -39,7 +39,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
               type='checkbox'
               id={'login_rememberMe'}
               className={styles.inputCheckbox}/>
-          <label htmlFor='login_rememberMe'>Rememember me</label>
+          <label htmlFor='login_rememberMe'>Remember me</label>
         </div>
         <div className={styles.formRow}>
           <button
@@ -50,7 +50,6 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
   )
 }
 
-//export default LoginForm;
 
 export default reduxForm<LoginFormDataType>({
   // a unique name for the form
