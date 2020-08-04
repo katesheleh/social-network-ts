@@ -2,28 +2,6 @@
 	margin-bottom: 20px;
 }
 
-.inputText {
-	display: block;
-	width: 100%;
-	padding: 8px 15px;
-	border: 1px solid #e4e3e1;
-	background-color: rgba(228, 227, 225, 0.2);
-	font-family: 'Fira Sans', sans-serif;
-	font-size: 16px;
-	line-height: 1.7;
-	font-weight: 300;
-	color: #222;
-	transition: all 0.2s ease;
-	box-sizing: border-box;
-}
-
-.inputText:hover,
-.inputText:focus {
-	background-color: rgba(228, 227, 225, 0.3);
-	border-color: #cccccc;
-	outline: none;
-}
-
 .button {
 	display: block;
 	width: 100%;

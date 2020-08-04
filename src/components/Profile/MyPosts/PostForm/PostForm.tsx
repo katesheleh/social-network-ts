@@ -1,22 +1,27 @@
 import React from 'react';
 import styles from './PostForm.module.css';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+import {maxLengthCreator, required} from '../../../../utils/validators/validators';
+import {Textarea} from '../../../common/FormControls/FormControls';
 
 
 export type PostFormDataType = {
 	newPostBody: string
 }
 
-const PostForm: React.FC<InjectedFormProps<PostFormDataType>> = (props) => {
+// validate field max length
+const maxLength = maxLengthCreator(30)
 
+const PostForm: React.FC<InjectedFormProps<PostFormDataType>> = (props) => {
 
 	return (
 			<form className={styles.form} onSubmit={props.handleSubmit}>
 				<Field
-						component={'textarea'}
+						// Textarea => custom component
+						component={Textarea}
+						validate={[required, maxLength]}
 						name={'newPostBody'}
 						placeholder='Write your post here'
-						className={styles.textarea}
 				/>
 				<button
 						className={styles.button}>Add post
