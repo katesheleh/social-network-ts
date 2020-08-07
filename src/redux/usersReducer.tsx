@@ -1,6 +1,6 @@
 import {
 	ToggleFollowingInProgressActionType,
-	ToggleIsFecthingActionType,
+	ToggleIsFetchingActionType,
 	UsersCurrentPageActionType,
 	UsersFollowActionType,
 	UsersPageType,
@@ -97,7 +97,7 @@ export const setCurrentPageAC = (currentPage: number): UsersCurrentPageActionTyp
 export const setTotalCountAC = (totalCount: number): UsersTotalCountActionType => ({type: SET_TOTAL_COUNT, totalCount})
 
 
-export const toggleIsFetchingAC = (isFetching: boolean): ToggleIsFecthingActionType => ({
+export const toggleIsFetchingAC = (isFetching: boolean): ToggleIsFetchingActionType => ({
 	type: TOGGLE_IS_FETCHING, isFetching
 })
 
@@ -109,7 +109,7 @@ export const toggleFollowingInProgressAC = (isFetching: boolean, userId: number)
 
 export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 	return (
-			(dispatch: Dispatch<ToggleIsFecthingActionType | UsersSetUsersActionType | UsersTotalCountActionType>) => {
+			(dispatch: Dispatch<ToggleIsFetchingActionType | UsersSetUsersActionType | UsersTotalCountActionType>) => {
 				// show preloader
 				dispatch(toggleIsFetchingAC(true))
 

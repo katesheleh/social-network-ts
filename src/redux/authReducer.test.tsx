@@ -1,5 +1,4 @@
-import {AuthUserType} from '../types/types';
-import authReducer, {setAuthUserDataAC} from './authReducer';
+import authReducer, {AuthUserType, setAuthUserDataAC} from './authReducer';
 
 let startState: AuthUserType;
 

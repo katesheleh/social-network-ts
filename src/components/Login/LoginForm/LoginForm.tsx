@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './LoginForm.module.css';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
-import {Input} from '../../common/FormControls/FormControls';
+import {Input, InputPsw} from '../../common/FormControls/FormControls';
 import {maxLengthCreator, required} from '../../../utils/validators/validators';
 
 export type LoginFormDataType = {
-  login: string
+  email: string
   password: string
   rememberMe: boolean
 }
@@ -22,18 +22,16 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
               component={Input}
               validate={[required, maxLength]}
               name={'email'}
-              type='text'
-              placeholder={'Login'}
-              id={'login_login'}
+              placeholder={'email'}
+              id={'login_email'}
           />
         </div>
         <div className={styles.formRow}>
           <label htmlFor='login_psw'>Password</label>
           <Field
-              component={Input}
+              component={InputPsw}
               validate={[required, maxLength]}
               name={'password'}
-              type='password'
               placeholder={'Password'}
               id={'login_psw'}/>
         </div>

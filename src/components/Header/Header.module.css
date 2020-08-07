@@ -24,3 +24,8 @@
 .loginLink {
   color: #fff;
 }
+
+.logout {
+  cursor: pointer;
+  text-decoration: underline;
+}

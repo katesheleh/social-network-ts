@@ -16,7 +16,7 @@ export type AddPostACType = {
 
 export type SetUserProfileType = {
 	type: typeof SET_USER_PROFILE
-	profile: any //ProfileType
+	profile: ProfileType
 }
 
 export type SetStatusType = {

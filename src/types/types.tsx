@@ -7,7 +7,6 @@ import {
 	TOGGLE_IS_FETCHING,
 	UNFOLLOW
 } from '../redux/usersReducer';
-import {SET_USER_DATA} from '../redux/authReducer';
 
 
 export type UsersPageType = {
@@ -80,7 +79,7 @@ export type UsersTotalCountActionType = {
 	totalCount: number
 }
 
-export type ToggleIsFecthingActionType = {
+export type ToggleIsFetchingActionType = {
 	type: typeof TOGGLE_IS_FETCHING
 	isFetching: boolean
 }
@@ -93,7 +92,7 @@ export type ToggleFollowingInProgressActionType = {
 
 export type UsersReducersActionType = UsersFollowActionType | UsersUnFollowActionType |
 		UsersSetUsersActionType | UsersCurrentPageActionType | UsersTotalCountActionType |
-		ToggleIsFecthingActionType | ToggleFollowingInProgressActionType
+		ToggleIsFetchingActionType | ToggleFollowingInProgressActionType
 
 
 export type MapDispatchToPropsPostsType = (
@@ -110,31 +109,6 @@ export type PaginationType = {
 	onPageChanged: (page: number) => void
 }
 
-export type AuthUserType = {
-	userId: null | string
-	email: null | string
-	login: null | string
-	isAuth: boolean
-}
-
-export type SetUserDataType = {
-	type: typeof SET_USER_DATA
-	data: AuthUserType
-}
-
-export type AuthReducersActionType = SetUserDataType
-
-
-export type UserAuthOwnPropsType = {
-	setAuthUserDataThunk: () => void
-	isAuth: boolean
-	login: any
-}
-
-export type HeaderPropsType = {
-	isAuth: boolean
-	login: any
-}
 
 export enum ResultCodeStatus {
 	'success' = 0,
