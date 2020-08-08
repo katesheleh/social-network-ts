@@ -1,8 +1,9 @@
 import {Dispatch} from 'redux';
 import {authAPI} from '../api/api';
 import {ResultCodeStatus} from '../types/types';
-import { ThunkDispatch } from 'redux-thunk';
+import {ThunkDispatch} from 'redux-thunk';
 import {AppRootStateType} from './redux-store';
+import {stopSubmit} from 'redux-form';
 
 export const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -19,6 +20,8 @@ export type SetUserDataType = {
 	data: AuthUserType
 }
 
+export type StopSubmitType = any
+
 export type AuthReducersActionType = SetUserDataType
 
 
@@ -28,7 +31,6 @@ let initialState: AuthUserType = {
 	login: null,
 	isAuth: false
 }
-
 
 
 const authReducer = (state: AuthUserType = initialState, action: AuthReducersActionType) => {
@@ -61,13 +63,19 @@ export const getAuthUserDataTC = () => {
 }
 
 export const loginTC = (email: string, password: string, rememberMe: boolean) =>
-		(dispatch:ThunkDispatch<AppRootStateType,unknown, AuthReducersActionType>) => {
-	authAPI.login(email, password, rememberMe).then(res => {
-		if (res.resultCode === ResultCodeStatus.success) {
-			dispatch(getAuthUserDataTC())
+		(dispatch: ThunkDispatch<AppRootStateType, unknown, AuthReducersActionType & StopSubmitType>) => {
+
+			authAPI.login(email, password, rememberMe).then(res => {
+				if (res.resultCode === ResultCodeStatus.success) {
+					dispatch(getAuthUserDataTC())
+				} else {
+					// get error message from server
+					 let message = res.messages.length > 0 ? res.messages[0] : 'Some Error'
+					// stop form submit if fields are wrong
+					dispatch(stopSubmit('login', {_error: message}))
+				}
+			})
 		}
-	})
-}
 
 export const logoutTC = () => (dispatch: Dispatch<SetUserDataType>) => {
 	authAPI.logout().then(res => {

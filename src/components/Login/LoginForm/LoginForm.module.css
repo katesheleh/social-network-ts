@@ -24,3 +24,9 @@
 	color: #fff;
 	background: #201e2b;
 }
+
+.errorMsg {
+	font-size: 14px;
+	font-weight: 400;
+	color: rgb(214, 14, 14);
+}

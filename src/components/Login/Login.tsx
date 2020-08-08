@@ -17,7 +17,6 @@ export type MSTPType = {
 
 const Login = (props: MDTPType & MSTPType) => {
 	const onSubmit = (formData: LoginFormDataType) => {
-		console.log(formData)
 		props.login(formData.email, formData.password, formData.rememberMe)
 	}
 

@@ -12,7 +12,7 @@ beforeEach(() => {
 })
 
 test('User data should be set', () => {
-	const action = setAuthUserDataAC(startState)
+	const action = setAuthUserDataAC('1', 'test@test.com', 'username', true)
 	const endState = authReducer(startState, action)
 
 	expect(endState.isAuth).toBeTruthy();
