@@ -4,9 +4,9 @@ import usersReducer, {
 	setTotalCountAC,
 	setUsersAC, toggleFollowingInProgressAC,
 	toggleIsFetchingAC,
-	unFollowSuccessAC
+	unFollowSuccessAC, UsersPageType, UsersStructureType
 } from './usersReducer';
-import {UsersPageType, UsersStructureType} from '../types/types';
+
 
 let users: Array<UsersStructureType> = []
 let startState: UsersPageType;

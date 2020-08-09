@@ -1,17 +1,25 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {
-	followUsersThunkCreator,
-	getUsersThunkCreator,
+	followUsersTC,
+	requestUsersTC,
 	setCurrentPageAC,
-	unfollowUsersThunkCreator
+	unfollowUsersTC,
+	UsersStructureType
 } from '../../redux/usersReducer';
-import {UsersStructureType} from '../../types/types';
 import Users from './Users';
 import {AppRootStateType} from '../../redux/redux-store';
 import {compose} from 'redux';
 import {withRouter} from 'react-router-dom';
 import {RouteComponentProps} from 'react-router';
+import {
+	getCurrentPage,
+	getFollowingInProgress,
+	getIsFetching,
+	getPageSize,
+	getTotalUsersCount,
+	getUsers
+} from '../../redux/user-seletors';
 
 export type UsersPagePropsType = {
 	users: Array<UsersStructureType>
@@ -61,12 +69,12 @@ class UsersContainer extends React.Component<OwnPropsType> {
 
 let mapStateToProps = (state: AppRootStateType) => {
 	return {
-		users: state.usersPage.users,
-		pageSize: state.usersPage.pageSize,
-		totalUsersCount: state.usersPage.totalUsersCount,
-		currentPage: state.usersPage.currentPage,
-		isFetching: state.usersPage.isFetching,
-		followingInProgress: state.usersPage.followingInProgress
+		users: getUsers(state),
+		pageSize: getPageSize(state),
+		totalUsersCount: getTotalUsersCount(state),
+		currentPage: getCurrentPage(state),
+		isFetching: getIsFetching(state),
+		followingInProgress: getFollowingInProgress(state)
 	}
 }
 
@@ -76,9 +84,9 @@ export default compose<any, any, any>(
 				mapStateToProps,
 				{
 					setCurrentPage: setCurrentPageAC,
-					getUsers: getUsersThunkCreator,
-					followUsers: followUsersThunkCreator,
-					unfollowUsers: unfollowUsersThunkCreator
+					getUsers: requestUsersTC,
+					followUsers: followUsersTC,
+					unfollowUsers: unfollowUsersTC
 				}
 		)
 )(UsersContainer)

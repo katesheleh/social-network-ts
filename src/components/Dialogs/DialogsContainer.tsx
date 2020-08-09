@@ -16,8 +16,6 @@ type MapDispatchToPropsType = {
 	sendMessage: (newMessageBody: string) => void
 }
 
-type OwnProps = {}
-
 let mapStateToProps = (state: AppRootStateType) => {
 	return {
 		dialogs: state.messagesPage.dialogs,
