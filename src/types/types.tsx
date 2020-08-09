@@ -18,31 +18,6 @@ export type UsersPageType = {
 	followingInProgress: Array<number>
 }
 
-export type UsersPagePropsType = {
-	users: Array<UsersStructureType>
-	pageSize: number
-	totalUsersCount: number
-	currentPage: number
-	setCurrentPage: (currentPage: number) => void
-	isFetching: boolean
-	followingInProgress: Array<number>
-	getUsers: (currentPage: number, pageSize: number) => void
-	followUsers: (userId: string) => void
-	unfollowUsers: (userId: string) => void
-}
-
-export type UsersPageUIType = {
-	users: Array<UsersStructureType>
-	pageSize: number
-	totalUsersCount: number
-	currentPage: number
-	onPageChanged: (page: number) => void
-	isFetching: boolean
-	followingInProgress: Array<number>
-	followUsers: (userId: string) => void
-	unfollowUsers: (userId: string) => void
-}
-
 export type UsersStructureType = {
 	name: string
 	id: string
@@ -100,14 +75,6 @@ export type MapDispatchToPropsPostsType = (
 			type: string;
 			newText?: string;
 		}) => void
-
-
-export type PaginationType = {
-	totalUsersCount: number
-	pageSize: number
-	currentPage: number
-	onPageChanged: (page: number) => void
-}
 
 
 export enum ResultCodeStatus {

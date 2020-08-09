@@ -1,4 +1,4 @@
-import authReducer, {AuthUserType, setAuthUserDataAC} from './authReducer';
+import appReducer, {AuthUserType, setAuthUserDataAC} from './authReducer';
 
 let startState: AuthUserType;
 
@@ -13,7 +13,7 @@ beforeEach(() => {
 
 test('User data should be set', () => {
 	const action = setAuthUserDataAC('1', 'test@test.com', 'username', true)
-	const endState = authReducer(startState, action)
+	const endState = appReducer(startState, action)
 
 	expect(endState.isAuth).toBeTruthy();
 	expect(endState.login).toEqual('username');

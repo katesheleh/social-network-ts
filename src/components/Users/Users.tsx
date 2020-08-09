@@ -1,10 +1,22 @@
 import React from 'react';
 import styles from './Users.module.css';
 import userPhoto from '../../assets/images/no_profile_image_placeholder.jpg';
-import {UsersPageUIType} from '../../types/types';
+import {UsersStructureType} from '../../types/types';
 import Pagination from '../common/Pagination/Pagination';
 import Preloader from '../common/Preloader/Preloader';
 import {NavLink} from 'react-router-dom';
+
+export type UsersPageUIType = {
+	users: Array<UsersStructureType>
+	pageSize: number
+	totalUsersCount: number
+	currentPage: number
+	onPageChanged: (page: number) => void
+	isFetching: boolean
+	followingInProgress: Array<number>
+	followUsers: (userId: string) => void
+	unfollowUsers: (userId: string) => void
+}
 
 const Users = (props: UsersPageUIType) => {
 	return (

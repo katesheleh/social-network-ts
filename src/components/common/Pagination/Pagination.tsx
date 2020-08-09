@@ -1,6 +1,12 @@
 import React, {MouseEvent} from 'react';
 import styles from './Pagination.module.css';
-import {PaginationType} from '../../../types/types';
+
+type PaginationType = {
+	totalUsersCount: number
+	pageSize: number
+	currentPage: number
+	onPageChanged: (page: number) => void
+}
 
 const Pagination = (props: PaginationType) => {
 	let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);

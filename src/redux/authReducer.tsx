@@ -49,18 +49,15 @@ export const setAuthUserDataAC = (userId: null | string, email: null | string, l
 		({type: SET_USER_DATA, data: {userId, email, login, isAuth}})
 
 // thunk
-export const getAuthUserDataTC = () => {
-	return (
-			(dispatch: Dispatch<SetUserDataType>) => {
-				authAPI.me().then(res => {
-					if (res.resultCode === ResultCodeStatus.success) {
-						let {id, login, email} = res.data
-						dispatch(setAuthUserDataAC(id, email, login, true))
-					}
-				})
-			}
-	)
+export const getAuthUserDataTC = () => (dispatch: Dispatch<SetUserDataType>) => {
+	return authAPI.me().then(res => {
+		if (res.resultCode === ResultCodeStatus.success) {
+			let {id, login, email} = res.data
+			dispatch(setAuthUserDataAC(id, email, login, true))
+		}
+	})
 }
+
 
 export const loginTC = (email: string, password: string, rememberMe: boolean) =>
 		(dispatch: ThunkDispatch<AppRootStateType, unknown, AuthReducersActionType & StopSubmitType>) => {
@@ -70,7 +67,7 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
 					dispatch(getAuthUserDataTC())
 				} else {
 					// get error message from server
-					 let message = res.messages.length > 0 ? res.messages[0] : 'Some Error'
+					let message = res.messages.length > 0 ? res.messages[0] : 'Some Error'
 					// stop form submit if fields are wrong
 					dispatch(stopSubmit('login', {_error: message}))
 				}

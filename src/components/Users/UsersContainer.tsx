@@ -6,15 +6,31 @@ import {
 	setCurrentPageAC,
 	unfollowUsersThunkCreator
 } from '../../redux/usersReducer';
-import {UsersPagePropsType} from '../../types/types';
+import {UsersStructureType} from '../../types/types';
 import Users from './Users';
 import {AppRootStateType} from '../../redux/redux-store';
 import {compose} from 'redux';
 import {withRouter} from 'react-router-dom';
-import {withAuthRedirect} from '../../hoc/withAuthRedirect';
+import {RouteComponentProps} from 'react-router';
 
+export type UsersPagePropsType = {
+	users: Array<UsersStructureType>
+	pageSize: number
+	totalUsersCount: number
+	currentPage: number
+	setCurrentPage: (currentPage: number) => void
+	isFetching: boolean
+	followingInProgress: Array<number>
+	getUsers: (currentPage: number, pageSize: number) => void
+	followUsers: (userId: string) => void
+	unfollowUsers: (userId: string) => void
+}
 
-class UsersContainer extends React.Component<UsersPagePropsType> {
+type PathParamsType = {}
+
+type OwnPropsType = RouteComponentProps<PathParamsType> & UsersPagePropsType
+
+class UsersContainer extends React.Component<OwnPropsType> {
 
 	componentDidMount() {
 		this.props.getUsers(this.props.currentPage, this.props.pageSize)
@@ -54,7 +70,8 @@ let mapStateToProps = (state: AppRootStateType) => {
 	}
 }
 
-export default compose<any, any, any, any>(
+export default compose<any, any, any>(
+		withRouter,
 		connect(
 				mapStateToProps,
 				{
@@ -63,7 +80,5 @@ export default compose<any, any, any, any>(
 					followUsers: followUsersThunkCreator,
 					unfollowUsers: unfollowUsersThunkCreator
 				}
-		),
-		withRouter,
-		withAuthRedirect
+		)
 )(UsersContainer)
