@@ -14,7 +14,18 @@ export type PostType = {
 	likesCounter: number
 }
 
-const MyPosts = (props: PostsType) => {
+// 1. example PureComponent. It can be used instead shouldComponentUpdate
+//class MyPosts extends React.PureComponent<PostsType> {
+
+
+// 2. example shouldComponentUpdate for class Component
+// shouldComponentUpdate(nextProps: Readonly<PostsType>, nextState: Readonly<{}>): boolean {
+// 	return nextProps != this.props || nextState != this.state
+// }
+
+
+const MyPosts = React.memo((props: PostsType) => {
+	console.log('fd')
 	let postsElements = props.posts.map(post =>
 			<Post
 					key={post.id}
@@ -38,7 +49,7 @@ const MyPosts = (props: PostsType) => {
 				</div>
 			</div>
 	)
-}
+})
 
 export default MyPosts;
 
