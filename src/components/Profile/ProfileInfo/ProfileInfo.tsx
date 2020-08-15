@@ -4,6 +4,7 @@ import noUserImage from '../../../assets/images/no_profile_image_placeholder.jpg
 import Preloader from '../../common/Preloader/Preloader';
 import ProfileStatus from './ProfileStatus/ProfileStatus';
 import {ProfileComponentType} from '../Profile';
+import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
 
 const ProfileInfo = (props: ProfileComponentType) => {
 	if (!props.profile) {
@@ -25,7 +26,7 @@ const ProfileInfo = (props: ProfileComponentType) => {
 					<div className={styles.content}>
 						<h3 className={styles.subtitle}>{props.profile.fullName}</h3>
 
-						<ProfileStatus status={props.status} updateStatus={props.updateUserStatus}/>
+						<ProfileStatusWithHooks status={props.status} updateStatus={props.updateUserStatus}/>
 
 						<p className={`${styles.data} ${styles.contacts}`}><strong>Contacts: </strong>
 							{!props.profile.contacts.facebook && !props.profile.contacts.website && !props.profile.contacts.vk
