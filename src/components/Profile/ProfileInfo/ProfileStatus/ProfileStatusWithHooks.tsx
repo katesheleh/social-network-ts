@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import styles from './ProfileStatus.module.css';
 
 
@@ -6,14 +6,14 @@ type ProfileStatusType = {
 	status: string
 	updateStatus: (status: string) => void
 }
-type localStateType = {
-	editMode: boolean
-	status: string
-}
 
 const ProfileStatusWithHooks = (props: ProfileStatusType) => {
 	const [editMode, setEditMode] = useState<boolean>(false)
 	const [status, setStatus] = useState<string>(props.status)
+
+	useEffect(()=> {
+		setStatus(props.status)
+	}, [props.status])
 
 	const activateEditMode = () => {
 		setEditMode(true)
