@@ -2,14 +2,14 @@ import React from 'react';
 import Profile from './Profile';
 import {connect} from 'react-redux';
 import {AppRootStateType} from '../../redux/redux-store';
-import {getUserStatusTC, ProfileType, setUserProfileTC, updateStatusTC} from '../../redux/profileReducer';
+import {getUserStatusTC, ProfileType, savePhotoTC, setUserProfileTC, updateStatusTC} from '../../redux/profileReducer';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
 
 class ProfileContainer extends React.Component<Props> {
 
-	componentDidMount() {
+	refreshProfile() {
 		let userId: string | null | number = this.props.match.params.userId;
 		if (!userId) {
 			userId = String(this.props.authorizedUserId)
@@ -28,11 +28,24 @@ class ProfileContainer extends React.Component<Props> {
 		}
 	}
 
+	componentDidMount() {
+		this.refreshProfile()
+	}
+
+	componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<{}>, snapshot?: any) {
+		if (this.props.match.params.userId !== prevProps.match.params.userId) {
+			this.refreshProfile()
+		}
+	}
+
 
 	render() {
 		return <Profile
+				isOwner={!this.props.match.params.userId}
+				savePhoto={this.props.savePhoto}
 				profile={this.props.profile}
-				status={this.props.status} updateUserStatus={this.props.updateUserStatus}
+				status={this.props.status}
+				updateUserStatus={this.props.updateUserStatus}
 		/>
 	}
 }
@@ -52,7 +65,8 @@ export default compose<React.ComponentType>(
 				{
 					setUserProfile: setUserProfileTC,
 					getUserStatus: getUserStatusTC,
-					updateUserStatus: updateStatusTC
+					updateUserStatus: updateStatusTC,
+					savePhoto: savePhotoTC
 				}),
 		withRouter,
 		withAuthRedirect
@@ -73,6 +87,7 @@ type MapDispatchType = {
 	setUserProfile: (userId: string) => void
 	getUserStatus: (userId: string) => void
 	updateUserStatus: (status: string) => void
+	savePhoto: (file: any) => void
 }
 
 export type Props = OwnProps & MapDispatchType & MapStateType & RouteComponentProps<{ userId: string }>

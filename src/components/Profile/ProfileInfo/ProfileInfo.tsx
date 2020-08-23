@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import styles from './ProfileInfo.module.css';
 import noUserImage from '../../../assets/images/no_profile_image_placeholder.jpg';
 import Preloader from '../../common/Preloader/Preloader';
-import ProfileStatus from './ProfileStatus/ProfileStatus';
 import {ProfileComponentType} from '../Profile';
 import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
 
@@ -10,18 +9,18 @@ const ProfileInfo = (props: ProfileComponentType) => {
 	if (!props.profile) {
 		return <Preloader/>
 	} else {
+
+		// callback to change main avatar photo
+		const onImgSelected = (e: ChangeEvent<HTMLInputElement>) => {
+			if (e.target.files) {
+				props.savePhoto(e.target.files[0])
+			}
+		}
+
 		return (
 				<div className={styles.profileInfo}>
 					<div className={styles.banner}>
-						{props.profile.photos.large !== null
-								? <img
-										className={styles.img}
-										src={props.profile.photos.large}
-										alt={props.profile.fullName}/>
-								: <img
-										className={styles.img}
-										src={noUserImage}
-										alt={props.profile.fullName}/>}
+						<img className={styles.img} src={props.profile.photos.large || noUserImage} alt={props.profile.fullName}/>
 					</div>
 					<div className={styles.content}>
 						<h3 className={styles.subtitle}>{props.profile.fullName}</h3>
@@ -64,6 +63,8 @@ const ProfileInfo = (props: ProfileComponentType) => {
 									{props.profile.lookingForAJobDescription}
 								</p>
 								: ''}
+						{/*	CHANGE PROFILE PHOTO	*/}
+						<p className={styles.data}><strong>Change profile photo: </strong>{props.isOwner && <input type='file' onChange={onImgSelected}/>}</p>
 					</div>
 				</div>
 		)

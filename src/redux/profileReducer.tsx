@@ -8,53 +8,9 @@ export const ADD_POST = 'ADD_POST'
 export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 export const SET_USER_PROFILE = 'SET_USER_PROFILE'
 export const SET_STATUS = 'SET_STATUS'
+export const SAVE_PHOTO = 'SAVE_PHOTO'
 
-export type AddPostACType = {
-	type: typeof ADD_POST
-	newPostBody: string
-}
 
-export type SetUserProfileType = {
-	type: typeof SET_USER_PROFILE
-	profile: ProfileType
-}
-
-export type SetStatusType = {
-	type: typeof SET_STATUS;
-	status: string
-}
-
-export type ProfileReducersActionType = AddPostACType | SetUserProfileType | SetStatusType
-
-export type ProfileType = {
-	userId: number
-	aboutMe: string
-	lookingForAJob: boolean
-	lookingForAJobDescription: null | string
-	fullName: string
-	contacts: ProfileContactsType
-	photos: {
-		small: null | string
-		large: null | string
-	}
-}
-
-export type ProfileContactsType = {
-	github: null | string
-	vk: null | string
-	facebook: null | string
-	instagram: null | string
-	twitter: null | string
-	website: null | string
-	youtube: null | string
-	mainLink: null | string
-}
-
-export type ProfilePageType = {
-	posts: Array<PostType>
-	profile: ProfileType
-	status: string
-}
 
 let userProfile: ProfileType = {
 	userId: 1,
@@ -109,6 +65,12 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
 				status: action.status
 			}
 
+		case SAVE_PHOTO:
+			return {
+				...state,
+				profile: {...state.profile, photos: action.photos}
+			}
+
 		default:
 			return state
 	}
@@ -124,6 +86,10 @@ export const setUserProfile = (profile: ProfileType): SetUserProfileType => {
 
 export const setStatus = (status: string): SetStatusType => {
 	return ({type: SET_STATUS, status})
+}
+
+export const savePhotoAC = (photos: PhotosType): SavePhotoType => {
+	return ({type: SAVE_PHOTO, photos})
 }
 
 
@@ -161,5 +127,75 @@ export const updateStatusTC = (status: string) => {
 	)
 }
 
+export const savePhotoTC = (file: string) => {
+	return (
+			(dispatch: Dispatch) => {
+				profileAPI.savePhoto(file).then(response => {
+					if (response.data.resultCode === ResultCodeStatus.success) {
+						dispatch(savePhotoAC(response.data.photos))
+					}
+				})
+			}
+	)
+}
+
 
 export default profileReducer;
+
+
+
+// TYPES
+
+export type AddPostACType = {
+	type: typeof ADD_POST
+	newPostBody: string
+}
+
+export type SetUserProfileType = {
+	type: typeof SET_USER_PROFILE
+	profile: ProfileType
+}
+
+export type SetStatusType = {
+	type: typeof SET_STATUS
+	status: string
+}
+
+export type SavePhotoType = {
+	type: typeof SAVE_PHOTO
+	photos: PhotosType
+}
+
+export type ProfileReducersActionType = AddPostACType | SetUserProfileType | SetStatusType | SavePhotoType
+
+export type ProfileType = {
+	userId: number
+	aboutMe: string
+	lookingForAJob: boolean
+	lookingForAJobDescription: null | string
+	fullName: string
+	contacts: ProfileContactsType
+	photos: PhotosType
+}
+
+type PhotosType = {
+	small: null | string
+	large: null | string
+}
+
+export type ProfileContactsType = {
+	github: null | string
+	vk: null | string
+	facebook: null | string
+	instagram: null | string
+	twitter: null | string
+	website: null | string
+	youtube: null | string
+	mainLink: null | string
+}
+
+export type ProfilePageType = {
+	posts: Array<PostType>
+	profile: ProfileType
+	status: string
+}
