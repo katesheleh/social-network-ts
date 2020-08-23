@@ -12,26 +12,11 @@ import UsersContainer from '../Users/UsersContainer';
 import ProfileContainer from '../Profile/ProfileContainer';
 import Login from '../Login/Login';
 import {connect} from 'react-redux';
-
 import {compose} from 'redux';
 import {initializeAppTC} from '../../redux/appReducer';
 import {AppRootStateType} from '../../redux/redux-store';
 import Preloader from '../common/Preloader/Preloader';
 
-
-type MDTPType = {
-	initializeApp: () => void
-}
-
-type MSTPType = {
-	initialized: boolean
-}
-
-type AppPropsType = MDTPType & MSTPType
-
-type PathParamsType = {}
-
-type OwnPropsType = RouteComponentProps<PathParamsType> & AppPropsType
 
 class App extends React.Component<OwnPropsType> {
 
@@ -75,6 +60,22 @@ const MapStateToProps = (state: AppRootStateType): MSTPType => ({
 })
 
 
-export default compose<any, any, any>(
+export default compose<React.ComponentType>(
 		withRouter,
-		connect(MapStateToProps, {initializeApp: initializeAppTC}))(App)
+		connect<MSTPType, MDTPType, null, AppRootStateType>(MapStateToProps, {initializeApp: initializeAppTC}))(App)
+
+
+// TYPES
+type MDTPType = {
+	initializeApp: () => void
+}
+
+type MSTPType = {
+	initialized: boolean
+}
+
+type AppPropsType = MDTPType & MSTPType
+
+type PathParamsType = {}
+
+type OwnPropsType = RouteComponentProps<PathParamsType> & AppPropsType

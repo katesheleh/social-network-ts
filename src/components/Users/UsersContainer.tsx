@@ -21,22 +21,6 @@ import {
 	getUsers
 } from '../../redux/user-seletors';
 
-export type UsersPagePropsType = {
-	users: Array<UsersStructureType>
-	pageSize: number
-	totalUsersCount: number
-	currentPage: number
-	setCurrentPage: (currentPage: number) => void
-	isFetching: boolean
-	followingInProgress: Array<number>
-	getUsers: (currentPage: number, pageSize: number) => void
-	followUsers: (userId: string) => void
-	unfollowUsers: (userId: string) => void
-}
-
-type PathParamsType = {}
-
-type OwnPropsType = RouteComponentProps<PathParamsType> & UsersPagePropsType
 
 class UsersContainer extends React.Component<OwnPropsType> {
 
@@ -67,7 +51,7 @@ class UsersContainer extends React.Component<OwnPropsType> {
 }
 
 
-let mapStateToProps = (state: AppRootStateType) => {
+let mapStateToProps = (state: AppRootStateType): MapStateType => {
 	return {
 		users: getUsers(state),
 		pageSize: getPageSize(state),
@@ -78,9 +62,9 @@ let mapStateToProps = (state: AppRootStateType) => {
 	}
 }
 
-export default compose<any, any, any>(
+export default compose<React.ComponentType>(
 		withRouter,
-		connect(
+		connect<MapStateType, MapDispatchType, OwnPropsType, AppRootStateType>(
 				mapStateToProps,
 				{
 					setCurrentPage: setCurrentPageAC,
@@ -90,3 +74,38 @@ export default compose<any, any, any>(
 				}
 		)
 )(UsersContainer)
+
+
+// TYPES
+export type UsersPagePropsType = {
+	users: Array<UsersStructureType>
+	pageSize: number
+	totalUsersCount: number
+	currentPage: number
+	setCurrentPage: (currentPage: number) => void
+	isFetching: boolean
+	followingInProgress: Array<number>
+	getUsers: (currentPage: number, pageSize: number) => void
+	followUsers: (userId: string) => void
+	unfollowUsers: (userId: string) => void
+}
+
+type PathParamsType = {}
+
+type OwnPropsType = RouteComponentProps<PathParamsType> & UsersPagePropsType
+
+type MapStateType = {
+	users: UsersStructureType[]
+	pageSize: number
+	totalUsersCount: number
+	currentPage: number
+	isFetching: boolean
+	followingInProgress: number[]
+}
+
+type MapDispatchType = {
+	setCurrentPage: (currentPage: number) => void
+	getUsers: (page: number, pageSize: number) => void
+	followUsers: (userId: string) => void
+	unfollowUsers: (userId: string) => void
+}

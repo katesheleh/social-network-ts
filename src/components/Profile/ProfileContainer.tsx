@@ -7,30 +7,13 @@ import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
 
-type OwnProps = {}
-
-type MapStateType = {
-	profile: ProfileType
-	status: string
-	authorizedUserId: string | null
-	isAuth: boolean
-}
-
-type MapDispatchType = {
-	setUserProfile: (userId: string) => void
-	getUserStatus: (userId: string) => void
-	updateUserStatus: (status: string) => void
-}
-
-export type Props = OwnProps & MapDispatchType & MapStateType & RouteComponentProps<{ userId: string }>
-
 class ProfileContainer extends React.Component<Props> {
 
 	componentDidMount() {
 		let userId: string | null | number = this.props.match.params.userId;
 		if (!userId) {
 			userId = String(this.props.authorizedUserId)
-			if(!userId) {
+			if (!userId) {
 				this.props.history.push('/login')
 			}
 		}
@@ -63,7 +46,7 @@ const MapStateToProps = (state: AppRootStateType): MapStateType => ({
 })
 
 
-export default compose<any, any, any, any>(
+export default compose<React.ComponentType>(
 		connect<MapStateType, MapDispatchType, OwnProps, AppRootStateType>(
 				MapStateToProps,
 				{
@@ -74,4 +57,23 @@ export default compose<any, any, any, any>(
 		withRouter,
 		withAuthRedirect
 )(ProfileContainer)
+
+
+// TYPES
+type OwnProps = {}
+
+type MapStateType = {
+	profile: ProfileType
+	status: string
+	authorizedUserId: string | null
+	isAuth: boolean
+}
+
+type MapDispatchType = {
+	setUserProfile: (userId: string) => void
+	getUserStatus: (userId: string) => void
+	updateUserStatus: (status: string) => void
+}
+
+export type Props = OwnProps & MapDispatchType & MapStateType & RouteComponentProps<{ userId: string }>
 

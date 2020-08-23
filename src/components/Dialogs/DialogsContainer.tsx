@@ -7,6 +7,24 @@ import {compose} from 'redux';
 import {DialogItemType} from './DialogItem/DialogItem';
 import {MessageType} from './Message/Message';
 
+let mapStateToProps = (state: AppRootStateType) => {
+	return {
+		dialogs: state.messagesPage.dialogs,
+		messages: state.messagesPage.messages
+	}
+}
+
+export default compose<React.ComponentType>(
+		connect<MapStateType, MapDispatchToPropsType, null, AppRootStateType>(
+				mapStateToProps,
+				{
+					sendMessage: addMessageAC
+				}),
+		withAuthRedirect
+)(Dialogs)
+
+
+// TYPES
 type MapStateType = {
 	dialogs: Array<DialogItemType>
 	messages: Array<MessageType>
@@ -15,19 +33,3 @@ type MapStateType = {
 type MapDispatchToPropsType = {
 	sendMessage: (newMessageBody: string) => void
 }
-
-let mapStateToProps = (state: AppRootStateType) => {
-	return {
-		dialogs: state.messagesPage.dialogs,
-		messages: state.messagesPage.messages
-	}
-}
-
-export default compose<any, any, any>(
-		connect<MapStateType, MapDispatchToPropsType, null, AppRootStateType>(
-				mapStateToProps,
-				{
-					sendMessage: addMessageAC
-				}),
-		withAuthRedirect
-)(Dialogs)
