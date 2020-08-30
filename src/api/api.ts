@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {ProfileType} from '../redux/profileReducer';
 
 
 // axios general settings, axios params -> baseUrl and config
@@ -61,8 +62,12 @@ export const profileAPI = {
 			}
 		})
 				.then(response => response.data)
-	}
+	},
 
+
+	saveProfile(profile: ProfileType) {
+		return instance.put(`/profile`, profile)
+	}
 }
 
 

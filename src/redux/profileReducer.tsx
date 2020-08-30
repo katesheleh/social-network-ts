@@ -3,13 +3,14 @@ import {Dispatch} from 'redux';
 import {profileAPI} from '../api/api';
 import {PostType} from '../components/Profile/MyPosts/MyPosts';
 import {ResultCodeStatus} from '../types/types';
+import {AppRootStateType} from './redux-store';
+import {stopSubmit} from 'redux-form';
 
 export const ADD_POST = 'ADD_POST'
 export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 export const SET_USER_PROFILE = 'SET_USER_PROFILE'
 export const SET_STATUS = 'SET_STATUS'
 export const SAVE_PHOTO = 'SAVE_PHOTO'
-
 
 
 let userProfile: ProfileType = {
@@ -139,9 +140,35 @@ export const savePhotoTC = (file: string) => {
 	)
 }
 
+//export const saveProfileTC = (fullName: string, aboutMe: string, lookingForAJob: boolean, lookingForAJobDescription: string, vk: null | string) => {
+export const saveProfileTC = (profile: ProfileType) => {
+	return (
+			// TS TYPE for Dispatch ??????
+			async (dispatch: Dispatch<any>, getState: () => AppRootStateType) => {
+				const userId = getState().auth.userId
+				await profileAPI.saveProfile(profile).then(response => {
+					if (response.data.resultCode === ResultCodeStatus.success) {
+						if (userId) {
+							dispatch(setUserProfileTC(userId))
+						}
+					} else {
+						// get error message from server
+						let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some Error'
+						// stop form submit if fields are wrong
+						dispatch(stopSubmit('edit-profile', {_error: message}))
+
+						// TODO: add error message to every contact field -> parse string
+						//dispatch(stopSubmit('edit-profile', {'contacts': {'facebook': message}}))
+						return Promise.reject(message)
+
+					}
+				})
+			}
+	)
+}
+
 
 export default profileReducer;
-
 
 
 // TYPES

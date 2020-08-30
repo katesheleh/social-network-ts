@@ -10,6 +10,7 @@ export type ProfileComponentType = {
 	status: string
 	updateUserStatus: (status: string) => void
 	savePhoto: (file: any) => void
+	saveProfile: (profile: ProfileType) => void
 }
 
 const Profile = (props: ProfileComponentType) => {
@@ -21,7 +22,8 @@ const Profile = (props: ProfileComponentType) => {
 						profile={props.profile}
 						status={props.status}
 						updateUserStatus={props.updateUserStatus}
-						savePhoto={props.savePhoto}/>
+						savePhoto={props.savePhoto}
+						saveProfile={props.saveProfile}/>
 				<MyPostsContainer/>
 			</div>
 	)
