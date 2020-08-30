@@ -7,7 +7,8 @@ beforeEach(() => {
 		userId: '1',
 		email: 'test@test.com',
 		login: 'username',
-		isAuth: false
+		isAuth: false,
+		captchaUrl: null
 	}
 })
 

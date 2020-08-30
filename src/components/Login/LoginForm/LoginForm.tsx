@@ -8,25 +8,42 @@ export type LoginFormDataType = {
 	email: string
 	password: string
 	rememberMe: boolean
+	captchaUrl: string
+}
+
+type OwnPropsType = {
+	captchaUrl: string
+}
+
+type ErrorType = {
+	error: string
 }
 
 // validate field max length
 const maxLength = maxLengthCreator(30)
 
-const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
+const LoginForm: React.FC<InjectedFormProps<LoginFormDataType, OwnPropsType, ErrorType> & OwnPropsType> = ({handleSubmit, captchaUrl, error}) => {
 	return (
-			<form className={styles.form} onSubmit={props.handleSubmit}>
-        {/*Show error message if exists*/}
-				{props.error && <p className={styles.errorMsg}>{props.error}</p>}
+			<form className={styles.form} onSubmit={handleSubmit}>
+				{/*Show error message if exists*/}
+				{error && <p className={styles.errorMsg}>{error}</p>}
+
+				{/*CAPTCHA*/}
+				{captchaUrl && <img src={captchaUrl}/>}
+				{captchaUrl && <Field
+						component={Input}
+						validate={[required]}
+						name={'captchaUrl'}
+						placeholder={'Symbols from image'}/>}
+
+
 				<div className={styles.formRow}>
 					<label htmlFor='login_login'>Login</label>
 					<Field
 							component={Input}
 							validate={[required, maxLength]}
 							name={'email'}
-							placeholder={'email'}
-							id={'login_email'}
-					/>
+							placeholder={'email'}/>
 				</div>
 				<div className={styles.formRow}>
 					<label htmlFor='login_psw'>Password</label>
@@ -34,15 +51,13 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
 							component={InputPsw}
 							validate={[required, maxLength]}
 							name={'password'}
-							placeholder={'Password'}
-							id={'login_psw'}/>
+							placeholder={'Password'}/>
 				</div>
 				<div className={styles.formRow}>
 					<Field
 							component={'input'}
 							name={'rememberMe'}
 							type='checkbox'
-							id={'login_rememberMe'}
 							className={styles.inputCheckbox}/>
 					<label htmlFor='login_rememberMe'>Remember me</label>
 				</div>
@@ -57,7 +72,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormDataType>> = (props) => {
 }
 
 
-export default reduxForm<LoginFormDataType>({
+export default reduxForm<LoginFormDataType, OwnPropsType, ErrorType>({
 	// a unique name for the form
 	form: 'login'
 })(LoginForm)
