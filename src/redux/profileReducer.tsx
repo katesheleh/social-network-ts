@@ -95,76 +95,63 @@ export const savePhotoAC = (photos: PhotosType): SavePhotoType => {
 
 
 // thunk
-export const setUserProfileTC = (userId: string) => {
-	return (
-			(dispatch: Dispatch) => {
-				profileAPI.getUser(userId).then(response => {
-					dispatch(setUserProfile(response.data))
-				})
-			}
-	)
+export const setUserProfileTC = (userId: string) => (dispatch: Dispatch) => {
+	profileAPI.getUser(userId).then(response => {
+		dispatch(setUserProfile(response.data))
+	})
 }
 
-export const getUserStatusTC = (userId: string) => {
-	return (
-			(dispatch: Dispatch) => {
-				profileAPI.getStatus(userId).then(response => {
-					dispatch(setStatus(response.data))
-					console.log('getStatus:' + response.data)
-				})
-			}
-	)
+
+export const getUserStatusTC = (userId: string) => (dispatch: Dispatch) => {
+	profileAPI.getStatus(userId).then(response => {
+		dispatch(setStatus(response.data))
+		console.log('getStatus:' + response.data)
+	})
 }
 
-export const updateStatusTC = (status: string) => {
-	return (
-			(dispatch: Dispatch) => {
-				profileAPI.updateStatus(status).then(response => {
-					if (response.data.resultCode === ResultCodeStatus.success) {
-						dispatch(setStatus(status))
-					}
-				})
+
+export const updateStatusTC = (status: string) => async (dispatch: Dispatch) => {
+	try {
+		await profileAPI.updateStatus(status).then(response => {
+			if (response.data.resultCode === ResultCodeStatus.success) {
+				dispatch(setStatus(status))
 			}
-	)
+		})
+	} catch (error) {
+		// code to do when an error happens
+		console.log(error)
+	}
 }
 
-export const savePhotoTC = (file: string) => {
-	return (
-			(dispatch: Dispatch) => {
-				profileAPI.savePhoto(file).then(response => {
-					if (response.data.resultCode === ResultCodeStatus.success) {
-						dispatch(savePhotoAC(response.data.photos))
-					}
-				})
-			}
-	)
+
+export const savePhotoTC = (file: string) => (dispatch: Dispatch) => {
+	profileAPI.savePhoto(file).then(response => {
+		if (response.data.resultCode === ResultCodeStatus.success) {
+			dispatch(savePhotoAC(response.data.photos))
+		}
+	})
 }
+
 
 //export const saveProfileTC = (fullName: string, aboutMe: string, lookingForAJob: boolean, lookingForAJobDescription: string, vk: null | string) => {
-export const saveProfileTC = (profile: ProfileType) => {
-	return (
-			// TS TYPE for Dispatch ??????
-			async (dispatch: Dispatch<any>, getState: () => AppRootStateType) => {
-				const userId = getState().auth.userId
-				await profileAPI.saveProfile(profile).then(response => {
-					if (response.data.resultCode === ResultCodeStatus.success) {
-						if (userId) {
-							dispatch(setUserProfileTC(userId))
-						}
-					} else {
-						// get error message from server
-						let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some Error'
-						// stop form submit if fields are wrong
-						dispatch(stopSubmit('edit-profile', {_error: message}))
-
-						// TODO: add error message to every contact field -> parse string
-						//dispatch(stopSubmit('edit-profile', {'contacts': {'facebook': message}}))
-						return Promise.reject(message)
-
-					}
-				})
+export const saveProfileTC = (profile: ProfileType) => async (dispatch: Dispatch<any>, getState: () => AppRootStateType) => {
+	const userId = getState().auth.userId
+	await profileAPI.saveProfile(profile).then(response => {
+		if (response.data.resultCode === ResultCodeStatus.success) {
+			if (userId) {
+				dispatch(setUserProfileTC(userId))
 			}
-	)
+		} else {
+			// get error message from server
+			let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some Error'
+			// stop form submit if fields are wrong
+			dispatch(stopSubmit('edit-profile', {_error: message}))
+
+			// TODO: add error message to every contact field -> parse string
+			//dispatch(stopSubmit('edit-profile', {'contacts': {'facebook': message}}))
+			return Promise.reject(message)
+		}
+	})
 }
 
 

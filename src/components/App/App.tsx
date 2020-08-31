@@ -1,6 +1,6 @@
 import React, {Suspense} from 'react';
 import styles from './App.module.css';
-import {Route, withRouter} from 'react-router-dom';
+import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {RouteComponentProps} from 'react-router';
 import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
@@ -21,8 +21,19 @@ const UsersContainer = React.lazy(() => import('../Users/UsersContainer'));
 
 class App extends React.Component<OwnPropsType> {
 
+	// catch all server errors
+	catchAllUnhandledErrors = function (promiseRejectionEvent: Event) {
+		console.log('Some error occured')
+		console.log(promiseRejectionEvent)
+	}
+
 	componentDidMount() {
 		this.props.initializeApp()
+		window.addEventListener('unhandlesrejection', this.catchAllUnhandledErrors)
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('unhandlesrejection', this.catchAllUnhandledErrors)
 	}
 
 	render() {
@@ -38,16 +49,20 @@ class App extends React.Component<OwnPropsType> {
 
 						<div className={styles.content}>
 							<div className={styles.contentMain}>
-								<Route path='/login' render={() => <Login/>}/>
-								<Route path='/profile/:userId?'
-											 render={() => <Suspense fallback={<Preloader/>}><ProfileContainer/></Suspense>}/>
-								<Route path='/dialogs'
-											 render={() => <Suspense fallback={<Preloader/>}><DialogsContainer/></Suspense>}/>
-								<Route path='/users'
-											 render={() => <Suspense fallback={<Preloader/>}><UsersContainer/></Suspense>}/>
-								<Route path='/news' render={() => <News/>}/>
-								<Route path='/music' render={() => <Music/>}/>
-								<Route path='/friends' render={() => <Friends/>}/>
+								<Switch>
+									<Route exact path='/' render={() => <Redirect to='/profile'/>}/>
+									<Route path='/login' render={() => <Login/>}/>
+									<Route path='/profile/:userId?'
+												 render={() => <Suspense fallback={<Preloader/>}><ProfileContainer/></Suspense>}/>
+									<Route path='/dialogs'
+												 render={() => <Suspense fallback={<Preloader/>}><DialogsContainer/></Suspense>}/>
+									<Route path='/users'
+												 render={() => <Suspense fallback={<Preloader/>}><UsersContainer/></Suspense>}/>
+									<Route path='/news' render={() => <News/>}/>
+									<Route path='/music' render={() => <Music/>}/>
+									<Route path='/friends' render={() => <Friends/>}/>
+									<Route path='*' render={() => <div>404 NOT FOUND</div>}/>
+								</Switch>
 							</div>
 							<div className={styles.footer}>
 								<Footer/>

@@ -11,12 +11,12 @@ const ProfileData = (props: ProfileDataType) => {
 				<h3 className={styles.subtitle}>{props.profile.fullName}</h3>
 
 				{/*GET EVERY KEY and VALUE FROM OBJECT*/}
-				<p className={`${styles.data} ${styles.contacts}`}><strong>Contacts: </strong>
+				<div className={`${styles.data} ${styles.contacts}`}><strong>Contacts: </strong>
 					{Object.keys(props.profile.contacts).map(key => {
 								return <ProfileContact key={key} title={key} value={(props.profile.contacts as any)[key]}/>
 							}
 					)}
-				</p>
+				</div>
 
 				<p className={styles.data}><strong>About me: </strong>
 					{props.profile.aboutMe !== null ? props.profile.aboutMe : 'no info'}</p>

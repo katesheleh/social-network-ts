@@ -14,13 +14,13 @@ const ProfileDataForm: FC<InjectedFormProps<ProfileType, OwnPropsType, ErrorType
 				{/*Show error message if exists*/}
 				{error && <p className={styles.errorMsg}>{error}</p>}
 
-				<p className={styles.data}><strong>Full Name: </strong>
+				<div className={styles.data}><strong>Full Name: </strong>
 					<Field
 							component={Input}
 							validate={[required, maxLength]}
 							name={'fullName'}
 							placeholder={'Full Name'}/>
-				</p>
+				</div>
 
 				{Object.keys(profile.contacts).map(key => {
 							return (
@@ -36,30 +36,30 @@ const ProfileDataForm: FC<InjectedFormProps<ProfileType, OwnPropsType, ErrorType
 						}
 				)}
 
-				<p className={styles.data}><strong>About me: </strong>
+				<div className={styles.data}><strong>About me: </strong>
 					<Field
 							component={Textarea}
 							validate={[]}
 							name={'aboutMe'}
 							placeholder={'About me'}/>
-				</p>
+				</div>
 
-				<p className={styles.data}><strong>I'm looking for a job: </strong>
+				<div className={styles.data}><strong>I'm looking for a job: </strong>
 					<Field
 							component={'input'}
 							type='checkbox'
 							validate={[]}
 							name={'lookingForAJob'}
 							placeholder={''}/>
-				</p>
+				</div>
 
-				<p className={styles.data}><strong>Job description: </strong>
+				<div className={styles.data}><strong>Job description: </strong>
 					<Field
 							component={Textarea}
 							validate={[]}
 							name={'lookingForAJobDescription'}
 							placeholder={'Job description'}/>
-				</p>
+				</div>
 
 				<button type='submit' className={styles.button}>Save Changes</button>
 			</form>
